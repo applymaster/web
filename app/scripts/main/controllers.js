@@ -15,3 +15,8 @@ angular.module('webApp')
       'Karma'
     ];
   });
+
+angular.module('webApp')
+  .controller('MainCtrl', function () {
+
+  });

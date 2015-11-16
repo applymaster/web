@@ -31,7 +31,7 @@ angular
       })*/
       .when('/', {
         templateUrl: '../views/main.html',
-        controller: 'HomeCtrl'
+        controller: 'MainCtrl'
       })
       .when('/login', {
         templateUrl: '../views/user/login.html',

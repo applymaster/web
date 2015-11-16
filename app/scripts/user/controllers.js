@@ -1,3 +1,6 @@
+/**
+ * Created by startimes on 2015/11/16.
+ */
 'use strict';
 
 var app = angular.module('webApp');
@@ -22,7 +25,7 @@ app.controller('LoginCtrl', ['$scope', 'Login', '$location', '$cookies',
         {email:email, password:md5(password, email)},
         function(response) {
           if (response.success) {
-            $cookies.putObject("user", response.user);
+            $cookies.putObject('user', response.user);
             $scope.setUser(response.user);
             $location.path('/home');
           } else {
@@ -33,7 +36,7 @@ app.controller('LoginCtrl', ['$scope', 'Login', '$location', '$cookies',
           $scope.loginError = response.data;
         }
       );
-    }
+    };
   }
 ]);
 
@@ -52,7 +55,7 @@ app.controller('RegisterAppCtrl', ['$scope', '$http', 'Register', 'Login', '$loc
         $scope.loginError = 'Email or password cannot be null!';
         return;
       }
-      if (password != passwordConfirm) {
+      if (password !== passwordConfirm) {
         $scope.loginError = 'Two passwords are not the same!';
         return;
       }
@@ -96,7 +99,7 @@ app.controller('ApplicantInfoCtrl', ['$scope', '$http',
   function($scope, $http) {
     $scope.educations = [{name:"",id:0}];
     $scope.addEducation = function() {
-      $scope.educations.push({name:"",id:0});
+      $scope.educations.push({name:'',id:0});
     };
 
     $('#datepicker').datepicker({
