@@ -1,0 +1,38 @@
+<div class="row layout-inner">
+    <div class="white-container top-student">
+        <h1 class="title">创建一个账号</h1>
+        <h4 class="subtitle">只需 1-2 分钟，你就可以在我们的平台上寻找到有留学背景、经验丰富的留学顾问</h4>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-xs-3 control-label">Email</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="email" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">密码</label>
+            <div class="col-xs-7">
+              <input type="password" class="form-control" ng-model="password" placeholder="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">确认密码</label>
+            <div class="col-xs-7">
+              <input type="password" class="form-control" ng-model="passwordConfirm" placeholder="passwordConfirm">
+            </div>
+          </div>
+          <div style="color:red">{{ loginError }}</div>
+          <div class="form-group">
+              <div class="col-xs-3 control-label"></div>
+              <div class="checkbox col-xs-7">
+                <label>
+                  <input type="checkbox" ng-model="assignment">我已阅读 <a href="#">《申请大师服务协议条款》</a>
+                </label>
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-xs-10 btns"><button type="button" class="btn btn-info bg-student" ng-click="register(email, password, passwordConfirm)">下一步</button></div>
+          </div>
+        </form>
+    </div>
+</div>

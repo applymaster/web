@@ -1,0 +1,73 @@
+<div class="row layout-inner">
+    <div class="white-container top-teacher">
+        <h1 class="title">完善你的信息</h1>
+        <h4 class="subtitle">完善你的个人信息，有助于平台上的留学顾问更准确地找到你，助你更快更好地达到目标</h4>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-xs-3 control-label">姓名（中文）</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="namezw" placeholder="请输入您的完整中文名">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">姓名（拼音）</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="namepy" placeholder="请输入您的完整拼音姓名或者英文名">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">性别</label>
+            <div class="col-xs-7">
+                <select class="form-control" ng-model="sex">
+                    <option selected="selected">男</option>
+                    <option>女</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">出生年月</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" id="datepicker" ng-model="birth" placeholder="birth">
+            </div>
+          </div>
+          <div class="form-group" ng-repeat="education in educations">
+              <label class="col-xs-3 control-label"><span ng-show="$first">教育背景</span></label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="education.name" placeholder="education">
+            </div>
+            <div ng-show="$last" class="col-xs-2 btn-wrap">
+                <button type="button" ng-click="addEducation()" class="btn btn-success bg-teacher">添加</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">自我介绍</label>
+            <div class="col-xs-7">
+                <textarea rows="4" class="form-control" ng-model="introduce" placeholder="请填写300字以内的自我介绍"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">密码保护问题</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="protectquestion" placeholder="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">密码保护答案</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="protectanswer" placeholder="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">上传头像</label>
+            <div class="col-xs-7">
+              <input type="file" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+              <div class="col-xs-10 btns">
+                  <button type="button" ng-click="navTo('register/teacher_compl');" class="btn btn-success bg-teacher">完成注册</button>
+              </div>
+          </div>
+        </form>
+    </div>
+</div>

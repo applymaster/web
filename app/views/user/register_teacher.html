@@ -1,0 +1,44 @@
+<div class="row layout-inner">
+    <div class="white-container top-teacher">
+        <h1 class="title">创建一个顾问账号</h1>
+        <h4 class="subtitle">只需几个步骤，你也可以成为助人圆梦的梦想顾问</h4>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-xs-3 control-label">Email</label>
+            <div class="col-xs-7">
+              <input type="email" class="form-control" ng-model="email" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label"></label>
+            <div class="col-xs-7">
+                <a class="color-teacher" href="#/home">我已毕业，申请人工认证</a>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">密码</label>
+            <div class="col-xs-7">
+              <input type="password" class="form-control" ng-model="password" placeholder="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">确认密码</label>
+            <div class="col-xs-7">
+              <input type="password" class="form-control" ng-model="passwordConfirm" placeholder="passwordConfirm">
+            </div>
+          </div>
+          <div style="color:red">{{ loginError }}</div>
+          <div class="form-group">
+              <div class="col-xs-3 control-label"></div>
+              <div class="checkbox col-xs-7">
+                <label>
+                  <input type="checkbox" ng-model="assignment">我已阅读 <a href="#">《申请大师服务协议条款》</a>
+                </label>
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-xs-10 btns"><button type="button" class="btn bg-teacher btn-success" ng-click="register(email, password, passwordConfirm)">下一步</button></div>
+          </div>
+        </form>
+    </div>
+</div>

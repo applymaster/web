@@ -1,0 +1,56 @@
+<div class="row layout-inner">
+    <div class="white-container top-student">
+        <h1 class="title">完善你的信息</h1>
+        <h4 class="subtitle">完善你的个人信息，有助于平台上的留学顾问更准确地找到你，助你更快更好地达到目标</h4>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-xs-3 control-label">真实姓名</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="name" placeholder="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">性别</label>
+            <div class="col-xs-7">
+                <select class="form-control" ng-model="sex">
+                    <option selected="selected">男</option>
+                    <option>女</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">出生年月</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" id="datepicker" ng-model="birth" placeholder="birth">
+            </div>
+          </div>
+          <div class="form-group" ng-repeat="education in educations">
+              <label class="col-xs-3 control-label"><span ng-show="$first">教育背景</span></label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="education.name" placeholder="education">
+            </div>
+            <div ng-show="$last" class="col-xs-2 btn-wrap">
+                <button type="button" ng-click="addEducation()" class="btn btn-info bg-student">添加</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">密码保护问题</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="protectquestion" placeholder="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-3 control-label">密码保护答案</label>
+            <div class="col-xs-7">
+              <input type="text" class="form-control" ng-model="protectanswer" placeholder="">
+            </div>
+          </div>
+          <div class="form-group">
+              <div class="col-xs-10 btns">
+                  <button type="button" ng-click="submit()" class="btn btn-info btn-inline bg-student">完成注册</button>
+                  <button type="button" ng-click="back()" class="btn btn-info bg-student">上一步</button>
+              </div>
+          </div>
+        </form>
+    </div>
+</div>
