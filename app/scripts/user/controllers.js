@@ -91,7 +91,7 @@ app.controller('RegisterAppCtrl', ['$scope', '$http', 'Register', 'Login', '$loc
           $scope.loginError = response.data;
         }
       );
-    }
+    };
   }
 ]);
 
@@ -176,7 +176,7 @@ app.controller('RegisterTeaCtrl', ['$scope', '$http', 'Register', 'Login', '$loc
           $scope.loginError = response.data;
         }
       );
-    }
+    };
   }
 ]);
 

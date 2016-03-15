@@ -1,0 +1,61 @@
+<table id="order" class="table">
+    <thead>
+        <tr>
+            <th class="tbltab" ng-click="switchOrder(0);">{{"T_ORDER_STATUS_0"|translate}}</th>
+            <th class="tbltab" ng-click="switchOrder(3);">{{"T_ORDER_STATUS_3"|translate}}</th>
+            <th class="tbltab" ng-click="switchOrder(4);">{{"T_ORDER_STATUS_4"|translate}}</th>
+            <th class="tbltab" ng-click="switchOrder(7);">{{"T_ORDER_STATUS_7"|translate}}</th>
+            <th class="tbltab" ng-click="switchOrder(5);">{{"T_ORDER_STATUS_5"|translate}}</th>
+            <th class="tbltab" ng-click="switchOrder(6);">{{"T_ORDER_STATUS_6"|translate}}</th>
+            <th class="tbltab" ng-click="switchOrder(2);">{{"T_ORDER_STATUS_2"|translate}}</th>
+            <th class="tbltab" ng-click="switchOrder(8);">{{"T_ORDER_STATUS_8"|translate}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- sort by -->
+        <tr>
+            <td colspan="6">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="sortby.time" ng-click="sort()"> {{"T_ORDER_SORT_1"|translate}}</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="sortby.buyer" ng-click="sort()"> {{"T_ORDER_SORT_2"|translate}}</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="sortby.service" ng-click="sort()"> {{"T_ORDER_SORT_3"|translate}}</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </td>
+        </tr>
+        <!-- datas -->
+        <tr>
+            <td>{{"T_ORDER_ID"|translate}}</td>
+            <td>{{"T_ORDER_TIME"|translate}}</td>
+            <td>{{"T_ORDER_SERVICE"|translate}}</td>
+            <td>{{"T_ORDER_NUMBER"|translate}}</td>
+            <td>{{"T_ORDER_UNIVALENT"|translate}}</td>
+            <td>{{"T_ORDER_RESET_PRI"|translate}}</td>
+            <td>{{"T_ORDER_STATUS"|translate}}</td>
+            <td>User Card</td>
+        </tr>
+        <tr ng-repeat="item in orders">
+            <td>{{item.id}}</td>
+            <td>{{item.time}}</td>
+            <td>{{item.service}}</td>
+            <td>{{item.num}}</td>
+            <td>{{item.price_now}} - {{item.price_old}} - {{item.reset_time}}</td>
+            <td>{{item.price_status}}</td>
+            <td>{{["T_ORDER_BEGIN","T_ORDER_UNDERGOING","T_ORDER_SUCCESS"][item.status]|translate}}</td>
+            <td>
+                {{item.buyer.name}} {{item.buyer.nationality}} {{item.buyer.gender}} {{item.buyer.age}} {{item.buyer.degree}} {{item.buyer.intention}} {{item.buyer.email}}
+            </td>
+        </tr>
+    </tbody>
+</table>

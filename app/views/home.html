@@ -1,0 +1,101 @@
+<div id="home" >
+    <div ng-if="user.type == 0">
+        <div class="mz-banner">
+            <div class="mz-container">
+                <img src="../images/main/slogan.png" alt="slogan" class="slogan">
+                <form action="" method="POST" class="form-inline" role="form">
+                    <div class="input-group">
+                        <label class="sr-only" for="school">你想读什么</label>
+                        <input type="text" id="school" placeholder="你想读什么...">
+                        <input type="text" disabled="disabled" placeholder="本科">
+                        <button type="button" class="btn input-group-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                        <img src="../images/main/search04.png" alt="search">
+                    </div>
+                </form>
+                <button type="button" class="btn-black">{{"HOME_REGISTER"|translate}}</button>
+            </div>
+        </div>
+        <div class="mz-container mz-content">
+            <div class="title">
+                <h2>{{"HOME_TITLE"|translate}}</h2>
+                <p>{{"HOME_SLOGA"|translate}}</p>
+            </div>
+            <div class="row">
+                <div class="item mz-col-lg-8">
+                    <span><p>{{"HOME_INFO_1"|translate}}</p></span>
+                    <img src="../images/main/item1.png" height="379" width="379" alt="nba">
+                </div>
+                <div class="item mz-col-lg-4">
+                    <span><p>{{"HOME_INFO_2"|translate}}</p></span>
+                    <img src="../images/main/item2.png" height="379" width="379" alt="city">
+                </div>
+            </div>
+            <div class="row">
+                <div class="item mz-col-lg-4">
+                    <span><p>{{"HOME_INFO_3"|translate}}</p></span>
+                    <img src="../images/main/item3.png" height="379" width="379" alt="food">
+                </div>
+                <div class="item mz-col-lg-4">
+                    <span><p>{{"HOME_INFO_4"|translate}}</p></span>
+                    <img src="../images/main/item4.png" height="379" width="379" alt="music">
+                </div>
+                <div class="item mz-col-lg-4">
+                    <span><p>{{"HOME_INFO_5"|translate}}</p></span>
+                    <img src="../images/main/item5.png" height="379" width="379" alt="party">
+                </div>
+            </div>
+            <div class="row">
+                <div class="item mz-col-lg-4">
+                    <span><p>{{"HOME_INFO_6"|translate}}</p></span>
+                    <img src="../images/main/item6.png" height="379" width="379" alt="schoold">
+                </div>
+                <div class="more mz-col-lg-8">
+                    <span></span>
+                    <img src="../images/main/item_more.png" height="10" width="44" alt="more">
+                </div>
+            </div>
+            <div class="row">
+                <div class="feater feater1 mz-col-lg-3">
+                    <h3>{{"HOME_FEATER_1"|translate}}</h3>
+                    <p>{{"HOME_FEATER_1_1"|translate}}</p>
+                    <p>{{"HOME_FEATER_1_2"|translate}}</p>
+                </div>
+                <div class="feater feater2 mz-col-lg-3">
+                    <h3>{{"HOME_FEATER_2"|translate}}</h3>
+                    <p>{{"HOME_FEATER_2_1"|translate}}</p>
+                    <p>{{"HOME_FEATER_2_2"|translate}}</p>
+                </div>
+                <div class="feater feater3 mz-col-lg-3">
+                    <h3>{{"HOME_FEATER_3"|translate}}</h3>
+                    <p>{{"HOME_FEATER_3_1"|translate}}</p>
+                    <p>{{"HOME_FEATER_3_2"|translate}}</p>
+                </div>
+                <div class="feater feater4 mz-col-lg-3">
+                    <h3>{{"HOME_FEATER_4"|translate}}</h3>
+                    <p>{{"HOME_FEATER_4_1"|translate}}</p>
+                    <p>{{"HOME_FEATER_4_2"|translate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- teacher -->
+    <div ng-if="user.type == 1">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-repeat="item in menus">
+                <span>{{item.link}}</span>
+                <p><a ui-sref="{{item.link}}">{{ item.i18n | translate }}</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- student -->
+    <div ng-if="user.type == 2">
+        
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="tbltab">{{"T_CENTER_HEADTITLE_1"|translate}}</th>
+            <th class="tbltab">{{"T_CENTER_RMB"|translate}}</th>
+            <th class="tbltab">{{"T_CENTER_DOLLOR"|translate}}</th>
+            <th class="tbltab">{{"T_CENTER_AVE_PRI"|translate}}</th>
+            <th class="tbltab">{{"T_CENTER_MAX_COUNT"|translate}}</th>
+            <th class="tbltab">min count</th>
+            <th class="tbltab">{{"T_CENTER_CUR_COUNT"|translate}}</th>
+            <th class="tbltab">{{"T_CENTER_REST_COUNT"|translate}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in data">
+            <td>
+                {{["T_CENTER_ALL", "T_CENTER_SIN1", "T_CENTER_SIN2", "T_CENTER_SIN3", "T_CENTER_SIN4", "T_CENTER_SIN5", "T_CENTER_SIN6", "T_CENTER_SIN7", "T_CENTER_SIN8", "T_CENTER_SIN9", "T_CENTER_SIN10", "T_CENTER_SIN11"][item.type]|translate}}
+                 - {{item.avaliable}}
+             </td>
+            <td>¥{{item.price}}</td>
+            <td>DOLLOR:${{item.price}}</td>
+            <td>{{item.aveprice}}</td>
+            <td>{{item.uplimit}}</td>
+            <td>{{item.lowlimit}}</td>
+            <td>{{item.getNum}}</td>
+            <td>{{item.uplimit - item.getNum}}</td>
+        </tr>
+    </tbody>
+</table>

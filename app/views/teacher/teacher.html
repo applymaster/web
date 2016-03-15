@@ -1,0 +1,10 @@
+<div class="teacher">
+    <nav class="navbar navbar-default" role="navigation" ng-if="tmenu.length">
+        <ul class="nav navbar-nav">
+            <li ng-repeat="item in tmenu" ui-sref-active="active">
+                <a ui-sref="{{item.link}}">{{item.i18n|translate}}</a>
+            </li>
+        </ul>
+    </nav>
+    <div ui-view="viewT" class="content"></div>
+</div>

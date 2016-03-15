@@ -1,0 +1,137 @@
+<!-- navbar -->
+<nav id="header" class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand logo" href="#/"></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="javascript:void(0)" ng-click="toPage(1)">顾问主页</a></li>
+            <li><a href="javascript:void(0)" ng-click="toPage(2)">顾问评价</a></li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</nav>
+<!-- jumbotron -->
+<div class="jumbotron">
+    <div class="row" style="background-image:url({{teacher.bannerImg}})">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <img ng-src="{{teacher.images}}" alt="{{teacher.name}}">
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" sytle="position: absolute; bottom: 0; right: 0;">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="javascript:void(0)"><strong>{{teacher.share}}个</strong>留学分享<span></span></a></li>
+                            <li><a href="javascript:void(0)"><strong>{{teacher.follower}}人</strong><span>加入列表</span></a></li>
+                            <li><a href="javascript:void(0)" ng-click="turnTo = 3"><strong>{{teacher.score}}次</strong><span>成功订单</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row container">
+        <p>{{teacher.name}}</p>
+        <p>{{["新晋顾问","精英顾问","明星顾问"][teacher.level]}}</p>
+        <p>{{teacher.intro}}</p>
+    </div>
+</div>
+<!-- home page -->
+<div ng-if="turnTo == 1 || !turnTo">
+    <h1>HOME</h1>
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-repeat="item in teacher.logs">
+            <!-- 缩略图 + brief -->
+            <div class="thumbnail" ng-if="item.cover">
+                <img ng-src="{{item.cover}}" alt="cover" ng-if="item.cover">
+                <div class="caption">
+                    <p ng-if="item.article">{{item.article}}</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">喜欢{{item.like}}</a>
+                        <a href="#" class="btn btn-default">评论{{item.comment}}</a>
+                    </p>
+                </div>
+            </div>
+            <!-- 纯文字 -->
+            <div class="thumbnail" ng-if="!item.cover">
+                <p>{{item.article}}</p>
+                <p>
+                    <a href="#" class="btn btn-primary">更多</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- evaluation page -->
+<div ng-if="turnTo == 2">
+    <h1>Evaluation</h1>
+    <form class="navbar-form pull-right">
+        <input type="text" style="width: 200px;">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <form class="navbar-form form-inline">
+                <div class="form-group">
+                    <label for="sort">排序规则</label>
+                    <select name="sort" id="sort" ng-model="sort">
+                        <option value="0">按全套服务排序</option>
+                        <option value="1">按单项服务排序</option>
+                        <option value="2">按评分高低排序</option>
+                        <option value="3">按时间顺序排序</option>
+                    </select>
+                </div>
+                <div class="form-group-right">
+                    <label for="good">只显示</label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox"> 好评
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox"> 中评
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox"> 差评
+                    </label>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <div class="row">
+        <ul class="nav navbar-nav">
+            <li> <a href="javascript:void(0)">好评率{{teacher.fRate}}</a></li>
+            <li> <a href="javascript:void(0)">成功申请率{{teacher.sRate}}</a></li>
+            <li> <a href="javascript:void(0)">平均申请周期{{teacher.cycle}}</a></li>
+            <li> <a href="javascript:void(0)">加入时间{{teacher.joinTime}}</a></li>
+        </ul>
+    </div>
+    <div class="row" ng-repeat="item in teacher.comments">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="thumbnail">
+                <img ng-src="{{item.images}}" alt="{{item.author}}">
+                <div class="caption">
+                    <p>{{item.author}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            {{["差评", "中评", "好评"][item.grade]}} {{item.time}} {{item.comment}} 来自{{teacher.name}}的回复: {{item.response}}
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <span ng-repeat="tag in item.tags">{{tag}}</span>
+        </div>
+    </div>
+</div>

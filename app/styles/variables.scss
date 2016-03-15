@@ -1,0 +1,55 @@
+/* global variables */
+
+// font size
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 18px;
+$font-size-lg: 21px;
+$font-size-xl: 36px;
+// color
+$color-red: #d44950;
+$color-blue: #26b6db;
+$color-grey: #999999;
+$color-green: #7bc005;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-lightgrey: #f0f0f0;
+// GUI color
+$color-link: #ffffff;
+$color-link-focus: #999999;
+$color-bg-primary: $color-black;
+$color-bg-secondary: $color-lightgrey;
+$color-form-link-text: $color-green;
+$color-header-bg: $color-black;
+$color-header-text: $color-white;
+$color-footer-bg: $color-black;
+$color-footer-text: $color-white;
+$color-button-default-bg: $color-black;
+$color-button-default-text: $color-white;
+$color-button-primary-bg: $color-white;
+$color-button-primary-text: $color-black;
+$color-input-error: $color-red;
+$color-text-error: $color-red;
+// Radius
+$radius-nav-border: 0;
+$radius-border-base: 0;
+$radius-border-large: 0;
+$radius-border-small: 0;
+// select
+$color-select-border: $color-black;
+// layout
+$inner-width: 1140px;
+$header-height: 80px;
+$footer-height: 90px;
+$split-left-width: 300px;
+$split-right-width: $inner-width - $split-left-width + 30px;
+//media
+$mz-breakpoint: 1171px;
+
+//transparent
+@mixin make-transparent($value: 0.5) {
+    filter: alpha(opacity=$value*100);
+    -moz-opacity: $value;
+    -khtml-opacity: $value;
+    opacity: $value;
+}

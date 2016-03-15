@@ -1,0 +1,167 @@
+<!-- navbar -->
+<nav id="header" class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand logo" href="#/"></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="#/search/teacherList">寻找顾问</a></li>
+            <li><a href="#/">我的申请</a></li>
+            <li><a href="#/">顾问列表</a></li>
+            <li><a href="#/">文件中心</a></li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</nav>
+<!-- breadcrumb -->
+<ol class="breadcrumb">
+    <li>
+        <a href="#/">我的申请中心</a>
+    </li>
+    <li class="active">寻找顾问</li>
+</ol>
+<!-- table -->
+<div class="container">
+    <div class="row">
+        <!-- left -->
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <form role="form">
+                <p>欲寻找服务</p>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="fullset">
+                            <input type="checkbox" name="fullset" id="fullset" ng-model="search.query.fullset"> 全套留学申请 </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="singleArticle">
+                            <input type="checkbox" name="essays" id="essays" ng-model="search.query.essays"> 单篇申请文 </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="consultation">
+                            <input type="checkbox" name="consultation" id="consultation" ng-model="search.query.consultation"> 选校咨询 </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="others">
+                            <input type="checkbox" name="others" id="others" ng-model="search.query.others"> 其他拆分服务 </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="correction">
+                            <input type="checkbox" name="correction" id="correction" ng-model="search.query.corrections"> 作文批改 </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>欲申请学位</p>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="bachelor" id="bachelor" ng-model="search.query.bacherlor"> 学士 </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="master" id="master" ng-model="search.query.master"> 硕士 </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="doctor" id="doctor" ng-model="search.query.doctor"> 博士 </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>欲申请专业大类</p>
+                    <select name="major" id="major" class="form-control" ng-model="search.query.major" ng-options="m.major as m.major for m in majors" ng-change="changeMajor()">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <span class="help">什么是专业大类</span>
+                </div>
+                <div class="form-group">
+                    <p>欲申请具体专业</p>
+                    <select name="profession" id="profession" class="form-control" ng-model="search.query.profession" ng-options="item as item for item in professions">
+                        <option value="">其他专业</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="inputProfe" id="inputProfe" class="form-control" ng-model="search.query.inputProfe" ng-if="!search.query.profession">
+                    <span class="help">什么是具体专业</span>
+                </div>
+                <div class="form-group">
+                    <p>价格范围</p>
+                    <select name="range" id="range" class="form-control" ng-model="search.query.range">
+                        <option value="111">111</option>
+                        <option value="222">222</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="submitCondition()">搜索</button>
+            </form>
+        </div>
+        <!-- right -->
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <form class="navbar-form form-inline">
+                    <div class="form-group">
+                        <label for="sort">排序规则</label>
+                        <select name="sort" id="sort" class="form-control" ng-model="search.query.sort" ng-change="submitScreen()">
+                            <option value="1">星级从高到低</option>
+                            <option value="2">星级从低到高</option>
+                            <option value="3">价格从高到低</option>
+                            <option value="4">价格从低到高</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="good">只显示</label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="star_teacher" id="star_teacher" ng-model="search.query.star" ng-click="submitScreen()"> 明星顾问
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="elite_teacher" id="elite_teacher" ng-model="search.query.elite" ng-click="submitScreen()"> 精英顾问
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="new_teacher" id="new_teacher" ng-model="search.query.new" ng-click="submitScreen()"> 新晋顾问
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="thumbnail" ng-repeat="teacher in search.teachers">
+                    <img ng-src="{{teacher.images}}" alt="teacher_photo">
+                    <div class="caption">
+                        <h3>{{teacher.name}}</h3>
+                        <p class="info">{{teacher.service}} {{teacher.degree}} ： {{teacher.marjor}}</p>
+                        <p class="experience">顾问留学背景：{{teacher.experience}}</p>
+                        <p>
+                            <label class="teacher_level">{{["新晋顾问","精英顾问","明星顾问"][teacher.level]}}</label>
+                            <label type="button" class="add_into_comparition" data-toggle="modal" data-target="#myModal">加入比较</label>
+                            <button role="button" class="add_into_comparition" data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="addToComparison()">Small modal</button>
+                            <label class="add_into_comparition" role="button">加入比较</label>
+                            <label class="teacher_score">成功申请过{{teacher.score}}单</label>
+                        </p>
+                    </div>
+                    <div class="right">
+                        <span>价格</span>
+                        <p>￥{{teacher.price}}</p>
+                        <button type="button" class="btn btn-primary" ng-click="detail()">查看顾问主页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

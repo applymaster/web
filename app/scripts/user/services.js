@@ -5,7 +5,7 @@
 
 /* Services */
 
-var services = angular.module('services', ['ngResource']);
+var services = angular.module('webApp.services', ['ngResource']);
 
 services.factory('Login', ['$resource',
   function($resource) {

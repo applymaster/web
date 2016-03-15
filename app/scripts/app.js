@@ -8,86 +8,257 @@
  *
  * Main module of the application.
  */
-angular
-  .module('webApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      /*.when('/', {
-        templateUrl: '../views/main_bak.html',
-        controller: 'MainBakCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })*/
-      .when('/', {
-        templateUrl: '../views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/login', {
-        templateUrl: '../views/user/login.html',
-        controller: 'LoginCtrl'
-      })
-      .when('/register/select', {
-        templateUrl: '../views/user/register_select.html',
-      })
-      .when('/register/applicant', {
-        templateUrl: '../views/user/register_applicant.html',
-        controller: 'RegisterAppCtrl'
-      })
-      .when('/register/applicant_more', {
-        templateUrl: '../views/user/register_applicant_more.html',
-        controller: 'ApplicantInfoCtrl'
-      })
-      .when('/register/applicant_compl', {
-        templateUrl: '../views/user/register_applicant_compl.html',
-        controller: 'RegisterAppComplCtrl'
-      })
-      .when('/register/teacher', {
-        templateUrl: '../views/user/register_teacher.html',
-        controller: 'RegisterTeaCtrl'
-      })
-      .when('/register/teacher_more', {
-        templateUrl: '../views/user/register_teacher_more.html',
-        controller: 'TeacherInfoCtrl'
-      })
-      .when('/register/teacher_compl', {
-        templateUrl: '../views/user/register_teacher_compl.html',
-        controller: 'RegisterTeaComplCtrl'
-      })
-      .when('/register/active', {
-        templateUrl: '../views/user/register_active.html',
-        controller: 'ActiveCtrl'
-      })
-      .when('/register/verify_email/:key', {
-        templateUrl: 'views/loading.html',
-        controller: 'VerifyEmailCtrl'
-      })
-      .when('/order', {
-        templateUrl: 'views/order_list.html',
-        controller: 'OrderListCtrl'
-      })
-      .when('/order/:id', {
-        templateUrl: 'views/order_detail.html',
-        controller: 'OrderDetailCtrl'
-      })
-      .when('/account', {
-        redirectTo: 'account/overview'
-      })
-      .when('/account/overview', {
-        templateUrl: 'views/account/overview.html',
-        controller: 'AccountOverviewCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+
+angular.module('webApp', [
+        'ngAnimate',
+        'ngCookies',
+        'ngSanitize',
+        'ngTouch',
+        'ui.router',
+        'pascalprecht.translate',
+        'ngDialog',
+        'webApp.Services'
+    ])
+    // language
+    .config(function($translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+            files: [{
+                prefix: '../i18n/',
+                suffix: '.json'
+            }]
+        });
+        $translateProvider.registerAvailableLanguageKeys(['en', 'zh'], {
+            'en_US': 'en',
+            'en_UK': 'en',
+            'zh_CN': 'zh'
+        });
+        //set preferred lang
+        $translateProvider.preferredLanguage('zh');
+        //auto determine preferred lang
+        $translateProvider.determinePreferredLanguage();
+        //when can not determine lang, choose en lang.
+        $translateProvider.fallbackLanguage('zh');
+    })
+    // ui-router
+    .config(function($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('demo', {
+                url: '/demo',
+                templateUrl: '/views/components/demo.html',
+                controller: 'DemoCtrl'
+            })
+
+        .state('home', {
+            url: '/home',
+            templateUrl: '/views/home.html',
+            controller: 'HomeCtrl'
+        })
+
+        .state('search', {
+            url: '/search',
+            templateUrl: '/views/search/search.html'
+        })
+
+        .state('search.details', {
+            url: '/details',
+            templateUrl: '/views/search/details.html'
+        })
+
+        .state('teacher', {
+            //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
+            abstract: true,
+            url: '/teacher',
+            templateUrl: '/views/teacher/teacher.html',
+            controller: 'TeacherCtrl'
+        })
+
+        .state('teacher.account', {
+                url: '/account',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/account.html',
+                        controller: 'AccountCtrl'
+                    }
+                }
+            })
+            .state('teacher.diploma', {
+                url: '/diploma',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/diploma.html',
+                        controller: 'DiplomaCtrl'
+                    }
+                }
+            })
+            .state('teacher.security', {
+                url: '/security',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/security.html',
+                        controller: 'SecurityCtrl'
+                    }
+                }
+            })
+
+        .state('teacher.center', {
+            url: '/center',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/center.html',
+                    controller: 'CenterCtrl'
+                }
+            }
+        })
+
+        .state('teacher.order', {
+            url: '/order',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/order.html',
+                    controller: 'OrderCtrl'
+                }
+            }
+        })
+
+        .state('teacher.wallet', {
+                url: '/wallet',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/wallet.html',
+                        controller: 'WalletCtrl'
+                    }
+                }
+            })
+            .state('teacher.income', {
+                url: '/income',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/wallet.html',
+                        controller: 'WalletCtrl'
+                    }
+                }
+            })
+            .state('teacher.recommend', {
+                url: '/recommend',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/wallet.html',
+                        controller: 'WalletCtrl'
+                    }
+                }
+            })
+
+        .state('teacher.assess', {
+                url: '/assess',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/credit.html',
+                        controller: 'CreditCtrl'
+                    }
+                }
+            })
+            .state('teacher.point', {
+                url: '/point',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/credit.html',
+                        controller: 'CreditCtrl'
+                    }
+                }
+            })
+            .state('teacher.star', {
+                url: '/star',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/credit.html',
+                        controller: 'CreditCtrl'
+                    }
+                }
+            })
+
+        .state('teacher.calendar', {
+            url: '/calendar',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/calendar.html',
+                    controller: 'CalendarCtrl'
+                }
+            }
+        })
+
+        .state('teacher.community', {
+            url: '/community',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/community.html',
+                    controller: 'CommunityCtrl'
+                }
+            }
+        })
+
+        .state('teacher.main', {
+            url: '/main',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/main.html',
+                    controller: 'MainCtrl'
+                }
+            }
+        })
+
+        /*
+
+        .state('teacher.message', {
+        url: '/message',
+        views: {
+        'viewT': {
+        templateUrl: '/views/teacher/message.html'
+        }
+        }
+        })
+
+        .state('teacher.help', {
+        url: '/help',
+        views: {
+        'viewT': {
+        templateUrl: '/views/teacher/help.html'
+        }
+        }
+        })
+        */
+
+        .state('student', {
+            abstract: true,
+            url: '/student',
+            templateUrl: '/views/student/student.html',
+            controller: 'StudentCtrl'
+        })
+
+        .state('student.account', {
+            url: '/account',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/student/account.html'
+                }
+            }
+        })
+
+        .state('student.security', {
+            url: '/security',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/student/security.html'
+                }
+            }
+        });
+        // catch all route
+        // send users to the form page
+        $urlRouterProvider.otherwise('/home');
+    })
+    .run(['$rootScope', '$state', '$stateParams',
+        function($rootScope, $state, $stateParams) {
+            $rootScope.$state = $state;
+            $rootScope.$stateParams = $stateParams;
+        }
+    ]);

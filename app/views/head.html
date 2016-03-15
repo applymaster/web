@@ -1,0 +1,38 @@
+<!-- guest -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" ng-if="user.type == 0">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+            <li><img src="../images/logo.png" class="logo" alt="logo"></li>
+            <li class="icon-qq"></li>
+            <li class="icon-wx"></li>
+            <li class="icon-wb"></li>
+            <li class="icon-db"></li>
+            <li><a ui-sref="login">{{"HEAD_LOGIN"|translate}}</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- teacher -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" ng-if="user.type == 1">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+            <li id="logo"><img src="../images/logo.png" alt="logo"></li>
+            <li><a ui-sref="home">{{"HEAD_HOME"|translate}}</a></li>
+            <li><a ui-sref="teacher.community">{{"HEAD_COMMUNITY"|translate}}</a></li>
+            <li><a ui-sref="home">{{user.name}}</a></li>
+            <li><a ui-sref="logout">{{"HEAD_LOGOUT"|translate}}</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- student -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" ng-if="user.type == 2">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+            <li><img src="../images/logo.png" class="logo" alt="logo"></li>
+            <li><a ui-sref="student.home">{{"HEAD_HOME"|translate}}</a></li>
+            <li><a ui-sref="search">{{"HEAD_SEARCH_CONSULTANT"|translate}}</a></li>
+            <li><a ui-sref="student.class">{{"HEAD_CLASS"|translate}}</a></li>
+            <li><a ui-sref="student.home">{{user.name}}</a></li>
+            <li><a ui-sref="/logout">{{"HEAD_LOGOUT"|translate}}</a></li>
+        </ul>
+    </div>
+</nav>

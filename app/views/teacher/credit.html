@@ -1,0 +1,28 @@
+<table class="table table-hover" ng-if="$state.is('teacher.assess')">
+    <tr ng-repeat="cItem in content">
+        <td>{{cItem.title | translate}}</td>
+        <td>{{cItem.value}}</td>
+    </tr>
+    <tr>
+    	<td></td>
+    	<td>{{ T_EVALUATION_SCORE_0 | translate }}</td>
+    	<td>{{ T_EVALUATION_SCORE_1 | translate }}</td>
+    	<td>{{ T_EVALUATION_SCORE_2 | translate }}</td>
+    	<td>{{ T_EVALUATION_SCORE_3 | translate }}</td>
+    	<td>{{ T_EVALUATION_SCORE_4 | translate }}</td>
+    </tr>
+</table>
+
+<table class="table table-hover" ng-if="$state.is('teacher.point')">
+    <tr ng-repeat="cItem in content">
+        <td>{{cItem.title | translate}}</td>
+        <td>{{cItem.value}}</td>
+    </tr>
+</table>
+
+<table class="table table-hover" ng-if="$state.is('teacher.star')">
+    <tr ng-repeat="cItem in content">
+        <td>{{cItem.title | translate}}</td>
+        <td>{{cItem.value}}</td>
+    </tr>
+</table>

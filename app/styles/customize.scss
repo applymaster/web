@@ -1,0 +1,17 @@
+/*! Customize Bootstrap */
+
+/* Container widths */
+
+@mixin out-container {
+    @include clearfix;
+    @include container-fixed(0);
+    width: 100%;
+    @media(max-width: $mz-breakpoint) {
+        width: $mz-breakpoint;
+    }
+}
+
+@mixin in-container {
+    width: $mz-breakpoint;
+    margin: 0 auto;
+}

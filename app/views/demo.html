@@ -1,0 +1,75 @@
+<!-- <h1>Test iCheck and Dropkick</h1>
+<table class="table table-hover">
+	<tbody>
+		<tr>
+			<td>checkbox - {{demo['check']}}</td>
+			<td>
+				<input type="checkbox" ng-model="demo['check']" icheck> checked enabled
+			</td>
+			<td>
+				<input type="checkbox" ng-model="demo['uncheck']" icheck>uncheck enabled
+			</td>
+			<td>
+				<input type="checkbox" ng-model="demo['check']" icheck disabled="disabled" >checked disabled
+			</td>
+			<td>
+				<input type="checkbox" ng-model="demo['uncheck']" icheck disabled="disabled" >uncheck disabled
+			</td>
+		</tr>
+		<tr>
+			<td>radio - {{demo["radio"]}}</td>
+			<td>
+				<input type="radio" value="1" name="demo" ng-model="demo['radio']" icheck> value = 1
+			</td>
+			<td>
+				<input type="radio" value="2" name="demo" ng-model="demo['radio']" icheck> value = 2
+			</td>
+			<td>
+				<input type="radio" value="1" name="demo" ng-model="demo['radio']" icheck disabled="disabled" > value = 1, disabled
+			</td>
+			<td>
+				<input type="radio" value="2" name="demo" ng-model="demo['radio']" icheck disabled="disabled" > value = 2, disabled
+			</td>
+		</tr>
+		<tr>
+			<td>select - {{demo['select']}}</td>
+			<td>
+				<select ng-model="demo['select']" value dropkick ng-options="i as i for i in [1, 2]">
+				</select>
+			</td>
+			<td>
+				<select ng-model="demo['select']" value dropkick ng-options="i as i for i in [1, 2]">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>alert box</td>
+			<td><input type="button" name="alert" value="Alert" ng-click="alertBox()"></td>
+		</tr>
+	</tbody>
+</table>
+ --><h1>Test iCheck iRadio</h1>
+<div class="out-container" style="background-color: white">
+	<div class="row">
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<icheck ng-model="demo['check']" />  {{demo.check}} enabled
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<iradio value="1" name="demo" ng-model="demo['radio']"/>  radio value="1"
+		</div>
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<iradio value="2" name="demo" ng-model="demo['radio']" />  radio value="2"
+		</div>
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			{{demo.radio}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<!-- <select  value ></select> -->
+			<dropkick ng-model="demo['select']" ng-options="i as i for i in [1, 2]"/>
+		</div>
+	</div>
+</div>
