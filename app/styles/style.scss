@@ -2,7 +2,7 @@
 @import "variables.scss";
 @import "customize.scss";
 
-/* Global Settings */
+/* Base Settings */
 
 html {
     width: 100%;
@@ -19,12 +19,9 @@ html {
         }
         min-height: 100%;
         padding: 0;
-        background: $color-bg-primary;
+        background: $color-bg-secondary;
     }
 }
-
-
-/* Base Style */
 
 ul {
     padding: 0;
@@ -37,36 +34,761 @@ ul {
 a {
     text-decoration: none;
     cursor: pointer;
-	.form-color: {
-		color: $color-form-link-text
-	}
-}
-
-.ng-invalid {
-	border-color: $color-input-error;
+    .form-color: {
+        color: $color-form-link-text
+    }
 }
 
 .error {
-	color: $color-text-error;
-}
-/* Header */
-#logo {
-    position: relative;
-    right: 50%;
+    color: $color-red;
 }
 
-/* Main */
+.glyphicon {
+    &.red {
+        color: red;
+    }
+    &.grey {
+        color: $color-lightgrey;
+    }
+    &.orange {
+        color: orange;
+    }
+}
+
+.btn {
+    height: 47px;
+    width: 115px;
+    font-size: 24px;
+}
+
+.btn-info,
+.btn-success {
+    a {
+        color: white;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.btn-link {
+    padding: 0;
+    border: none;
+    vertical-align: inherit;
+}
+
+.tooltip-inner {
+    text-align: left;
+}
+
+
+/* Container Layout */
 
 .main-content {
-    background-color: $color-bg-secondary;
-    margin-bottom: $footer-height;
-    margin-top: 120px;
-    z-index: 10;
     @include out-container;
-    > div {
+    > div,
+    > form {
         @include in-container;
     }
 }
+
+.user-body, .special-body {
+    background: url('../images/header.png') no-repeat 0 0;
+    background-size: 100% 925px;
+    .main-content {
+        background: transparent;
+        padding-bottom: 40px;
+    }
+}
+
+.teacher-body {
+    .main-content {
+        background-color: $color-bg-secondary;
+        margin-bottom: $footer-height;
+        z-index: 10;
+    }
+}
+
+.student-body {
+    .main-content {
+        background-color: $color-bg-secondary;
+        margin-bottom: $footer-height;
+        z-index: 10;
+    }
+}
+
+/* Header */
+.user-body,
+.special-body {
+    header nav {
+        background: transparent;
+        border-color: transparent;
+    }
+}
+
+.student-body,
+.special-body {
+    header {
+        .navbar-right {
+            text-align: right;
+        }
+        .dropdown-list {
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: -15px;
+                border-bottom: 15px solid rgb(60,60,60);;
+                border-left: 18px solid transparent;
+                border-right: 17px solid transparent;
+            }
+            li {
+                width: 143px;
+                height: 30px;
+                text-align: center;
+                background-color: rgb(60,60,60);
+                a {
+                    color: rgb(85,85,85);
+                    font-size: 18px;
+                }
+                &:hover {
+                    background-color: $color-black;
+                    a {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+/* Home */
+
+#home {
+    cursor: pointer;
+    .user-home {
+        width: $mz-breakpoint;
+        .slogan {
+            display: block;
+            margin: 298px auto 0 auto;
+        }
+        .play {
+            display: block;
+            margin: 160px auto 0 auto;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 100px;
+            .btn {
+                padding: 1px;
+                width: 180px;
+                height: 47px;
+                a {
+                    font-size: 24px;
+                }
+                &:first-child {
+                    margin-right: 90px;
+                }
+                &:last-child {
+                    margin-left: 90px;
+                }
+            }
+        }
+    }
+    .teacher-home {
+        text-align: center;
+        margin: 280px auto;
+        > div {
+            padding-top: 20px;
+            margin-bottom: 150px;
+            color: $color-black;
+            .thumbnail {
+                width: 285px;
+                height: 285px;
+                padding: 100px;
+            }
+            .caption {
+                margin-top: 15px;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            &:hover {
+                background-color: $color-black;
+                color: white;
+                .thumbnail {
+                    background-color: $color-black;
+                    border-color: $color-black;
+                }
+                a {
+                    color: white;
+                }
+            }
+        }
+        a {
+            color: $color-black;
+        }
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+    }
+    .student-home {
+        color: white;
+        .slogan {
+            display: block;
+            margin: 420px auto;
+        }
+        .pic-list {
+            margin: 590px auto 175px;
+            .row .item {
+                float: left;
+                display: block;
+                margin-top: 16px;
+                position: relative;
+                &:not(:first-child) {
+                    margin-left: 16px;
+                }
+                .lg-cover {
+                    position: absolute;
+                    top: 0;
+                    width: 775px;
+                    height: 379px;
+                }
+                .sm-cover {
+                    position: absolute;
+                    top: 0;
+                    width: 379px;
+                    height: 379px;
+                }
+                .info {
+                    font-size: 24px;
+                    font-weight: bold;
+                    position: absolute;
+                    top: 0;
+                    height: 379px;
+                    line-height: 379px;
+                    margin: 0 auto;
+                    z-index: 99;
+                    text-align: center;
+                    color: white;
+                    &.lg-info {
+                        width: 775px;
+                    }
+                    &.sm-info {
+                        width: 379px;
+                    }
+                }
+            }
+        }
+        .banner {
+            margin-bottom: 175px;
+        }
+    }
+}
+
+
+/* Login */
+
+.login {
+    width: 430px;
+    height: 545px;
+    margin: 188px auto 0 auto;
+    padding: 135px 21.5px;
+    background: url('../images/main/cover.png') repeat 0 0;
+    .form-group {
+        input {
+            font-size: 18px;
+            width: 348px;
+            height: 47px;
+        }
+        &:first-child {
+            margin-bottom: 30px;
+        }
+        &.forgot {
+            .btn {
+                width: 140.5px;
+                font-size: 18px;
+            }
+            .btn-link {
+                color: rgb(160, 160, 160);
+                margin-left: 277px;
+                margin-bottom: 78px;
+            }
+        }
+        &:last-child {
+            text-align: center;
+        }
+        .error-message {
+            font-size: 12px;
+            margin-left: 56px;
+        }
+    }
+}
+
+.register {
+    color: white;
+    .slogan {
+        width: 98%;
+        margin-top: 420px;
+    }
+    .register-box {
+        width: 430px;
+        height: 545px;
+        padding: 0 39px;
+        margin-top: 240px;
+        margin-left: 40px;
+        background: $color-black;
+        .title {
+            margin-top: 55px;
+            margin-bottom: 50px;
+            text-align: center;
+            p {
+                color: rgb(160, 160, 160);
+            }
+        }
+        .form-group {
+            margin-bottom: 30px;
+            input {
+                font-size: 18px;
+                height: 47px;
+            }
+            .error-message {
+                margin-left: 56px;
+            }
+        }
+        .button-group {
+            text-align: center;
+            margin: 62px auto;
+            .btn {
+                height: 47px;
+                width: 140.5px;
+            }
+        }
+    }
+    .pic-list {
+        .row .item {
+            float: left;
+            display: block;
+            margin-top: 16px;
+            position: relative;
+            &:not(:first-child) {
+                margin-left: 16px;
+            }
+            .lg-cover {
+                position: absolute;
+                top: 0;
+                width: 775px;
+                height: 379px;
+            }
+            .sm-cover {
+                position: absolute;
+                top: 0;
+                width: 379px;
+                height: 379px;
+            }
+            .info {
+                font-size: 24px;
+                font-weight: bold;
+                position: absolute;
+                top: 0;
+                height: 379px;
+                line-height: 379px;
+                margin: 0 auto;
+                z-index: 99;
+                text-align: center;
+                color: white;
+                &.lg-info {
+                    width: 775px;
+                }
+                &.sm-info {
+                    width: 379px;
+                }
+            }
+        }
+    }
+}
+
+.register.rs {
+    .error-message .text-danger {
+        color: rgb(38, 176, 214);
+    }
+    .pic-list {
+        margin-top: 250px;
+    }
+    .banner {
+        margin: 175px auto;
+    }
+}
+
+.register.rt {
+    .error-message .text-danger {
+        color: rgb(124, 187, 5);
+    }
+    .banner {
+        margin: 250px auto 175px;
+    }
+}
+
+
+/* Student */
+.student-body,
+.special-body {
+}
+
+
+/* Teacher */
+
+.teacher-body {
+    .main-content {
+        margin-top: 173px;
+    }
+    .navbar-default.header {
+        border: none;
+        margin-bottom: 0;
+        ul {
+            background-color: $color-bg-primary;
+            @include clearfix;
+            li {
+                a {
+                    font-size: 24px;
+                    padding: 15px 79px;
+                    color: white;
+                }
+                &.active {
+                    background-color: white;
+                    a {
+                        color: $color-black;
+                    }
+                }
+                &.black-item {
+                    background-color: $color-bg-primary;
+                    a {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+    .navbar-default.secondary {
+        border: none;
+        margin-bottom: 0;
+        ul {
+            background-color: $color-bg-primary;
+            @include clearfix;
+            li {
+                a {
+                    color: white;
+                    width: 195.1px;
+                    height: 59px;
+                    line-height: 59px;
+                    padding: 0;
+                    text-align: center;
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+                &.active {
+                    background-color: white;
+                    a {
+                        color: $color-black;
+                    }
+                }
+                &.black-item {
+                    background-color: $color-bg-primary;
+                    a {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        background-color: white;
+    }
+    .center {
+        input {
+            width: 100px;
+            &[disabled] {
+                border: none;
+            }
+        }
+    }
+    .diploma {
+        .diploma-item {
+            height: 135px;
+            width: 135px;
+            margin-right: 26px;
+            position: relative;
+            display: inline-block;
+            .diploma-img {
+                height: 135px;
+                width: 135px;
+                display: block;
+            }
+            .diploma-icon {
+                position: absolute;
+                top: -9px;
+                right: -9px;
+            }
+            .left {
+                float: left;
+            }
+            .right {
+                float: right;
+            }
+        }
+        .diploma-filter {
+            .diploma-img {
+                -webkit-filter: brightness(0.4);
+                filter: brightness(0.4);
+            }
+            span {
+                color: white;
+                position: absolute;
+                left: 35%;
+                top: 45%;
+            }
+        }
+    }
+}
+
+/* 顾问首页 */
+#myzone {
+    z-index: 9999;
+    margin-top: 772px;
+    background: rgb(242, 242, 242);
+    .state {
+        .item {
+            float: left;
+        }
+        .sm-item {
+            width: 380px;
+            height: 289px;
+            img {
+                width: 380px;
+                height: 289px;
+            }
+        }
+        .lg-item {
+            width: 790px;
+            height: 289px;
+            padding: 0 15px 15px;
+            background-color: white;
+        }
+        .line1 {
+            margin-top: 30px;
+            margin-bottom: 23px;
+            .username {
+                font-size: 24px;
+            }
+            .level {
+                font-size: 18px;
+            }
+        }
+        .line2 {
+            margin-bottom: 26px;
+            > div {
+                border-right: 1px solid black;
+                padding-left: 21px;
+                padding-right: 25px;
+                &:first-child {
+                    padding-left: 0;
+                }
+            }
+            .score {
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .msg {
+                font-size: 14px;
+            }
+        }
+        .line3 textarea {
+            width: 760px;
+            height: 72px;
+            padding: 2px;
+            margin-bottom: 20px;
+            border: 1px solid $color-green;
+        }
+        .line4 .grey {
+            color: rgb(160, 160, 160);
+        }
+    }
+    .list {
+        .item {
+            float: left;
+            width: 380px;
+            height: 620px;
+            padding: 15px;
+            margin-top: 15px;
+            background-color: white;
+            &:not(:first-child) {
+                margin-left: 15px;
+            }
+            img {
+                width: 350px;
+                height: 350px;
+            }
+        }
+    }
+}
+/* Table Page */
+
+.table-page {
+    padding: 52px 79px;
+}
+
+
+/* Form Page */
+
+.table-form {
+    padding: 52px 79px;
+    .form-control,
+    .error-message {
+        width: 300px;
+    }
+}
+
+.has-error {
+    color: $state-danger-text;
+}
+
+.has-success {
+    color: $state-success-text;
+}
+
+
+/* Calendar Page */
+
+.arrow {
+    width: 0;
+    height: 0;
+    top: 20px;
+    right: -48px;
+    position: absolute;
+    display: block;
+    border-right: 24px solid transparent;
+    border-left: 24px solid black;
+    border-top: 24px solid transparent;
+    border-bottom: 24px solid transparent;
+}
+
+.calendar {
+    .title {
+        font-weight: bold;
+        .month {
+            color: rgb(76, 73, 72);
+            font-size: 82px;
+            margin-bottom: 52px;
+        }
+        .word {
+            color: rgb(137, 137, 137);
+            margin-left: 10px;
+            margin-top: 20px;
+        }
+        .word div:first-child {
+            font-size: 30px;
+            height: 30px;
+        }
+    }
+    .content {
+        width: 100%;
+        th {
+            border-top: 1px solid rgb(76, 73, 72);
+            border-bottom: 2px solid rgb(76, 73, 72);
+            text-align: center;
+            font-size: 28px;
+        }
+        td {
+            .day {
+                width: 93px;
+                height: 93px;
+                position: relative;
+                &:hover {
+                    background-color: $color-green;
+                    color: white;
+                    .lunar {
+                        color: white;
+                    }
+                }
+                .event {
+                    position: absolute;
+                    width: 300px;
+                    padding: 20px;
+                    height: 300px;
+                    top: 26px;
+                    right: 117px;
+                    display: block;
+                    font-size: 18px;
+                    background: black;
+                    color: white;
+                    text-align: left;
+                    z-index: 1060;
+                    text-align: start;
+                    text-decoration: none;
+                    text-shadow: none;
+                    text-transform: none;
+                    letter-spacing: normal;
+                    word-break: normal;
+                    word-spacing: normal;
+                    word-wrap: normal;
+                    white-space: normal;
+                    -webkit-background-clip: padding-box;
+                    background-clip: padding-box;
+                    line-break: auto;
+                    h3 {
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+                    table td {
+                        padding-right: 10px;
+                        font-size: 21px;
+                        color: white;
+                    }
+                    label {
+                        font-size: 18px;
+                    }
+                    input[type="text"] {
+                        width: 140px;
+                        height: 26px;
+                        display: inline-block;
+                    }
+                    #way1value {
+                        width: 36px;
+                        & + label {
+                            padding: 0;
+                        }
+                    }
+                    .radio {
+                        display: inherit;
+                    }
+                    button {
+                        font-size: 21px;
+                        height: 42px;
+                        width: 80px;
+                    }
+                }
+            }
+            text-align: center;
+            cursor: pointer;
+        }
+        /* workday 文字 */
+        td {
+            color: rgb(76, 73, 72);
+            font-size: 42px;
+        }
+        /* weekend 文字 */
+        td:nth-child(n+6) {
+            color: rgb(137, 137, 137);
+            font-size: 42px;
+        }
+        /* lunar 农历文字 */
+        td .lunar {
+            color: rgb(137, 137, 137);
+            font-size: 18px;
+        }
+    }
+}
+
 
 /* Footer */
 
@@ -140,36 +862,5 @@ footer {
             color: $color-footer-text;
             cursor: pointer;
         }
-    }
-}
-
-/* Home */
-#home {
-    margin-top: 122px;
-    cursor: pointer;
-    .row div{
-        background: white;
-        color: black;
-        &:hover {
-            background-color: black;
-            color: white;
-        }
-    }
-}
-
-/* Teacher */
-.teacher {
-    margin: 120px 200px;
-    nav {
-        background-color: $color-bg-primary;
-        ul {
-            @include clearfix;
-            li {
-                float: left;
-            }
-        }
-    };
-    .content {
-        background-color: $color-bg-secondary;
     }
 }

@@ -1,0 +1,90 @@
+<form name="frmRegister" class="form-horizontal">
+    <div class="register" ng-class="{'rt': $state.params.type == '1', 'rs': $state.params.type == '2'}">
+        <div class="row">
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <img src="../images/main/slogan.png" alt="slogan" class="slogan">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 register-box">
+                <div class="title" ng-if="$state.params.type == '1'">
+                    <h1>{{"REGISTER_HEADER_1"|translate}}</h1>
+                    <p>{{"REGISTER_INFO_1"|translate}}</p>
+                </div>
+                <div class="title" ng-if="$state.params.type == '2'">
+                    <h1>{{"REGISTER_HEADER_2"|translate}}</h1>
+                    <p>{{"REGISTER_INFO_2"|translate}}</p>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                        <input type="email" mz-detect-input2 class="form-control" id="email" mz-name="email" ng-model="user.email" placeholder="{{'LOGIN_EMAIL'|translate}}" required ng-change="detectEmail('email')">
+                        <div class="input-group-addon" style="cursor: pointer;" ng-click="verifyEmail('email')">{{"BT_VERIFY"|translate}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                        <input type="password" mz-detect-input2 class="form-control" id="password" mz-name="password" ng-model="user.password" placeholder="{{'LOGIN_PASSWORD'|translate}}" required ng-change="detectPwd('password')">
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="checkpolicy">{{"REGISTER_POLICY"|translate}}
+                    </label>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn" ng-class="{'btn-success': $state.params.type == '1', 'btn-info': $state.params.type == '2'}" ng-click="login()" ng-disabled="frmRegister.$invalid || !checkpolicy ">{{"BT_LOGIN"|translate}}</button>
+                    <button type="button" class="btn" ng-class="{'btn-success': $state.params.type == '1', 'btn-info': $state.params.type == '2'}" ng-click="register()" ng-disabled="frmRegister.$invalid || !checkpolicy ">{{"BT_REGISTER"|translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="pic-list" ng-if="$state.params.type == '2'">
+            <div class="row">
+                <div class="item">
+                    <img src="../../images/main/item1.png">
+                    <a class="info lg-info" href="#">{{"HOME_INFO_1"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="lg-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/item2.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_2"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+            </div>
+            <div class="row">
+                <div class="item">
+                    <img src="../../images/main/item3.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_3"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/item4.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_4"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/item5.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_5"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+            </div>
+            <div class="row">
+                <div class="item">
+                    <img src="../../images/main/item6.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_6"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/cover.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_7"|translate}}</a>
+                </div>
+                <div class="item">
+                    <img src="../../images/main/cover.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_8"|translate}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="row banner">
+            <img src="../../images/main/04.png">
+        </div>
+    </div>
+</form>

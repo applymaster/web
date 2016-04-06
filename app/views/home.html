@@ -1,101 +1,77 @@
-<div id="home" >
-    <div ng-if="user.type == 0">
-        <div class="mz-banner">
-            <div class="mz-container">
-                <img src="../images/main/slogan.png" alt="slogan" class="slogan">
-                <form action="" method="POST" class="form-inline" role="form">
-                    <div class="input-group">
-                        <label class="sr-only" for="school">你想读什么</label>
-                        <input type="text" id="school" placeholder="你想读什么...">
-                        <input type="text" disabled="disabled" placeholder="本科">
-                        <button type="button" class="btn input-group-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                        <img src="../images/main/search04.png" alt="search">
-                    </div>
-                </form>
-                <button type="button" class="btn-black">{{"HOME_REGISTER"|translate}}</button>
-            </div>
-        </div>
-        <div class="mz-container mz-content">
-            <div class="title">
-                <h2>{{"HOME_TITLE"|translate}}</h2>
-                <p>{{"HOME_SLOGA"|translate}}</p>
-            </div>
-            <div class="row">
-                <div class="item mz-col-lg-8">
-                    <span><p>{{"HOME_INFO_1"|translate}}</p></span>
-                    <img src="../images/main/item1.png" height="379" width="379" alt="nba">
-                </div>
-                <div class="item mz-col-lg-4">
-                    <span><p>{{"HOME_INFO_2"|translate}}</p></span>
-                    <img src="../images/main/item2.png" height="379" width="379" alt="city">
-                </div>
-            </div>
-            <div class="row">
-                <div class="item mz-col-lg-4">
-                    <span><p>{{"HOME_INFO_3"|translate}}</p></span>
-                    <img src="../images/main/item3.png" height="379" width="379" alt="food">
-                </div>
-                <div class="item mz-col-lg-4">
-                    <span><p>{{"HOME_INFO_4"|translate}}</p></span>
-                    <img src="../images/main/item4.png" height="379" width="379" alt="music">
-                </div>
-                <div class="item mz-col-lg-4">
-                    <span><p>{{"HOME_INFO_5"|translate}}</p></span>
-                    <img src="../images/main/item5.png" height="379" width="379" alt="party">
-                </div>
-            </div>
-            <div class="row">
-                <div class="item mz-col-lg-4">
-                    <span><p>{{"HOME_INFO_6"|translate}}</p></span>
-                    <img src="../images/main/item6.png" height="379" width="379" alt="schoold">
-                </div>
-                <div class="more mz-col-lg-8">
-                    <span></span>
-                    <img src="../images/main/item_more.png" height="10" width="44" alt="more">
-                </div>
-            </div>
-            <div class="row">
-                <div class="feater feater1 mz-col-lg-3">
-                    <h3>{{"HOME_FEATER_1"|translate}}</h3>
-                    <p>{{"HOME_FEATER_1_1"|translate}}</p>
-                    <p>{{"HOME_FEATER_1_2"|translate}}</p>
-                </div>
-                <div class="feater feater2 mz-col-lg-3">
-                    <h3>{{"HOME_FEATER_2"|translate}}</h3>
-                    <p>{{"HOME_FEATER_2_1"|translate}}</p>
-                    <p>{{"HOME_FEATER_2_2"|translate}}</p>
-                </div>
-                <div class="feater feater3 mz-col-lg-3">
-                    <h3>{{"HOME_FEATER_3"|translate}}</h3>
-                    <p>{{"HOME_FEATER_3_1"|translate}}</p>
-                    <p>{{"HOME_FEATER_3_2"|translate}}</p>
-                </div>
-                <div class="feater feater4 mz-col-lg-3">
-                    <h3>{{"HOME_FEATER_4"|translate}}</h3>
-                    <p>{{"HOME_FEATER_4_1"|translate}}</p>
-                    <p>{{"HOME_FEATER_4_2"|translate}}</p>
-                </div>
-            </div>
+<div id="home">
+    <!-- guest -->
+    <div ng-if="user.type == 0" class="guest-home">
+        <img src="../images/main/slogan.png" alt="slogan" class="slogan">
+        <img src="../images/main/play.png" alt="play" class="play">
+        <div class="button-group">
+            <button type="button" class="btn btn-info"><a ui-sref="register({type:2})">{{"HOME_REGISTER_1"|translate}}</a></button>
+            <button type="button" class="btn btn-success"><a ui-sref="register({type:1})">{{"HOME_REGISTER_2"|translate}}</a></button>
         </div>
     </div>
     <!-- teacher -->
-    <div ng-if="user.type == 1">
-        <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-repeat="item in menus">
-                <span>{{item.link}}</span>
-                <p><a ui-sref="{{item.link}}">{{ item.i18n | translate }}</a></p>
-            </div>
+    <div ng-if="user.type == 1" class="teacher-home row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-repeat="item in menus" id="{{item.id}}" mz-teacher-hover>
+            <a ui-sref="{{item.link}}">
+                <div class="thumbnail">
+                    <img ng-src="../images/home/{{item.id}}.png" alt="{{item.id}}">
+                </div>
+                <div class="caption">
+                    <a ui-sref="{{item.link}}">{{ item.i18n | translate }}</a>
+                </div>
+            </a>
         </div>
     </div>
     <!-- student -->
-    <div ng-if="user.type == 2">
-        
+    <div ng-if="user.type == 2" class="student-home">
+        <img src="../images/main/slogan.png" alt="slogan" class="slogan">
+        <div class="pic-list">
+            <div class="row">
+                <div class="item">
+                    <img src="../../images/main/item1.png">
+                    <a class="info lg-info" href="#">{{"HOME_INFO_1"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="lg-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/item2.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_2"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+            </div>
+            <div class="row">
+                <div class="item">
+                    <img src="../../images/main/item3.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_3"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/item4.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_4"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/item5.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_5"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+            </div>
+            <div class="row">
+                <div class="item">
+                    <img src="../../images/main/item6.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_6"|translate}}</a>
+                    <img src="../../images/main/cover.png" class="sm-cover">
+                </div>
+                <div class="item">
+                    <img src="../../images/main/cover.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_7"|translate}}</a>
+                </div>
+                <div class="item">
+                    <img src="../../images/main/cover.png">
+                    <a class="info sm-info" href="#">{{"HOME_INFO_8"|translate}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="row banner">
+            <img src="../../images/main/04.png">
+        </div>
     </div>
 </div>

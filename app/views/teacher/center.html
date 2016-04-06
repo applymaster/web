@@ -1,29 +1,96 @@
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th class="tbltab">{{"T_CENTER_HEADTITLE_1"|translate}}</th>
-            <th class="tbltab">{{"T_CENTER_RMB"|translate}}</th>
-            <th class="tbltab">{{"T_CENTER_DOLLOR"|translate}}</th>
-            <th class="tbltab">{{"T_CENTER_AVE_PRI"|translate}}</th>
-            <th class="tbltab">{{"T_CENTER_MAX_COUNT"|translate}}</th>
-            <th class="tbltab">min count</th>
-            <th class="tbltab">{{"T_CENTER_CUR_COUNT"|translate}}</th>
-            <th class="tbltab">{{"T_CENTER_REST_COUNT"|translate}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="item in data">
+<form name="frmCenter" class="table-page center">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="tbltab">{{"T_CENTER_HEADTITLE_1"|translate}}</th>
+                <th class="tbltab">{{"T_CENTER_HEADTITLE_2"|translate}}</th>
+                <th class="tbltab">{{"T_CENTER_HEADTITLE_3"|translate}}</th>
+                <th class="tbltab">{{"T_CENTER_HEADTITLE_4"|translate}}</th>
+                <th class="tbltab">{{"T_CENTER_HEADTITLE_5"|translate}}</th>
+                <th class="tbltab">{{"T_CENTER_HEADTITLE_6"|translate}}</th>
+                <th class="tbltab">{{"T_CENTER_HEADTITLE_7"|translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="all.avaliable"> {{"T_CENTER_ALL"|translate}}
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <input type="text" name="all_price" ng-model="all.price" ng-disabled="disStatus">
+                </td>
+                <td>
+                    ¥{{all.price}}
+                </td>
+                <td>
+                    <input type="text" name="all_aveprice" ng-model="all.aveprice" ng-disabled="disStatus">
+                </td>
+                <td>
+                    {{all.uplimit}}
+                </td>
+                <td>
+                    <input type="text" name="all_getNum" ng-model="all.getNum" ng-disabled="disStatus">
+                </td>
+                <td>
+                    <input type="text" name="all_remainderNum" ng-model="all.remainderNum" ng-disabled="disStatus">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="select" ng-click="selectAll()"> {{"T_CENTER_SIN"|translate}}
+                        </label>
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="item in single">
+                <td>
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="item.avaliable"> {{["T_CENTER_ALL", "T_CENTER_SIN1", "T_CENTER_SIN2", "T_CENTER_SIN3", "T_CENTER_SIN4", "T_CENTER_SIN5", "T_CENTER_SIN6", "T_CENTER_SIN7", "T_CENTER_SIN8", "T_CENTER_SIN9", "T_CENTER_SIN10", "T_CENTER_SIN11"][item.type]|translate}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <input type="text" name="single_price{{$index}}" ng-model="item.price" ng-disabled="disStatus">
+                </td>
+                <td>
+                    ¥{{item.price}}
+                </td>
+                <td>
+                    <input type="text" name="single_aveprice{{$index}}" ng-model="item.aveprice" ng-disabled="disStatus">
+                </td>
+                <td>
+                    {{item.star}} {{"T_CENTER_STAR"|translate}} {{item.uplimit}} {{"T_CENTER_DAN"|translate}}
+                </td>
+                <td>
+                    <input type="text" name="single_getNum{{$index}}" ng-model="item.getNum" ng-disabled="disStatus">
+                </td>
+                <td>
+                    <input type="text" name="single_remainderNum{{$index}}" ng-model="item.remainderNum" ng-disabled="disStatus">
+                </td>
+            </tr>
+            <tr class="form-buttons">
             <td>
-                {{["T_CENTER_ALL", "T_CENTER_SIN1", "T_CENTER_SIN2", "T_CENTER_SIN3", "T_CENTER_SIN4", "T_CENTER_SIN5", "T_CENTER_SIN6", "T_CENTER_SIN7", "T_CENTER_SIN8", "T_CENTER_SIN9", "T_CENTER_SIN10", "T_CENTER_SIN11"][item.type]|translate}}
-                 - {{item.avaliable}}
-             </td>
-            <td>¥{{item.price}}</td>
-            <td>DOLLOR:${{item.price}}</td>
-            <td>{{item.aveprice}}</td>
-            <td>{{item.uplimit}}</td>
-            <td>{{item.lowlimit}}</td>
-            <td>{{item.getNum}}</td>
-            <td>{{item.uplimit - item.getNum}}</td>
+                <button type="button" class="btn btn-default" ng-click="submit()">{{"BT_SAVE"|translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="disStatus = false;">{{"BT_EDIT"|translate}}</button>
+            </td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</form>

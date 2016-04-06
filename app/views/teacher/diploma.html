@@ -1,0 +1,26 @@
+<div class="table-page diploma">
+    <div class="row">
+        <div class="diploma-item" ng-class="{'diploma-filter': item.status == '2'}" ng-repeat="item in diplomas">
+            <div ng-if="item.status == '0'">
+                <img ng-src="{{item.image}}" class="diploma-img">
+                <div>
+                    <img ng-src="../images/diploma-ok.png" alt="{{'T_DIPLOMA_STATUS_0'|translate}}" class="diploma-icon">
+                    <span class="left">{{"T_DIPLOMA_STATUS_0"|translate}}</span>
+                    <span class="right">{{item.time}}</span>
+                </div>
+            </div>
+            <div ng-if="item.status == '1'">
+                <img ng-src="{{item.image}}" class="diploma-img">
+                <div>
+                    <img ng-src="../images/diploma-error.png" alt="{{'T_DIPLOMA_STATUS_1'|translate}}" class="diploma-icon">
+                    <span class="left">{{"T_DIPLOMA_STATUS_1"|translate}}</span>
+                    <span class="right">{{item.time}}</span>
+                </div>
+            </div>
+            <div ng-if="item.status == '2'">
+                <img ng-src="{{item.image}}" class="diploma-img">
+                <span>{{"T_DIPLOMA_STATUS_2"|translate}}</span>
+            </div>
+        </div>
+    </div>
+</div>

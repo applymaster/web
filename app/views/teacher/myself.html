@@ -1,0 +1,54 @@
+<div id="myzone">
+	<div class="row state">
+		<div class="item sm-item">
+			<img ng-src="{{info.hdimg}}">
+		</div>
+		<div class="item lg-item">
+			<div class="row line1">
+				<div class="username col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				{{info.name}}
+			</div>
+			<div class="level col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				<img src="../../images/sales20160505-07.png">
+				{{['T_STAR_LEVEL_0', 'T_STAR_LEVEL_1', 'T_STAR_LEVEL_2'][info.level] | translate}}
+			</div>
+			</div>
+			<div class="row line2">
+				<div class="item">
+					<div class="score">{{info.score}}</div>
+					<div class="msg">{{"T_INFO_SCORE"|translate}}</div>
+				</div>
+				<div class="item">
+					<div class="score">{{info.sales}}</div>
+					<div class="msg">{{"T_INFO_SALES"|translate}}</div>
+				</div>
+				<div class="item">
+					<div class="score">{{info.credit}}</div>
+					<div class="msg">{{"T_INFO_CREADIT"|translate}}</div>
+				</div>
+			</div>
+			<div class="row line3">
+				<textarea name="intro">{{info.introduction}}</textarea>
+			</div>
+			<div class="row line4">
+				<div class="item">
+					<img src="../../images/time.png">
+					<span class="black">{{info.liveplace}}</span>
+					<span class="grey">{{info.time}}</span>
+				</div>
+				<div class="item" style="float: right;">
+					<span class="black">{{['T_DIPLOMA_STATUS_0', 'T_DIPLOMA_STATUS_1', 'T_DIPLOMA_STATUS_2'][info.status] | translate}}</span>
+					<span class="grey">{{info.stime}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row list">
+		<div class="item sm-item">
+			<img ng-src="" alt="">
+		</div>
+		<div class="item sm-item">
+			<img ng-src="" alt="">
+		</div>
+	</div>
+</div>

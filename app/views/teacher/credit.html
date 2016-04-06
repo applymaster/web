@@ -1,28 +1,63 @@
-<table class="table table-hover" ng-if="$state.is('teacher.assess')">
-    <tr ng-repeat="cItem in content">
-        <td>{{cItem.title | translate}}</td>
-        <td>{{cItem.value}}</td>
-    </tr>
-    <tr>
-    	<td></td>
-    	<td>{{ T_EVALUATION_SCORE_0 | translate }}</td>
-    	<td>{{ T_EVALUATION_SCORE_1 | translate }}</td>
-    	<td>{{ T_EVALUATION_SCORE_2 | translate }}</td>
-    	<td>{{ T_EVALUATION_SCORE_3 | translate }}</td>
-    	<td>{{ T_EVALUATION_SCORE_4 | translate }}</td>
-    </tr>
-</table>
-
-<table class="table table-hover" ng-if="$state.is('teacher.point')">
-    <tr ng-repeat="cItem in content">
-        <td>{{cItem.title | translate}}</td>
-        <td>{{cItem.value}}</td>
-    </tr>
-</table>
-
-<table class="table table-hover" ng-if="$state.is('teacher.star')">
-    <tr ng-repeat="cItem in content">
-        <td>{{cItem.title | translate}}</td>
-        <td>{{cItem.value}}</td>
-    </tr>
-</table>
+<div class="table-page">
+    <table class="table" ng-if="$state.is('teacher.assess')">
+        <tr>
+            <td>{{content[0].title | translate}}</td>
+            <td>
+                {{content[0].value}}
+                <button type="button" class="btn btn-link" tooltip data-original-title="{{'T_EVALUATION_INTEGRAL_RULE_DETAIL'|translate}}">{{"T_EVALUATION_INTEGRAL_RULE"|translate}}</button>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="cItem in content" ng-if="$index != 0">
+            <td>{{cItem.title | translate}}</td>
+            <td ng-if="$index != 0">
+                <span ng-if="$index != 0" class="glyphicon glyphicon-heart" ng-class="{'red': cItem.value > 0, 'grey': cItem.value < 1}"></span>
+            </td>
+            <td ng-if="$index != 0">
+                <span class="glyphicon glyphicon-heart" ng-class="{'red': cItem.value > 1, 'grey': cItem.value < 2}"></span>
+            </td>
+            <td ng-if="$index != 0">
+                <span class="glyphicon glyphicon-heart" ng-class="{'red': cItem.value > 2, 'grey': cItem.value < 3}"></span>
+            </td>
+            <td ng-if="$index != 0">
+                <span class="glyphicon glyphicon-heart" ng-class="{'red': cItem.value > 3, 'grey': cItem.value < 4}"></span>
+            </td>
+            <td ng-if="$index != 0">
+                <span class="glyphicon glyphicon-heart" ng-class="{'red': cItem.value > 4, 'grey': cItem.value < 5}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{{ "T_EVALUATION_SCORE_0" | translate }}</td>
+            <td>{{ "T_EVALUATION_SCORE_1" | translate }}</td>
+            <td>{{ "T_EVALUATION_SCORE_2" | translate }}</td>
+            <td>{{ "T_EVALUATION_SCORE_3" | translate }}</td>
+            <td>{{ "T_EVALUATION_SCORE_4" | translate }}</td>
+        </tr>
+    </table>
+    <table class="table" ng-if="$state.is('teacher.point')">
+        <tr ng-repeat="cItem in content">
+            <td>
+                {{cItem.title | translate}}
+                <button type="button" class="btn btn-link" tooltip data-original-title="{{'T_EVALUATION_INTEGRAL_RULE_DETAIL'|translate}}" ng-if="$index==0">{{"T_EVALUATION_INTEGRAL_RULE"|translate}}</button>
+            </td>
+            <td>{{cItem.value}}</td>
+        </tr>
+    </table>
+    <table class="table" ng-if="$state.is('teacher.star')">
+        <tr ng-repeat="cItem in content">
+            <td>{{cItem.title | translate}}</td>
+            <td>{{['T_STAR_LEVEL_0', 'T_STAR_LEVEL_1', 'T_STAR_LEVEL_2'][cItem.level] | translate}}</td>
+            <td>
+                <span class="glyphicon glyphicon-star orange" ng-if="cItem.value > 0"></span>
+                <span class="glyphicon glyphicon-star orange" ng-if="cItem.value > 1"></span>
+                <span class="glyphicon glyphicon-star orange" ng-if="cItem.value > 2"></span>
+                <span class="glyphicon glyphicon-star orange" ng-if="cItem.value > 3"></span>
+                <span class="glyphicon glyphicon-star orange" ng-if="cItem.value > 4"></span>
+            </td>
+        </tr>
+    </table>
+</div>

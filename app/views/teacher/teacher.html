@@ -1,10 +1,14 @@
-<div class="teacher">
-    <nav class="navbar navbar-default" role="navigation" ng-if="tmenu.length">
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in tmenu" ui-sref-active="active">
-                <a ui-sref="{{item.link}}">{{item.i18n|translate}}</a>
-            </li>
-        </ul>
+<div>
+    <nav class="navbar navbar-default secondary" role="navigation" ng-if="$state.current.name != 'teacher.me'">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="item in tmenu" ui-sref-active="active" ng-class="{'black-item': tmenu.length <= 1}">
+                        <a ui-sref="{{item.link}}">{{item.i18n|translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
     <div ui-view="viewT" class="content"></div>
 </div>

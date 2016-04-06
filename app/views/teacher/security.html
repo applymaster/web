@@ -1,66 +1,31 @@
-<table>
-    <caption>table title and/or explanatory text</caption>
-    <thead>
+<form name="frmSecurity" class="table-form">
+    <table class="table">
         <tr>
-            <th>header</th>
+            <th colspan="2">{{"T_SECURITY_INFO"|translate}}</th>
         </tr>
-    </thead>
-    <tbody>
         <tr>
-            <td class="txtL1">{{"T_SECURITY_MOBILE"|translate}}</td>
+            <td>{{"T_SECURITY_OLD_PASSWORD"|translate}}</td>
             <td>
-                <input type="text" ng-model="teacher.mobile">
-            </td>
-            <td>
-                <select ng-model="teacher.status.mobile">
-                    <option value="0">{{"T_STATUS_PRIVATE"|translate}}</option>
-                    <option value="1">{{"T_STATUS_PUBLIC"|translate}}</option>
-                </select>
+                <input mz-detect-input type="text" class="form-control" id="oldpwd" name="oldpwd" ng-model="teacher.oldpwd" ng-change="detectInput('oldpwd', 0)" required>
             </td>
         </tr>
         <tr>
-            <td class="txtL1">{{"T_SECURITY_APP_CARD"|translate}}</td>
+            <td>{{"T_SECURITY_NEW_PASSWORD"|translate}}</td>
             <td>
-                <input type="text" ng-model="teacher.appcard">
-            </td>
-            <td>
-                <select ng-model="teacher.status.appcard">
-                    <option value="0">{{"T_STATUS_PRIVATE"|translate}}</option>
-                    <option value="1">{{"T_STATUS_PUBLIC"|translate}}</option>
-                </select>
+                <input mz-detect-input type="text" class="form-control" id="password" name="password" ng-model="teacher.password" ng-change="detectInput('password', 1)" ng-pattern="/^(?![^a-zA-Z]+$)(?!\D+$).{6,}$/" required>
             </td>
         </tr>
         <tr>
-            <td class="txtL0">{{"T_SECURITY_MODIFY_PASSWORD"|translate}}</td>
-        </tr>
-        <tr>
-            <td class="txtL1">{{"T_SECURITY_OLD_PASSWORD"|translate}}</td>
+            <td>{{"T_SECURITY_CONFIRM_PWD"|translate}}</td>
             <td>
-                <input type="text" ng-model="teacher.old_password">
-            </td>
-            <td>
-                <select ng-model="teacher.status.old_password">
-                    <option value="0">{{"T_STATUS_PRIVATE"|translate}}</option>
-                    <option value="1">{{"T_STATUS_PUBLIC"|translate}}</option>
-                </select>
+                <input mz-detect-input type="text" class="form-control" id="confirm" name="confirm" ng-model="teacher.confirm" ng-change="detectInput('confirm', 2)" required>
             </td>
         </tr>
-        <tr>
-            <td class="txtL1">{{"T_SECURITY_NEW_PASSWORD"|translate}}</td>
+        <tr class="form-buttons">
             <td>
-                <input type="text" ng-model="teacher.password">
-            </td>
-            <td>
-                <select ng-model="teacher.status.password">
-                    <option value="0">{{"T_STATUS_PRIVATE"|translate}}</option>
-                    <option value="1">{{"T_STATUS_PUBLIC"|translate}}</option>
-                </select>
+                <button type="button" class="btn btn-default" ng-click="submitForm()" ng-disabled="frmSecurity.$invalid">{{"BT_SAVE"|translate}}</button>
+                <button type="button" class="btn btn-default" btn-cancel data="teacher">{{"BT_CANCEL"|translate}}</button>
             </td>
         </tr>
-        <tr>
-            <td>
-                <button type="submit" class="btn btn-primary">{{"T_SECURITY_SAVE_CHANGE"|translate}}</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    </table>
+</form>

@@ -1,154 +1,197 @@
-<table>
+<table class="table-form">
+<!-- 我的身份 -->
     <tr>
-        <td>{{"T_ACCOUNT_BASE_INFO"|translate}}</td>
+        <th>{{"T_ACCOUNT_PART_1"|translate}}</th>
     </tr>
     <tr>
-        <td class="txtL1">{{"T_ACCOUNT_USERNAME"|translate}}</td>
+        <td>{{"T_ACCOUNT_REALNAME"|translate}}</td>
         <td>
-            <input icheck type="text" ng-model="teacher.username">
+            <input type="text" ng-model="teacher.realname">
         </td>
+    </tr>
+    <tr>
+        <td>{{"T_ACCOUNT_GENDER"|translate}}</td>
         <td>
-            <select value dropkick ng-model="teacher.status.username">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
+            <input type="radio" value="male" ng-model="teacher.gender" id="gender0" name="gender">
+            <label for="gender0">{{"T_ACCOUNT_GENDER_0"|translate}}</label>
+            <input type="radio" value="female" ng-model="teacher.gender" id="gender1" name="gender">
+            <label for="gender1">{{"T_ACCOUNT_GENDER_1"|translate}}</label>
+        </td>
+    </tr>
+    <tr>
+        <td>{{"T_ACCOUNT_NATIONALITY"|translate}}</td>
+        <td>
+            <select ng-model="teacher.nationality">
+            </select>
+        </td>
+    </tr>
+<!-- 我的学历 -->
+    <tr>
+        <th>{{"T_ACCOUNT_PART_2"|translate}}</th>
+        <th><button type="button" class="btn btn-default">{{"T_ACCOUNT_ADD_DEGREE"|translate}}</button></th>
+    </tr>
+    <tr>
+        <td>{{"T_ACCOUNT_DEGREE"|translate}}</td>
+        <td>
+            <select ng-model="teacher.degree.level">
             </select>
         </td>
     </tr>
     <tr>
-        <td class="txtL1">{{"T_ACCOUNT_EMAILADDR"|translate}}</td>
+        <td>{{"T_ACCOUNT_SCHOOL"|translate}}</td>
         <td>
-            <input icheck type="text" ng-model="teacher.email">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.email">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
+            <select ng-model="teacher.degree.school[0]">
+            </select>
+            <select ng-model="teacher.degree.school[1]">
             </select>
         </td>
     </tr>
     <tr>
-        <td class="txtL1">{{"T_ACCOUNT_REALNAME"|translate}}</td>
+        <td>{{"T_ACCOUNT_SCHOOL"|translate}}</td>
         <td>
-            <input icheck type="text" ng-model="teacher.realname">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.realname">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
+            <select ng-model="teacher.degree.major[0]">
+            </select>
+            <select ng-model="teacher.degree.major[1]">
             </select>
         </td>
     </tr>
     <tr>
-        <td class="txtL1">{{"T_ACCOUNT_GENDER"|translate}}</td>
+        <td>{{"T_ACCOUNT_TIME_PERIODS"|translate}}</td>
         <td>
-            <input icheck type="text" ng-model="teacher.gender">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.gender">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
+            <select ng-model="teacher.degree.time.form.year">
+            </select>
+            <select ng-model="teacher.degree.time.form.month">
+            </select>
+            <span>{{"T_ACCOUNT_TO"|translate}}</span>
+            <select ng-model="teacher.degree.time.to.year">
+            </select>
+            <select ng-model="teacher.degree.time.to.month">
             </select>
         </td>
     </tr>
     <tr>
-        <td class="txtL1">{{"T_ACCOUNT_NATIONALITY"|translate}}</td>
+        <td></td>
         <td>
-            <input icheck type="text" ng-model="teacher.nationality">
+            <input type="radio" ng-model="teacher.degree.status" id="dstatus1" value="ungraduated" name="dstatus"> <label for="dstatus1">{{"T_ACCOUNT_UNGRADUATED"|translate}}</label>
+            <input type="radio" ng-model="teacher.degree.status" id="dstatus2" value="graduated" name="dstatus"> <label for="dstatus2">{{"T_ACCOUNT_GRADUATED"|translate}}</label>
         </td>
+    </tr>
+    <tr>
+        <td>{{"T_ACCOUNT_GRADUATION_CARD_ID"|translate}}</td>
         <td>
-            <select value dropkick ng-model="teacher.status.nationality">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
+            <input type="text" ng-model="degree.cert.id">
+            <button type="button" class="btn btn-default">{{"T_ACCOUNT_UPLOAD_GRADUATION_CERTIFICATE"|translate}}</button>
+        </td>
+    </tr>
+    <tr>
+        <td>{{"T_ACCOUNT_STUDENT_ID"|translate}}</td>
+        <td>
+            <input type="text" ng-model="degree.cert.id">
+            <button type="button" class="btn btn-default">{{"T_ACCOUNT_UPLOAD_STUDENT_ID_CARD"|translate}}</button>
+        </td>
+    </tr>
+    <tr class="form-buttons">
+        <td>
+            <button type="button" class="btn btn-default">{{"T_ACCOUNT_DELETE_DEGREE"|translate}}</button>
+        </td>
+    </tr>
+    <tr class="has-error">
+        <td colspan="2">
+            {{"T_ACCOUNT_REMINDER_INFO_1"|translate}}
+        </td>
+    </tr>
+<!-- 我的联系方式 -->
+    <tr>
+        <th>{{"T_ACCOUNT_PART_3"|translate}}</th>
+    </tr>
+    <tr>
+        <td>{{"T_ACCOUNT_EMAIL"|translate}}</td>
+        <td>
+            <input type="text" ng-model="teacher.email">
+        </td>
+    </tr>
+    <tr>
+        <td>{{"T_ACCOUNT_EMAIL"|translate}}</td>
+        <td>
+            <select ng-model="teacher.liveplace.country">
+            </select>
+            <select ng-model="teacher.liveplace.region">
+            </select>
+            <select ng-model="teacher.liveplace.city">
             </select>
         </td>
     </tr>
     <tr>
-        <td class="txtL1">{{"T_ACCOUNT_IDNUM"|translate}}</td>
-        <td>
-            <input icheck type="text" ng-model="teacher.idnum">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.idnum">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
-            </select>
-        </td>
+        <td>{{"T_ACCOUNT_TIMEZONE"|translate}}</td>
+        <td>{{teacher.timezone}}</td>
+    </tr>
+<!-- 我的收款方式 -->
+    <tr>
+        <th>{{"T_ACCOUNT_PART_4"|translate}}</th>
+        <th><button type="button" class="btn btn-default">{{"BT_ADD"|translate}}</button></th>
+    </tr>
+    <tr> <!-- ng-if="teacher.card.type == '0'" -->
+        <td>{{"T_ACCOUNT_CARD"|translate}}</td>
+        <td>{{teacher.card.id}}</td>
+    </tr>
+    <tr> <!-- ng-if="teacher.card.type == '1'" -->
+        <td>{{"T_ACCOUNT_ZHIFUBAO"|translate}}</td>
+        <td>{{teacher.card.id}}</td>
+    </tr>
+<!-- 了解渠道 -->
+    <tr>
+        <th>{{"T_ACCOUNT_PART_5"|translate}}</th>
     </tr>
     <tr>
-        <td class="txtL1">{{"T_ACCOUNT_BIRTHDAY"|translate}}</td>
         <td>
-            <input icheck type="text" ng-model="teacher.birthday">
+            <input type="radio" ng-model="knowus.way" id="way1" value="0">
+            <label for="way1">{{"T_ACCOUNT_FRIENDS_RECOMMENDED"|translate}}</label>
         </td>
         <td>
-            <select value dropkick ng-model="teacher.status.birthday">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td class="txtL1">{{"T_ACCOUNT_EDU_STATUS"|translate}}</td>
-        <td>
-            <input icheck type="text" ng-model="teacher.edustatus">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.edustatus">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td class="txtL1">{{"T_ACCOUNT_DEGREE"|translate}}</td>
-        <td>
-            <input icheck type="text" ng-model="teacher.degree">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.degree">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td class="txtL1">{{"T_ACCOUNT_LIVEPLACE"|translate}}</td>
-        <td>
-            <input icheck type="text" ng-model="teacher.liveplace">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.liveplace">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td class="txtL1">{{"T_ACCOUNT_HOW_TO_KNOW"|translate}}</td>
-        <td>
-            <input icheck type="text" ng-model="teacher.howknow">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.howknow">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td class="txtL1">{{"我的证件"|translate}}</td>
-        <td>
-            <input icheck type="text" ng-model="teacher.howknow">
-        </td>
-        <td>
-            <select value dropkick ng-model="teacher.status.howknow">
-                <option value="0">{{"T_ACCOUNT_STATUS_PRIVATE"|translate}}</option>
-                <option value="1">{{"T_ACCOUNT_STATUS_PUBLIC"|translate}}</option>
-            </select>
+            <input type="text" ng-model="teacher.knowus.name" placeholder="{{'T_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}">
+            <input type="text" ng-model="teacher.knowus.email" placeholder="{{'T_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}">
         </td>
     </tr>
     <tr>
         <td>
-            <button type="submit" class="btn btn-primary">{{"COMMON_STR_SAVE"|translate}}</button>
+            <input type="radio" ng-model="knowus.way" id="way2" value="1">
+            <label for="way2">{{"T_ACCOUNT_ALUMNI_ASSOCIATION"|translate}}</label>
+        </td>
+        <td>
+            <input type="text" ng-model="teacher.knowus.name" placeholder="{{'T_ACCOUNT_NAME_OF_ALUMNI_ASSOCIATION'|translate}}">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="radio" ng-model="knowus.way" id="way3" value="2">
+            <label for="way3">{{"T_ACCOUNT_STUDENT_UNION_OR_COMMUNITY"|translate}}</label>
+        </td>
+        <td>
+            <input type="text" ng-model="teacher.knowus.name" placeholder="{{'T_ACCOUNT_NAME_STUDENT_UNION_OR_COMMUNITY'|translate}}">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="radio" ng-model="knowus.way" id="way4" value="3">
+            <label for="way4">{{"T_ACCOUNT_INTERNET"|translate}}</label>
+        </td>
+        <td>
+            <input type="text" ng-model="teacher.knowus.name">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="radio" ng-model="knowus.way" id="way5" value="4">
+            <label for="way5">{{"T_ACCOUNT_OTHER"|translate}}</label>
+        </td>
+        <td>
+            <input type="text" ng-model="teacher.knowus.name">
+        </td>
+    </tr>
+    <tr class="form-buttons">
+        <td>
+            <button type="button" class="btn btn-default">{{"BT_SAVE"|translate}}</button>
+            <button type="button" class="btn btn-default">{{"BT_SUBMIT"|translate}}</button>
         </td>
     </tr>
 </table>

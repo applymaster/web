@@ -1,42 +1,42 @@
-<table class="table table-hover" ng-if="$state.is('teacher.wallet')">
-    <tr ng-repeat="cItem in content">
-        <th>{{cItem.title | translate}}</th>
-        <th>{{cItem.value}}</th>
-    </tr>
-</table>
-
-<table class="table table-hover" ng-if="$state.is('teacher.income')">
-    <thead>
-        <tr>
-            <th ng-repeat="tItem in title">
-                <span>{{tItem|translate}}</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-page">
+    <table class="table" ng-if="$state.is('teacher.wallet')">
         <tr ng-repeat="cItem in content">
-            <td>{{cItem.partner}}</td>
-            <td>{{cItem.service}}</td>
-            <td>{{cItem.amount}}</td>
-            <td>{{cItem.date}}</td>
+            <th>{{cItem.title | translate}}</th>
+            <th>{{cItem.value}}</th>
         </tr>
-    </tbody>
-</table>
-
-<table class="table table-hover" ng-if="$state.is('teacher.recommend')">
-    <thead>
-        <tr>
-            <th ng-repeat="tItem in title">
-                <span>{{tItem|translate}}</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="cItem in content">
-            <td>{{cItem.name}}</td>
-            <td>{{cItem.matter}}</td>
-            <td>{{cItem.amount}}</td>
-            <td>{{cItem.date}}</td>
-        </tr>
-    </tbody>
-</table>
+    </table>
+    <table class="table" ng-if="$state.is('teacher.income')">
+        <thead>
+            <tr>
+                <th ng-repeat="tItem in title">
+                    <span>{{tItem|translate}}</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cItem in content">
+                <td>{{cItem.partner}}</td>
+                <td>{{cItem.service}}</td>
+                <td>{{cItem.amount}}</td>
+                <td>{{cItem.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table" ng-if="$state.is('teacher.recommend')">
+        <thead>
+            <tr>
+                <th ng-repeat="tItem in title">
+                    <span>{{tItem|translate}}</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cItem in content">
+                <td>{{cItem.name}}</td>
+                <td>{{cItem.matter}}</td>
+                <td>{{cItem.amount}}</td>
+                <td>{{cItem.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

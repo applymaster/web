@@ -7,3 +7,4 @@ bower_components
 /app/api
 /.editorconfig
 /.idea
+*.patch

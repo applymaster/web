@@ -4,13 +4,13 @@
 'use strict';
 var getType = function(type) {
     if (type == -1) return 'demo';
-    return ['guest', 'teacher', 'student', 'admin'][type];
+    return ['user', 'teacher', 'student', 'admin'][type];
 };
 
-var services = angular.module('webApp.Services', ['ngResource']);
+var priServices = angular.module('primaryModule', ['ngResource']);
 
 // http
-services.factory('httpService', function($http, $q) {
+priServices.factory('httpService', function($http, $q) {
     return {
         get: function(s) {
             //url, funcA, funcS, funcF
@@ -71,8 +71,9 @@ services.factory('httpService', function($http, $q) {
         }
     };
 });
+
 // resource
-services.factory('resourceObj', ['$resource', function($resource) {
+priServices.factory('resourceObj', ['$resource', function($resource) {
     var service = {};
     service.init = function(type, path, byId) {
         if (byId)
@@ -84,13 +85,12 @@ services.factory('resourceObj', ['$resource', function($resource) {
         // url : /api/teacher/account/:id
         // 2. param : { tId: '@id' }
         // 3. other function
-        return $resource(url, {
-            id: '@id'
-        }, {});
+        return $resource(url, { id: '@id' }, {});
     }
     return service;
 }]);
-services.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj) {
+
+priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj) {
     var service = {
         /*
          * @type: 0, 1, 2
@@ -106,8 +106,9 @@ services.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj) {
             var eFunc = function(data, headers) {
                 defer.reject(data);
             };
-            var byId = id ? true : false;
-            var tResource = resourceObj.init(getType(type), path, byId);
+            var byId = id ? true : false,
+                _path = path.indexOf('/') == 0 ? path.substr(1) : path;
+            var tResource = resourceObj.init(getType(type), _path, byId);
             if (byId)
                 tResource.get({
                     'id': id
@@ -121,7 +122,7 @@ services.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj) {
          * @path: string, like 'account'
          * @id: string, like '123'
          */
-        query: function(type, path, id) {
+        query: function(type, path, offset, size, id) {
             var defer = $q.defer();
 
             var sFunc = function(data, headers) {
@@ -131,25 +132,43 @@ services.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj) {
             var eFunc = function(data, headers) {
                 defer.reject(data);
             };
-            var byId = id ? true : false;
-            var tResource = resourceObj.init(getType(type), path, byId);
+            var byId = id ? true : false,
+                _offset = offset ? offset : 0,
+                _size = size ? size : 20,
+                _path = path.indexOf('/') == 0 ? path.substr(1) : path;
+            var tResource = resourceObj.init(getType(type), _path, byId);
+
             if (byId)
-                tResource.query({
-                    'id': id
-                }, sFunc, eFunc);
+                tResource.query({ 'id': id, 'offset': _offset, 'size': _size }, sFunc, eFunc);
             else
-                tResource.query(sFunc, eFunc);
+                tResource.query({ 'offset': _offset, 'size': _size }, sFunc, eFunc);
+
             return defer.promise;
+        },
+        post: function(data) {
+            /* data is an {object}
+             * @type: 0, 1, 2
+             * @path: string, "path"
+             * @id: string, "id"
+             * @postData: object | array, "postData"
+             * @sFunc: function, "sFunc"
+             * @eFunc: function, "eFunc"
+             */
+            var byId = data.id ? true : false,
+                _path = data.path.indexOf('/') == 0 ? data.path.substr(1) : data.path;
+            var tResource = resourceObj.init(getType(data.type), _path, byId);
+            tResource.save(data.postData, data.sFunc, data.eFunc);
         }
     };
     return service;
 }]);
+
 // menu
-services.factory('menuServices', function($rootScope) {
+priServices.factory('menuServices', function($rootScope) {
     var menuTable = {
         // id - 二级菜单列表
         // children - 三级菜单列表
-        'guest': [{
+        'user': [{
             'id': 'login',
             'children': [{
                 'id': 'login',
@@ -176,12 +195,42 @@ services.factory('menuServices', function($rootScope) {
             }]
         }, { // 我的产品中心
             'id': 'center',
-            'i18n': 'T_MENU_CENTER',
-            'link': 'teacher.center'
+            'i18n': 'T_MENU_MY_CENTER',
+            'link': 'teacher.center',
+            'children': [{
+                'id': 'center',
+                'i18n': 'T_MENU_CENTER',
+                'link': 'teacher.center'
+            }]
         }, { // 交易管理
             'id': 'deal',
             'i18n': 'T_MENU_ORDER_MAN',
-            'link': 'teacher.order'
+            'link': 'teacher.order({status: "all"})',
+            'children': [{
+                'id': 'order_0',
+                'i18n': 'T_ORDER_NAVBAR_0',
+                'link': 'teacher.order({status: "all"})'
+            }, {
+                'id': 'order_1',
+                'i18n': 'T_ORDER_NAVBAR_1',
+                'link': 'teacher.order({status: "transacting"})'
+            }, {
+                'id': 'recommend',
+                'i18n': 'T_ORDER_NAVBAR_2',
+                'link': 'teacher.order({status: "paying"})'
+            }, {
+                'id': 'order_3',
+                'i18n': 'T_ORDER_NAVBAR_3',
+                'link': 'teacher.order({status: "confirming"})'
+            }, {
+                'id': 'order_4',
+                'i18n': 'T_ORDER_NAVBAR_4',
+                'link': 'teacher.order({status: "refunding"})'
+            }, {
+                'id': 'order_5',
+                'i18n': 'T_ORDER_NAVBAR_5',
+                'link': 'teacher.order({status: "closing"})'
+            }]
         }, { // 我的钱包
             'id': 'wallet',
             'children': [{
@@ -217,19 +266,50 @@ services.factory('menuServices', function($rootScope) {
         }, { // 日历
             'id': 'calendar',
             'i18n': 'T_MENU_CALENDAR',
-            'link': 'teacher.calendar'
+            'link': 'teacher.calendar',
+            'children': [{
+                'id': 'calendar',
+                'i18n': 'T_MENU_CALENDAR',
+                'link': 'teacher.calendar'
+            }]
         }, { // 社区互动
             'id': 'community',
             'i18n': 'T_MENU_COMMUNITY',
-            'link': 'teacher.community'
+            'link': 'teacher.community',
+            'children': [{
+                'id': 'community',
+                'i18n': 'T_MENU_COMMUNITY',
+                'link': 'teacher.community'
+            }]
         }, { // 主页展示
-            'id': 'main',
+            'id': 'me',
             'i18n': 'T_MENU_MAIN',
-            'link': 'teacher.main'
+            'link': 'teacher.me',
+            'children': [{
+                'id': 'me',
+                'i18n': 'T_MENU_MAIN',
+                'link': 'teacher.me'
+            }]
         }],
-        'student': [{
+        'student': [{ // 我的订单
+            'id': 'order',
+            'i18n': 'T_MENU_ORDER',
+            'link': 'student.order'
+        },{ // 我的钱包
+            'id': 'wallet',
+            'i18n': 'T_MENU_WALLET',
+            'link': 'student.wallet'
+        },{ // 比较顾问
+            'id': 'compare',
+            'i18n': 'T_MENU_COMPARE_CONSULTANT',
+            'link': 'student.compare'
+        },{ // 我的学堂
+            'id': 'class',
+            'i18n': 'T_MENU_MY_CLASS',
+            'link': 'student.class'
+        },{ // 账户设置
             'id': 'account',
-            'i18n': 'T_MENU_INFOMATION',
+            'i18n': 'T_MENU_SET_ACCOUNT',
             'link': 'student.account'
         }]
     };
@@ -246,12 +326,14 @@ services.factory('menuServices', function($rootScope) {
         return res;
     };
     var _showChildren = function(link, type) {
-        var i, j, fa;
+        var i, j, fa, fai;
         for (i = 0; i < menuTable[type].length; i++) {
             fa = menuTable[type][i];
             if (fa.children) {
                 for (j = 0; j < fa.children.length; j++) {
-                    if (link == fa.children[j].link)
+                    fai = fa.children[j].link;
+                    fai = fai.indexOf('(') > 0 ? fai.substr(0, fai.indexOf('(')) : fai;
+                    if (link == fai)
                         return fa.children;
                 }
             } else if (fa.link == link) {
@@ -292,3 +374,36 @@ services.factory('menuServices', function($rootScope) {
         }
     };
 });
+
+priServices.factory('formService', function($translate) {
+    var obj = {};
+    obj.isError = false;
+    obj.errMsg = '';
+    obj.init = function(element) {
+        this.errMsg = '';
+        this.isError = false;
+        if(getType(element) == 1)
+            $(element).next('.error-message').find('.text-danger').empty();
+        else
+            $(element).parents('.form-group').find('.text-danger').empty();
+    }
+    obj.detectInput = function(isError, errMsg, element) {
+        if (isError) {
+            this.isError = true;
+            var message = $translate.instant(errMsg);
+            if(getType(element) == 1)
+                $(element).next('.error-message').find('.text-danger').html(message);
+            else
+                $(element).parents('.form-group').find('.text-danger').html(message);
+            $(element).focus();
+        }
+    };
+    var getType = function(element) {
+        if(angular.isDefined($(element).attr('mz-detect-input'))) {
+            return 1;
+        } else {
+            return 2;
+        }
+    };
+    return obj;
+})

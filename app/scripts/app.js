@@ -17,7 +17,10 @@ angular.module('webApp', [
         'ui.router',
         'pascalprecht.translate',
         'ngDialog',
-        'webApp.Services'
+        'primaryModule',
+        'userModule',
+        'studentModule',
+        'teacherModule'
     ])
     // language
     .config(function($translateProvider) {
@@ -43,37 +46,32 @@ angular.module('webApp', [
     .config(function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('demo', {
-                url: '/demo',
-                templateUrl: '/views/components/demo.html',
-                controller: 'DemoCtrl'
+            .state('home', {
+                url: '/home',
+                templateUrl: '/views/home.html'
             })
 
-        .state('home', {
-            url: '/home',
-            templateUrl: '/views/home.html',
-            controller: 'HomeCtrl'
-        })
+            .state('login', {
+                url: '/login',
+                templateUrl: '/views/user/login.html',
+                controller: 'LoginCtrl'
+            })
 
-        .state('search', {
-            url: '/search',
-            templateUrl: '/views/search/search.html'
-        })
+            .state('register', {
+                url: '/register?type',
+                templateUrl: '/views/user/register.html',
+                controller: 'RegisterCtrl'
+            })
 
-        .state('search.details', {
-            url: '/details',
-            templateUrl: '/views/search/details.html'
-        })
+            .state('teacher', {
+                //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
+                abstract: true,
+                url: '/teacher',
+                templateUrl: '/views/teacher/teacher.html',
+                controller: 'TeacherCtrl'
+            })
 
-        .state('teacher', {
-            //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
-            abstract: true,
-            url: '/teacher',
-            templateUrl: '/views/teacher/teacher.html',
-            controller: 'TeacherCtrl'
-        })
-
-        .state('teacher.account', {
+            .state('teacher.account', {
                 url: '/account',
                 views: {
                     'viewT': {
@@ -101,27 +99,27 @@ angular.module('webApp', [
                 }
             })
 
-        .state('teacher.center', {
-            url: '/center',
-            views: {
-                'viewT': {
-                    templateUrl: '/views/teacher/center.html',
-                    controller: 'CenterCtrl'
+            .state('teacher.center', {
+                url: '/center',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/center.html',
+                        controller: 'CenterCtrl'
+                    }
                 }
-            }
-        })
+            })
 
-        .state('teacher.order', {
-            url: '/order',
-            views: {
-                'viewT': {
-                    templateUrl: '/views/teacher/order.html',
-                    controller: 'OrderCtrl'
+            .state('teacher.order', {
+                url: '/order/:status',
+                views: {
+                    'viewT': {
+                        templateUrl: '/views/teacher/order.html',
+                        controller: 'OrderCtrl'
+                    }
                 }
-            }
-        })
+            })
 
-        .state('teacher.wallet', {
+            .state('teacher.wallet', {
                 url: '/wallet',
                 views: {
                     'viewT': {
@@ -197,12 +195,12 @@ angular.module('webApp', [
             }
         })
 
-        .state('teacher.main', {
-            url: '/main',
+        .state('teacher.me', {
+            url: '/myself',
             views: {
                 'viewT': {
-                    templateUrl: '/views/teacher/main.html',
-                    controller: 'MainCtrl'
+                    templateUrl: '/views/teacher/myself.html',
+                    controller: 'TMeCtrl'
                 }
             }
         })
@@ -235,6 +233,52 @@ angular.module('webApp', [
             controller: 'StudentCtrl'
         })
 
+        .state('student.order', {
+            url: '/order',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/student/order.html'
+                }
+            }
+        })
+
+        .state('student.wallet', {
+            url: '/wallet',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/student/wallet.html'
+                }
+            }
+        })
+
+        .state('student.search', {
+            url: '/search',
+            templateUrl: '/views/search/search.html'
+        })
+
+        .state('search.details', {
+            url: '/details',
+            templateUrl: '/views/search/details.html'
+        })
+
+        .state('student.compare', {
+            url: '/compare',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/student/compare.html'
+                }
+            }
+        })
+
+        .state('student.class', {
+            url: '/class',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/student/class.html'
+                }
+            }
+        })
+
         .state('student.account', {
             url: '/account',
             views: {
@@ -243,15 +287,6 @@ angular.module('webApp', [
                 }
             }
         })
-
-        .state('student.security', {
-            url: '/security',
-            views: {
-                'viewT': {
-                    templateUrl: '/views/student/security.html'
-                }
-            }
-        });
         // catch all route
         // send users to the form page
         $urlRouterProvider.otherwise('/home');

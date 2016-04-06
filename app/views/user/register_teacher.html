@@ -1,44 +1,38 @@
-<div class="row layout-inner">
-    <div class="white-container top-teacher">
-        <h1 class="title">创建一个顾问账号</h1>
-        <h4 class="subtitle">只需几个步骤，你也可以成为助人圆梦的梦想顾问</h4>
-        <form class="form-horizontal">
-          <div class="form-group">
-            <label class="col-xs-3 control-label">Email</label>
-            <div class="col-xs-7">
-              <input type="email" class="form-control" ng-model="email" placeholder="Email">
+<div class="register">
+    <div class="register-container">
+        <img src="../images/main/slogan.png" alt="slogan" class="slogan">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <form name="frmLogin" class="form-horizontal">
+                    <div class="form-group title">
+                        <h1 ng-if="$state.params.type == '0'">{{"REGISTER_HEADER_1"|translate}}</h1>
+                        <p ng-if="$state.params.type == '0'">{{"REGISTER_INFO_1"|translate}}</p>
+                        <h1 ng-if="$state.params.type == '1'">{{"REGISTER_HEADER_2"|translate}}</h1>
+                        <p ng-if="$state.params.type == '1'">{{"REGISTER_INFO_2"|translate}}</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                            <input type="email" mz-detect-input2 mz-detect-offset="1" class="form-control" id="email" name="email" ng-model="user.email" placeholder="{{'LOGIN_EMAIL'|translate}}" required ng-change="detectEmail('email')">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                            <input type="password" mz-detect-input2 mz-detect-offset="1" class="form-control" id="password" name="password" ng-model="user.password" placeholder="{{'LOGIN_PASSWORD'|translate}}" required ng-change="detectPwd('password')">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label><input type="checkbox" ng-model="checkpolicy">{{"REGISTER_POLICY"|translate}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" ng-class="{'btn-success': $state.params.type == '0', 'btn-info': $state.params.type == '1'}" class="btn btn-default" ng-click="register()" ng-disabled="frmLogin.$invalid || !checkpolicy ">{{"BT_LOGIN"|translate}}</button>
+                        <button type="button" ng-class="{'btn-success': $state.params.type == '0', 'btn-info': $state.params.type == '1'}" class="btn btn-default" ng-click="register()" ng-disabled="frmLogin.$invalid || !checkpolicy ">{{"BT_REGISTER"|translate}}</button>
+                    </div>
+                </form>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-xs-3 control-label"></label>
-            <div class="col-xs-7">
-                <a class="color-teacher" href="#/home">我已毕业，申请人工认证</a>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-xs-3 control-label">密码</label>
-            <div class="col-xs-7">
-              <input type="password" class="form-control" ng-model="password" placeholder="password">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-xs-3 control-label">确认密码</label>
-            <div class="col-xs-7">
-              <input type="password" class="form-control" ng-model="passwordConfirm" placeholder="passwordConfirm">
-            </div>
-          </div>
-          <div style="color:red">{{ loginError }}</div>
-          <div class="form-group">
-              <div class="col-xs-3 control-label"></div>
-              <div class="checkbox col-xs-7">
-                <label>
-                  <input type="checkbox" ng-model="assignment">我已阅读 <a href="#">《申请大师服务协议条款》</a>
-                </label>
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="col-xs-10 btns"><button type="button" class="btn bg-teacher btn-success" ng-click="register(email, password, passwordConfirm)">下一步</button></div>
-          </div>
-        </form>
+        </div>
     </div>
 </div>

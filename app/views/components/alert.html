@@ -1,4 +1,9 @@
-<script type="text/ng-template" id="templateId">
-    <h1>Template heading</h1>
-    <p>Content goes here</p>
-</script>
+<div class="ngdialog-message">
+	<div class="ngdialog-head">{{_L[ngDialogData.title]}}</div>
+	<div class="ngdialog-body">
+		<div>{{_L[ngDialogData.body]}}</div>
+	</div>
+	<div class="ngdialog-buttons">
+		<input type="button" class="btn primary" ng-click="closeThisDialog();"  value="{{_L.BT_OK}}" />
+	</div>
+</div>
