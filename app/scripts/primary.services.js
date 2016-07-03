@@ -91,6 +91,10 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
 }]);
 
 priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj) {
+    function getRealPath(path) {
+        var baseUrl = "http://52.69.248.175:8000/";
+        return baseUrl + path;
+    }
     var service = {
         /*
          * @type: 0, 1, 2
@@ -108,7 +112,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
             };
             var byId = id ? true : false,
                 _path = path.indexOf('/') == 0 ? path.substr(1) : path;
-            var tResource = resourceObj.init(getType(type), _path, byId);
+            var tResource = resourceObj.init(getType(type), getRealPath(_path), byId);
             if (byId)
                 tResource.get({
                     'id': id
@@ -136,7 +140,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
                 _offset = offset ? offset : 0,
                 _size = size ? size : 20,
                 _path = path.indexOf('/') == 0 ? path.substr(1) : path;
-            var tResource = resourceObj.init(getType(type), _path, byId);
+            var tResource = resourceObj.init(getType(type), getRealPath(_path), byId);
 
             if (byId)
                 tResource.query({ 'id': id, 'offset': _offset, 'size': _size }, sFunc, eFunc);
@@ -156,7 +160,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
              */
             var byId = data.id ? true : false,
                 _path = data.path.indexOf('/') == 0 ? data.path.substr(1) : data.path;
-            var tResource = resourceObj.init(getType(data.type), _path, byId);
+            var tResource = resourceObj.init(getType(data.type), getRealPath(_path), byId);
             tResource.save(data.postData, data.sFunc, data.eFunc);
         }
     };
