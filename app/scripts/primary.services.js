@@ -74,12 +74,13 @@ priServices.factory('httpService', function($http, $q) {
 
 // resource
 priServices.factory('resourceObj', ['$resource', function($resource) {
+    var baseUrl = "http://52.69.248.175:8000";
     var service = {};
     service.init = function(type, path, byId) {
         if (byId)
-            var url = '/api/' + type + '/' + path + '/:id';
+            var url = baseUrl + '/api/' + type + '/' + path + '/:id';
         else
-            var url = '/api/' + type + '/' + path + '.json';
+            var url = baseUrl + '/api/' + type + '/' + path;
 
         // 1. url : /api/teacher/account.json
         // url : /api/teacher/account/:id
