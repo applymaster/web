@@ -37,6 +37,7 @@ module.exports = function(config) {
       'app/bower_components/angular-translate/angular-translate.js',
       'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
       'app/bower_components/ng-dialog/js/ngDialog.js',
+      'app/bower_components/angular-file-upload/dist/angular-file-upload.min.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

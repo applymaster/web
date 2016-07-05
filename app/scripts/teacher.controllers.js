@@ -205,12 +205,56 @@ app.controller('CalendarCtrl', ['$rootScope', '$scope', 'rcServices',
     }
 ]);
 
-app.controller('TMeCtrl', ['$rootScope', '$scope', 'rcServices',
-    function($rootScope, $scope, rcServices) {
+app.controller('TMeCtrl', ['$rootScope', '$scope', 'rcServices', 'ngDialog',
+    function($rootScope, $scope, rcServices, ngDialog) {
         rcServices.get(1, $rootScope.$state.current.url).then(function(data) {
             $scope.info = data;
-            var urlBg = 'url("' + data.bgimg + '")';
-            $('body').css('background-image', urlBg);
         });
+        $scope.addNew = function() {
+            ngDialog.open({
+                template: 'addShare',
+                controller: 'TMUploadCtrl'
+            });
+        };
+        $scope.modifyBG = function() {
+            ngDialog.open({
+                template: 'modifyBGImg',
+                controller: 'TMUploadCtrl'
+            });
+        };
+        $scope.modifyHD = function() {
+            ngDialog.open({
+                template: 'modifyHDImg',
+                controller: 'TMUploadCtrl'
+            });
+        };
+        $scope.modifyHD();
+    }
+]);
+
+app.controller('TMUploadCtrl', ['$rootScope', '$scope', 'rcServices', 'ngDialog', 'FileUploader',
+    function($rootScope, $scope, rcServices, ngDialog, FileUploader) {
+        $scope.uploadFile = new FileUploader({
+            url: rcServices.getUrl(1, 'me_share'),
+            removeAfterUpload: true
+        });
+        $scope.uploadBgImg = new FileUploader({
+            url: rcServices.getUrl(1, 'me_bgimg'),
+            removeAfterUpload: true
+        });
+        $scope.uploadHdImg = new FileUploader({
+            url: rcServices.getUrl(1, 'me_hdimg'),
+            removeAfterUpload: true
+        });
+        $scope.submitShare = function(){
+            $scope.uploadFile.queue[0].formData.push({'share-content':$scope.content});
+            $scope.uploadFile.queue[0].upload();
+        };
+        $scope.submitBgimg = function(){
+            $scope.uploadBgImg.queue[0].upload();
+        };
+        $scope.submitHdimg = function(){
+            $scope.uploadHdImg.queue[0].upload();
+        };
     }
 ]);

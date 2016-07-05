@@ -17,6 +17,7 @@ angular.module('webApp', [
         'ui.router',
         'pascalprecht.translate',
         'ngDialog',
+        'angularFileUpload',
         'primaryModule',
         'userModule',
         'studentModule',

@@ -77,6 +77,27 @@ a {
     vertical-align: inherit;
 }
 
+.btn-upload-group {
+    display: inline-block;
+    position: relative;
+    color: black;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    height: 47px;
+    line-height: 47px;
+    input[type="file"]{
+        position: absolute;
+        width: 47px;
+        z-index: 999;
+        opacity: 0;
+    }
+    .glyphicon {
+        font-size: 20px;
+        vertical-align: text-bottom;
+    }
+}
+
 .tooltip-inner {
     text-align: left;
 }
@@ -90,15 +111,12 @@ a {
     > form {
         @include in-container;
     }
+    background: transparent;
+    padding-bottom: 40px;
 }
 
-.user-body, .special-body {
-    background: url('../images/header.png') no-repeat 0 0;
+.user-body {
     background-size: 100% 925px;
-    .main-content {
-        background: transparent;
-        padding-bottom: 40px;
-    }
 }
 
 .teacher-body {
@@ -115,6 +133,13 @@ a {
         margin-bottom: $footer-height;
         z-index: 10;
     }
+}
+
+.body-bg-img {
+    position: absolute;
+    z-index: -999;
+    height: 926px;
+    width: 100%;
 }
 
 /* Header */
@@ -605,6 +630,7 @@ a {
         .line3 textarea {
             width: 760px;
             height: 72px;
+            resize: none;
             padding: 2px;
             margin-bottom: 20px;
             border: 1px solid $color-green;
@@ -621,14 +647,135 @@ a {
             padding: 15px;
             margin-top: 15px;
             background-color: white;
-            &:not(:first-child) {
-                margin-left: 15px;
+            position: relative;
+            .more {
+                width: 38px;
+                height: 12px;
+                position: absolute;
+                right: 15px;
+                bottom: 45px;
             }
-            img {
-                width: 350px;
-                height: 350px;
+            &.sm-item {
+                margin-left: 15px;
+                text-align: center;
+                &:first-child, &.not-margin-left {
+                    margin-left: 0;
+                }
+            }
+            &.education {
+                text-align: left;
+                height: 620px;
+                overflow: hidden;
+                .message {
+                    color: rgb(160, 160, 160);
+                }
+            }
+            &.share {
+                img {
+                    width: 350px;
+                    height: 350px;
+                }
+                div {
+                    display: table-cell;
+                    vertical-align: middle;
+                    height: 240px;
+                }
+            }
+            &.add {
+                background: white url('../../images/add02.png') no-repeat center;
+                &:hover {
+                    background: black url('../../images/add01.png') no-repeat center;;
+                }
             }
         }
+    }
+    .get-more {
+        padding-top: 80px;
+        padding-bottom: 77px;
+        text-align: center;
+        font-size: 18px;
+        color: rgb(160, 160, 160);
+        cursor: pointer;
+    }
+}
+.myzone-dialog {
+    width: 715.68px;
+    background-color: rgb(242, 242, 242);
+    .page-button {
+        height: 47px;
+        padding: 0 15px;
+        .center {
+            text-align: center;
+        }
+        .right {
+            float: right;
+        }
+    }
+}
+.myzone-add-share {
+    textarea {
+        width: 686px;
+        height: 256px;
+        padding: 15px;
+        margin: 15px 15px 10px;
+    }
+    .page-button {
+        padding-bottom: 10px;
+    }
+}
+.myzone-bgimg {
+    height: 672px;
+    .upload-img {
+        width: 686px;
+        height: 445px;
+        text-align: center;
+        margin: 35px auto 32px;
+        background-color: white;
+    }
+    button.select {
+        font-size: 18px;
+        margin-top: 188px;
+    }
+    input[type="file"] {
+        position: absolute;
+        top: 282px;
+        left: 300px;
+        width: 115px;
+        height: 52px;
+        opacity: 0;
+        z-index: 99;
+    }
+}
+.myzone-hdimg .ng-dialog-body{
+    margin-top: 35px;
+    .upload-img {
+        width: 481px;
+        height: 445px;
+        margin-right: 15px;
+        text-align: center;
+        vertical-align: top;
+        display: inline-block;
+        background-color: white;
+    }
+    .upload-preview {
+        width: 185px;
+        height: 445px;
+        vertical-align: top;
+        display: inline-block;
+        background-color: white;
+    }
+    button.select {
+        font-size: 18px;
+        margin-top: 188px;
+    }
+    input[type="file"] {
+        position: absolute;
+        top: 282px;
+        left: 183px;
+        width: 115px;
+        height: 52px;
+        opacity: 0;
+        z-index: 99;
     }
 }
 /* Table Page */
@@ -862,5 +1009,20 @@ footer {
             color: $color-footer-text;
             cursor: pointer;
         }
+    }
+}
+
+/* ngDialog */
+.ngdialog-content {
+    .ng-dialog-title {
+        background-color: black;
+        color: white;
+        padding: 15px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .ng-dialog-body {
+        display: block;
+        padding: 0 15px;
     }
 }

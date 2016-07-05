@@ -1,3 +1,4 @@
+'use strict'
 var app = angular.module('webApp');
 
 /* Detect Type 1: showing error message under form control */

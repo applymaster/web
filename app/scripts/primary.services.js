@@ -74,19 +74,31 @@ priServices.factory('httpService', function($http, $q) {
 
 // resource
 priServices.factory('resourceObj', ['$resource', function($resource) {
-    var baseUrl = "http://52.69.248.175:8000";
     var service = {};
-    service.init = function(type, path, byId) {
-        if (byId)
-            var url = baseUrl + '/api/' + type + '/' + path + '/:id';
-        else
-            var url = baseUrl + '/api/' + type + '/' + path;
-
-        // 1. url : /api/teacher/account.json
-        // url : /api/teacher/account/:id
+    // For Test
+    var baseUrl = "";
+    service.init = function(_type, _path, _byId) {
+        // 1. url : /api/teacher/account
+        //    url : /api/teacher/account/:id
         // 2. param : { tId: '@id' }
         // 3. other function
+        var url = this.getUrl(_type, _path, _byId);
         return $resource(url, { id: '@id' }, {});
+    };
+    service.getUrl = function(_type, _path, _byId) {
+        // For Test
+        var baseUrl = "";
+        if (_byId)
+            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id' + '.json';
+        else
+            var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
+        // For Project
+        // var baseUrl = "http://52.69.248.175:8000";
+        //     if (_byId)
+        //         var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
+        //     else
+        //         var url = baseUrl + '/api/' + _type + '/' + _path;
+        return url;
     }
     return service;
 }]);
@@ -159,6 +171,9 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
                 _path = data.path.indexOf('/') == 0 ? data.path.substr(1) : data.path;
             var tResource = resourceObj.init(getType(data.type), _path, byId);
             tResource.save(data.postData, data.sFunc, data.eFunc);
+        },
+        getUrl: function(_type, _path, _byId){
+            return resourceObj.getUrl(getType(_type), _path, _byId);
         }
     };
     return service;

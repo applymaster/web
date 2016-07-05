@@ -1,54 +1,121 @@
 <div id="myzone">
-	<div class="row state">
-		<div class="item sm-item">
-			<img ng-src="{{info.hdimg}}">
-		</div>
-		<div class="item lg-item">
-			<div class="row line1">
-				<div class="username col-xs-2 col-sm-2 col-md-2 col-lg-2">
-				{{info.name}}
-			</div>
-			<div class="level col-xs-2 col-sm-2 col-md-2 col-lg-2">
-				<img src="../../images/sales20160505-07.png">
-				{{['T_STAR_LEVEL_0', 'T_STAR_LEVEL_1', 'T_STAR_LEVEL_2'][info.level] | translate}}
-			</div>
-			</div>
-			<div class="row line2">
-				<div class="item">
-					<div class="score">{{info.score}}</div>
-					<div class="msg">{{"T_INFO_SCORE"|translate}}</div>
-				</div>
-				<div class="item">
-					<div class="score">{{info.sales}}</div>
-					<div class="msg">{{"T_INFO_SALES"|translate}}</div>
-				</div>
-				<div class="item">
-					<div class="score">{{info.credit}}</div>
-					<div class="msg">{{"T_INFO_CREADIT"|translate}}</div>
-				</div>
-			</div>
-			<div class="row line3">
-				<textarea name="intro">{{info.introduction}}</textarea>
-			</div>
-			<div class="row line4">
-				<div class="item">
-					<img src="../../images/time.png">
-					<span class="black">{{info.liveplace}}</span>
-					<span class="grey">{{info.time}}</span>
-				</div>
-				<div class="item" style="float: right;">
-					<span class="black">{{['T_DIPLOMA_STATUS_0', 'T_DIPLOMA_STATUS_1', 'T_DIPLOMA_STATUS_2'][info.status] | translate}}</span>
-					<span class="grey">{{info.stime}}</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row list">
-		<div class="item sm-item">
-			<img ng-src="" alt="">
-		</div>
-		<div class="item sm-item">
-			<img ng-src="" alt="">
-		</div>
-	</div>
+    <div class="row state">
+        <div class="item sm-item" ng-click="modifyHD()">
+            <img ng-src="{{info.hdimg}}">
+        </div>
+        <div class="item lg-item">
+            <div class="row line1">
+                <div class="username col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    {{info.name}}
+                </div>
+                <div class="level col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <img src="../../images/sales20160505-07.png"> {{['T_STAR_LEVEL_0', 'T_STAR_LEVEL_1', 'T_STAR_LEVEL_2'][info.level] | translate}}
+                </div>
+            </div>
+            <div class="row line2">
+                <div class="item">
+                    <div class="score">{{info.score}}</div>
+                    <div class="msg">{{"T_INFO_SCORE"|translate}}</div>
+                </div>
+                <div class="item">
+                    <div class="score">{{info.sales}}</div>
+                    <div class="msg">{{"T_INFO_SALES"|translate}}</div>
+                </div>
+                <div class="item">
+                    <div class="score">{{info.credit}}</div>
+                    <div class="msg">{{"T_INFO_CREADIT"|translate}}</div>
+                </div>
+            </div>
+            <div class="row line3">
+                <textarea name="intro">{{info.introduction}}</textarea>
+            </div>
+            <div class="row line4">
+                <div class="item">
+                    <img src="../../images/time.png">
+                    <span class="black">{{info.liveplace}}</span>
+                    <span class="grey">{{info['current-time']}}</span>
+                </div>
+                <div class="item" style="float: right;">
+                    <span class="black">{{['T_DIPLOMA_STATUS_0', 'T_DIPLOMA_STATUS_1', 'T_DIPLOMA_STATUS_2'][info.status] | translate}}</span>
+                    <span class="grey">{{info.stime}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row list">
+        <div class="item sm-item education">
+            <h4>{{"T_INFO_EDUCATION"|translate}}</h4>
+            <div ng-repeat="edu in info.education" class="message">
+                <div>{{edu.time}}</div>
+                <div>{{edu.degree}}</div>
+                <div>{{edu.school}}</div>
+                <div>{{edu.major}}</div>
+            </div>
+            <img src="../../images/more.png" class="more">
+        </div>
+        <div class="item sm-item share" ng-repeat="share in info.shares" ng-class="{'not-margin-left': {{$index}}%2 == 0 && {{$index}}!= 0}">
+            <img ng-src="{{share.img}}">
+            <div>{{share.brief}}</div>
+        </div>
+        <div class="item sm-item add" ng-click="addNew()">
+            <img src="../../images/add02.png">
+        </div>
+    </div>
+    <div class="get-more">{{"BT_GET_MORE"|translate}}</div>
 </div>
+<script type="text/ng-template" id="addShare">
+    <div class="myzone-dialog myzone-add-share">
+        <div class="ng-dialog-title">{{"T_INFO_SHARE"|translate}}</div>
+        <textarea name="content" ng-model="content"></textarea>
+        <div class="page-button">
+            <div class="btn-upload-group">
+                <input type="file" nv-file-select uploader="uploadFile" accept="image/gif, image/jpeg, image/x-png">
+                <i class="glyphicon glyphicon-picture"></i>
+                <span>{{"BT_IMG"|translate}}</span>
+            </div>
+            <div class="right">
+                <button type="button" class="btn btn-default" ng-click="submitShare();">{{"BT_RELEASE"|translate}}</button>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="modifyBGImg">
+    <div class="myzone-dialog myzone-bgimg">
+        <div class="ng-dialog-title">{{"T_INFO_SET_BG_IMG"|translate}}</div>
+        <div class="upload-img">
+            <input type="file" nv-file-select uploader="uploadBgImg" accept="image/gif, image/jpeg, image/x-png">
+            <button type="button" class="btn btn-default select">&nbsp;+&nbsp;{{"BT_CHOOSE_AND_UPLOAD"|translate}}</button>
+        </div>
+        <div class="page-button">
+            <div class="center">
+                <button type="button" class="btn btn-default" ng-click="submitBgimg();">{{"BT_CONFIRM"|translate}}</button>
+                <button type="button" class="btn btn-default" ng-click="closeThisDialog();">{{"BT_CANCEL"|translate}}</button>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="modifyHDImg">
+    <div class="myzone-dialog myzone-hdimg">
+        <div class="ng-dialog-title">{{"T_INFO_SET_HD_IMG"|translate}}</div>
+        <div class="ng-dialog-body">
+            <div class="upload-img">
+                <input type="file" nv-file-select uploader="uploadHdImg" accept="image/gif, image/jpeg, image/x-png">
+                <button type="button" class="btn btn-default select">&nbsp;+&nbsp;{{"BT_CHOOSE_AND_UPLOAD"|translate}}</button>
+            </div>
+            <div class="upload-preview">
+                <div ng-repeat="item in uploadHdImg.queue">
+                	<strong>{{item.file.name}}</strong>
+                	<div ng-show="uploadHdImg.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                	<div ng-show="uploadHdImg.isHTML5" ng-thumb="{ file: item._file, height: 50 }"></div>
+                	<div ng-show="uploadHdImg.isHTML5" ng-thumb="{ file: item._file, height: 30 }"></div>
+                </div>
+            </div>
+        </div>
+        <div class="page-button">
+            <div class="center">
+                <button type="button" class="btn btn-default" ng-click="submitBgimg();">{{"BT_CONFIRM"|translate}}</button>
+                <button type="button" class="btn btn-default" ng-click="closeThisDialog();">{{"BT_CANCEL"|translate}}</button>
+            </div>
+        </div>
+    </div>
+</script>
