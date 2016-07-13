@@ -804,6 +804,110 @@ a {
 }
 
 
+/* Order Page */
+.order {
+    .container {
+        width: 100%;
+        position: relative;
+        margin-bottom: 138.5px;
+    }
+    .order-title {
+        width: 789px;
+        font-size: 24px;
+        font-weight: bold;
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+        }
+    }
+    .order-content {
+        table, .dialog, .buyer {
+            float: left;
+        }
+        table {
+            width: 789px;
+            th, td {
+                text-align: center;
+            }
+            th {
+                border: 1px solid black;
+                font-weight: bold;
+                font-size: 24px;
+                height: 47px;
+                &:first-child {
+                    width: 253px;
+                }
+                &:nth-child(2) {
+                    width: 100px;
+                }
+                &:nth-child(3) {
+                    width: 120px;
+                }
+                &:last-child {
+                    width: 315px;
+                }
+            }
+            td {
+                border: 1px solid black;
+                font-size: 18px;
+                height: 94px;
+                .tiny-font {
+                    font-size: 14px;
+                }
+                .grey {
+                    color: $color-grey;
+                }
+            }
+        }
+        .dialog {
+            margin: 43px;
+        }
+        .buyer {
+            position: relative;
+            display: block;
+            float: left;
+            text-align: center;
+            .buyer-hd {
+                margin-bottom: 10px;
+                height: 101px;
+                width: 101px;
+            }
+            .buyer-name {
+                position: absolute;
+                font-size: 14px;
+                width: 79px;
+                top: 100%;
+            }
+        }
+    }
+    .order-buyer-card {
+        position: absolute;
+        left: 789px;
+        top: 186px;
+        width: 231px;
+        padding: 10px;
+        font-size: 14px;
+        background-color: $color-lightgrey;
+        li {
+            padding: 2px;
+        }
+        img {
+            vertical-align: bottom;
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 200px;
+            border-top: none;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-bottom: 10px solid $color-lightgrey;
+        }
+    }
+}
 /* Calendar Page */
 
 .arrow {
@@ -823,12 +927,12 @@ a {
     .title {
         font-weight: bold;
         .month {
-            color: rgb(76, 73, 72);
+            color: $color-darkgrey;
             font-size: 82px;
             margin-bottom: 52px;
         }
         .word {
-            color: rgb(137, 137, 137);
+            color: $color-grey;
             margin-left: 10px;
             margin-top: 20px;
         }
@@ -840,8 +944,8 @@ a {
     .content {
         width: 100%;
         th {
-            border-top: 1px solid rgb(76, 73, 72);
-            border-bottom: 2px solid rgb(76, 73, 72);
+            border-top: 1px solid $color-darkgrey;
+            border-bottom: 2px solid $color-darkgrey;
             text-align: center;
             font-size: 28px;
         }
@@ -920,17 +1024,17 @@ a {
         }
         /* workday 文字 */
         td {
-            color: rgb(76, 73, 72);
+            color: $color-darkgrey;
             font-size: 42px;
         }
         /* weekend 文字 */
         td:nth-child(n+6) {
-            color: rgb(137, 137, 137);
+            color: $color-grey;
             font-size: 42px;
         }
         /* lunar 农历文字 */
         td .lunar {
-            color: rgb(137, 137, 137);
+            color: $color-grey;
             font-size: 18px;
         }
     }
