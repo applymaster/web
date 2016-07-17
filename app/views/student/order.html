@@ -1,0 +1,50 @@
+<div class="table-page order">
+    <div class="container" ng-repeat="item in orders">
+        <div class="order-title">
+            <div class="left">
+                {{"T_ORDER_ID"|translate}} {{item.id}}
+            </div>
+            <div class="right">
+                {{"T_ORDER_TIME"|translate}} {{item.time}}
+            </div>
+        </div>
+        <div class="order-content">
+            <table>
+                <thead>
+                <tr>
+                    <th>{{"T_ORDER_SERVICE"|translate}}</th>
+                    <th>{{"T_ORDER_NUMBER"|translate}}</th>
+                    <th>{{"T_ORDER_PRICE"|translate}}</th>
+                    <th>{{"T_ORDER_STATUS"|translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{item.service}}</td>
+                    <td>{{item.num}}</td>
+                    <td ng-if="item.price.status">
+                        <div class="grey">
+                            <del>{{item.price.old}}</del>
+                        </div>
+                        <div>{{item.price.current}}</div>
+                        <div class="grey tiny-font">{{item.price.time}}</div>
+                    </td>
+                    <td ng-if="!item.price.status">
+                        <div>{{item.price.current}}</div>
+                    </td>
+                    <td>
+                        <div ng-if="item.status == 3 || item.status == 4">{{"T_ORDER_STATUS_1"|translate}}</div>
+                        <div ng-if="item.status == 7 || item.status == 8">{{"T_ORDER_STATUS_78"|translate}}</div>
+                        <div>{{item.status|tFilter: 'order-status'|translate}}</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <img src="../../images/dialog.png" class="dialog">
+            <div class="buyer">
+                <img ng-src="{{item.buyer.images}}" alt="{{item.buyer.name}}" class="buyer-hd">
+                <div class="buyer-name">{{item.buyer.name}}</div>
+            </div>
+        </div>
+    </div>
+</div>

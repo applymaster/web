@@ -27,16 +27,18 @@
                     ¥{{all.price}}
                 </td>
                 <td>
-                    <input type="text" name="all_aveprice" ng-model="all.aveprice" ng-disabled="disStatus">
+                    {{all.aveprice}}
                 </td>
                 <td>
-                    {{all.uplimit}}
+                    {{all.star}} {{"T_CENTER_STAR"|translate}}
+                    <input type="text" name="all_uplimit" ng-model="all.uplimit" ng-disabled="disStatus">
+                    {{"T_CENTER_DAN"|translate}}
                 </td>
                 <td>
-                    <input type="text" name="all_getNum" ng-model="all.getNum" ng-disabled="disStatus">
+                    {{all.getNum}}
                 </td>
                 <td>
-                    <input type="text" name="all_remainderNum" ng-model="all.remainderNum" ng-disabled="disStatus">
+                    {{all.remainderNum}}
                 </td>
             </tr>
             <tr>
@@ -73,16 +75,18 @@
                     ¥{{item.price}}
                 </td>
                 <td>
-                    <input type="text" name="single_aveprice{{$index}}" ng-model="item.aveprice" ng-disabled="disStatus">
+                    {{item.aveprice}}
                 </td>
                 <td>
-                    {{item.star}} {{"T_CENTER_STAR"|translate}} {{item.uplimit}} {{"T_CENTER_DAN"|translate}}
+                    {{item.star}} {{"T_CENTER_STAR"|translate}}
+                    <input type="text" name="single_uplimit{{$index}}" ng-model="item.uplimit" ng-disabled="disStatus">
+                    {{"T_CENTER_DAN"|translate}}
                 </td>
                 <td>
-                    <input type="text" name="single_getNum{{$index}}" ng-model="item.getNum" ng-disabled="disStatus">
+                    {{item.getNum}}
                 </td>
                 <td>
-                    <input type="text" name="single_remainderNum{{$index}}" ng-model="item.remainderNum" ng-disabled="disStatus">
+                    {{item.remainderNum}}
                 </td>
             </tr>
             <tr class="form-buttons">
