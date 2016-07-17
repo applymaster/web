@@ -185,7 +185,8 @@
     "T_ORDER_PRICE_NEW": "修改价格",
     "T_ORDER_PRICE_NOW": "当前价格",
     "T_ORDER_REASON": "修改原因",
-    "T_ORDER_ERROR_PRICE": "无效值",
+    "T_ORDER_ERROR_PRICE": "请输入正确价格",
+    "T_ORDER_ERROR_REASON": "请输入修改原因",
 
     "T_ORDER_BEGIN": "交易开始",
     "T_ORDER_SUCCESS": "交易成功",

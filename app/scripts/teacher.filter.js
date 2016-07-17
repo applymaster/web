@@ -2,7 +2,7 @@
  * Created by startimes on 2015/11/16.
  */
 'use strict';
-var tFilters = angular.module('teacherModule', []);
+var tFilters = angular.module('teacherModule', ['ngDialog']);
 tFilters.filter('tFilter', function($rootScope) {
     var fomate = function(input, expression, value) {
         var str;

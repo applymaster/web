@@ -392,6 +392,7 @@ priServices.factory('menuServices', function($rootScope) {
 });
 
 priServices.factory('formService', function($translate) {
+    /* 结合指令 mz-detect-input & mz-detect-input2 */
     var obj = {};
     obj.isError = false;
     obj.errMsg = '';
@@ -415,6 +416,8 @@ priServices.factory('formService', function($translate) {
         }
     };
     var getType = function(element) {
+        /* 类型1: 不使用 form-group */
+        /* 类型2: 使用 form-group */
         if(angular.isDefined($(element).attr('mz-detect-input'))) {
             return 1;
         } else {

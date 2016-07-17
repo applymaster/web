@@ -11,34 +11,34 @@
         <div class="order-content">
             <table>
                 <thead>
-                <tr>
-                    <th>{{"T_ORDER_SERVICE"|translate}}</th>
-                    <th>{{"T_ORDER_NUMBER"|translate}}</th>
-                    <th>{{"T_ORDER_PRICE"|translate}}</th>
-                    <th>{{"T_ORDER_STATUS"|translate}}</th>
-                </tr>
+                    <tr>
+                        <th>{{"T_ORDER_SERVICE"|translate}}</th>
+                        <th>{{"T_ORDER_NUMBER"|translate}}</th>
+                        <th>{{"T_ORDER_PRICE"|translate}}</th>
+                        <th>{{"T_ORDER_STATUS"|translate}}</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{item.service}}</td>
-                    <td>{{item.num}}</td>
-                    <td ng-if="item.price.status">
-                        <div class="grey">
-                            <del>{{item.price.old}}</del>
-                        </div>
-                        <div>{{item.price.current}}</div>
-                        <div class="grey tiny-font">{{item.price.time}}</div>
-                    </td>
-                    <td ng-if="!item.price.status">
-                        <div>{{item.price.current}}</div>
-                        <button type="button" class="btn btn-link tiny-font" ng-click="open('price', item)">{{"T_ORDER_MODIFY"|translate}}</button>
-                    </td>
-                    <td>
-                        <div ng-if="item.status == 3 || item.status == 4">{{"T_ORDER_STATUS_1"|translate}}</div>
-                        <div ng-if="item.status == 7 || item.status == 8">{{"T_ORDER_STATUS_78"|translate}}</div>
-                        <div>{{item.status|tFilter: 'order-status'|translate}}</div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{item.service}}</td>
+                        <td>{{item.num}}</td>
+                        <td ng-if="item.price.status">
+                            <div class="grey">
+                                <del>{{item.price.old}}</del>
+                            </div>
+                            <div>{{item.price.current}}</div>
+                            <div class="grey tiny-font">{{item.price.time}}</div>
+                        </td>
+                        <td ng-if="!item.price.status">
+                            <div>{{item.price.current}}</div>
+                            <button type="button" class="btn btn-link tiny-font" ng-click="open('price', item)">{{"T_ORDER_MODIFY"|translate}}</button>
+                        </td>
+                        <td>
+                            <div ng-if="item.status == 3 || item.status == 4">{{"T_ORDER_STATUS_1"|translate}}</div>
+                            <div ng-if="item.status == 7 || item.status == 8">{{"T_ORDER_STATUS_78"|translate}}</div>
+                            <div>{{item.status|tFilter: 'order-status'|translate}}</div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <img src="../../images/dialog.png" class="dialog">
@@ -58,40 +58,35 @@
             <li>{{item.buyer.intention}}</li>
         </ul>
     </div>
-    <script type="text/ng-template" id="modifyPrice">
-        <div class="ngdialog-message">
-            <div class="ngdialog-head">{{"T_ORDER_PRICE_NEW"|translate}}</div>
-            <div class="ngdialog-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            {{"T_ORDER_PRICE_NOW"|translate}}
-                        </div>
-                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                            {{ngDialogData.price.current}}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            {{"T_ORDER_PRICE_NEW"|translate}}
-                        </div>
-                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                            <input type="text" ng-model="item.new">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            {{"T_ORDER_REASON"|translate}}
-                        </div>
-                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                            <input type="text" ng-model="item.reason">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="ngdialog-buttons">
-                <input type="button" class="btn primary" ng-click="closeThisDialog();" value="{{_L.BT_SAVE}}" />
+</div>
+<script type="text/ng-template" id="modifyPrice">
+    <form class="mz-dialog" name="frmOrder">
+        <div class="ng-dialog-title">{{"T_ORDER_PRICE_NEW"|translate}}</div>
+        <div class="table-page">
+        <table class="table table-form">
+            <tr>
+                <td>{{"T_ORDER_PRICE_NOW"|translate}}</td>
+                <td>{{entry.current}}</td>
+            </tr>
+            <tr>
+                <td>{{"T_ORDER_PRICE_NEW"|translate}}</td>
+                <td>
+                    <input type="text" mz-detect-input ng-model="entry.new_price" name="price" id="price" required ng-change="detectInput('price')">
+                </td>
+            </tr>
+            <tr>
+                <td>{{"T_ORDER_REASON"|translate}}</td>
+                <td>
+                    <textarea mz-detect-input ng-model="entry.reason" name="reason" id="reason" required ng-change="detectInput('reason')"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="page-button">
+            <div>
+                <button type="button" class="btn btn-default" ng-click="submit();" ng-disabled="frmOrder.$invalid">{{"BT_SAVE"|translate}}</button>
+                <button type="button" class="btn btn-default" ng-click="closeThisDialog();">{{"BT_CANCEL"|translate}}</button>
             </div>
         </div>
-    </script>
-</div>
+        </div>
+    </form>
+</script>
