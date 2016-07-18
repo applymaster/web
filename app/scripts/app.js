@@ -64,6 +64,13 @@ angular.module('webApp', [
                 controller: 'RegisterCtrl'
             })
 
+            /* 顾问首页 */
+            .state('teacherme', {
+                url: '/myself',
+                templateUrl: '/views/teacher/myself.html',
+                controller: 'TMeCtrl'
+            })
+
             .state('teacher', {
                 //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
                 abstract: true,
@@ -196,16 +203,6 @@ angular.module('webApp', [
             }
         })
 
-        .state('teacher.me', {
-            url: '/myself',
-            views: {
-                'viewT': {
-                    templateUrl: '/views/teacher/myself.html',
-                    controller: 'TMeCtrl'
-                }
-            }
-        })
-
         /*
 
         .state('teacher.message', {
@@ -235,10 +232,11 @@ angular.module('webApp', [
         })
 
         .state('student.order', {
-            url: '/order',
+            url: '/order/:status',
             views: {
                 'viewT': {
-                    templateUrl: '/views/student/order.html'
+                    templateUrl: '/views/student/order.html',
+                    controller: 'SOrderCtrl'
                 }
             }
         })

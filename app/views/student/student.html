@@ -1,4 +1,15 @@
 <div id="student">
+    <nav class="navbar navbar-default secondary" role="navigation">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="item in smenu" ui-sref-active="active" ng-class="{'black-item': smenu.length <= 1}">
+                        <a ui-sref="{{item.link}}">{{item.i18n|translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="mz-container">
         <div ui-view="viewT"></div>
     </div>

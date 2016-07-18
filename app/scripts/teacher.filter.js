@@ -11,7 +11,7 @@ tFilters.filter('tFilter', function($rootScope) {
         }
         switch (expression) {
             case 'order-status':
-            str = ['T_ORDER_STATUS_0','T_ORDER_STATUS_1','T_ORDER_STATUS_2','T_ORDER_STATUS_3','T_ORDER_STATUS_4','T_ORDER_STATUS_5','T_ORDER_STATUS_6','T_ORDER_STATUS_7','T_ORDER_STATUS_8'][input];
+            str = ['TS_ORDER_STATUS_0','TS_ORDER_STATUS_1','TS_ORDER_STATUS_2','TS_ORDER_STATUS_3','TS_ORDER_STATUS_4','TS_ORDER_STATUS_5','TS_ORDER_STATUS_6','TS_ORDER_STATUS_7','TS_ORDER_STATUS_8'][input];
             break;
         }
         return str;

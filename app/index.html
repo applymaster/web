@@ -11,16 +11,18 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
     <!-- endbower -->
     <!-- endbuild -->
 </head>
 
-<body ng-controller="TopCtrl" ng-class="{'user-body': user.type == 0, 'teacher-body': user.type == 1 && $state.current.name != 'teacher.me', 'student-body': user.type == 2 && $state.current.name != 'home', 'special-body': user.type == 2 && $state.current.name == 'home' || $state.current.name == 'teacher.me'}" >
+<body ng-controller="TopCtrl" ng-class="{'user-body': user.type == 0, 'teacher-body': user.type == 1 && $state.current.name != 'teacherme', 'student-body': user.type == 2 && $state.current.name != 'home', 'special-body': user.type == 2 && $state.current.name == 'home' || $state.current.name == 'teacherme'}" >
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- Add your site or application content here -->
-    <img src="../images/teacher-bg.png" class="body-bg-img" ng-if="user.type == 2 && $state.current.name == 'home' || $state.current.name == 'teacher.me'">
+    <img src="../images/teacher-bg.png" class="body-bg-img" ng-if="user.type == 2 && $state.current.name == 'home' || $state.current.name == 'teacherme'">
     <header ng-include="'/views/head.html'"></header>
     <div class="main-content" ui-view=""></div>
     <footer ng-include="'/views/footer.html'"></footer>
@@ -42,6 +44,7 @@
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
     <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->

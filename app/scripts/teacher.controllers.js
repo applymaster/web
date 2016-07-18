@@ -96,9 +96,8 @@ app.controller('SecurityCtrl', ['$rootScope', '$scope', 'rcServices', 'formServi
 
 app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices', 'ngDialog', 'formService',
     function($rootScope, $scope, rcServices, menuServices, ngDialog, formService) {
-        rcServices.query(1, $rootScope.$state.current.url).then(function(data) {
+        rcServices.query(1, $rootScope.$state.current.url+'/'+$rootScope.$stateParams.status).then(function(data) {
             $scope.orders = data;
-            $scope.open('price', $scope.orders[1]);
         });
         $scope.open = function(type, item) {
             switch (type) {
@@ -114,10 +113,10 @@ app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices
                                 console.log('inputName:', $scope.frmOrder[inputName].$invalid, 'ERR_MSEEAGE')
                                 switch (inputName) {
                                     case 'price':
-                                        formService.detectInput($scope.frmOrder[inputName].$invalid, 'T_ORDER_ERROR_PRICE', $('#' + inputName));
+                                        formService.detectInput($scope.frmOrder[inputName].$invalid, 'TS_ORDER_ERROR_PRICE', $('#' + inputName));
                                         break;
                                     case 'reason':
-                                        formService.detectInput($scope.frmOrder[inputName].$invalid, 'T_ORDER_ERROR_REASON', $('#' + inputName));
+                                        formService.detectInput($scope.frmOrder[inputName].$invalid, 'TS_ORDER_ERROR_REASON', $('#' + inputName));
                                         break;
                                 }
                             };
@@ -142,7 +141,7 @@ app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices
                     });
                     break;
             }
-        }
+        };
     }
 ]);
 

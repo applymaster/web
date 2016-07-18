@@ -224,27 +224,27 @@ priServices.factory('menuServices', function($rootScope) {
             'link': 'teacher.order({status: "all"})',
             'children': [{
                 'id': 'order_0',
-                'i18n': 'T_ORDER_NAVBAR_0',
+                'i18n': 'TS_ORDER_NAVBAR_0',
                 'link': 'teacher.order({status: "all"})'
             }, {
                 'id': 'order_1',
-                'i18n': 'T_ORDER_NAVBAR_1',
+                'i18n': 'TS_ORDER_NAVBAR_1',
                 'link': 'teacher.order({status: "transacting"})'
             }, {
                 'id': 'recommend',
-                'i18n': 'T_ORDER_NAVBAR_2',
+                'i18n': 'TS_ORDER_NAVBAR_2',
                 'link': 'teacher.order({status: "paying"})'
             }, {
                 'id': 'order_3',
-                'i18n': 'T_ORDER_NAVBAR_3',
+                'i18n': 'TS_ORDER_NAVBAR_3',
                 'link': 'teacher.order({status: "confirming"})'
             }, {
                 'id': 'order_4',
-                'i18n': 'T_ORDER_NAVBAR_4',
+                'i18n': 'TS_ORDER_NAVBAR_4',
                 'link': 'teacher.order({status: "refunding"})'
             }, {
                 'id': 'order_5',
-                'i18n': 'T_ORDER_NAVBAR_5',
+                'i18n': 'TS_ORDER_NAVBAR_5',
                 'link': 'teacher.order({status: "closing"})'
             }]
         }, { // 我的钱包
@@ -300,17 +300,42 @@ priServices.factory('menuServices', function($rootScope) {
         }, { // 主页展示
             'id': 'me',
             'i18n': 'T_MENU_MAIN',
-            'link': 'teacher.me',
+            'link': 'teacherme',
             'children': [{
                 'id': 'me',
                 'i18n': 'T_MENU_MAIN',
-                'link': 'teacher.me'
+                'link': 'teacherme'
             }]
         }],
-        'student': [{ // 我的订单
-            'id': 'order',
+        'student': [{ // 交易管理
+            'id': 'deal',
             'i18n': 'T_MENU_ORDER',
-            'link': 'student.order'
+            'link': 'student.order({status: "all"})',
+            'children': [{
+                'id': 'order_0',
+                'i18n': 'TS_ORDER_NAVBAR_0',
+                'link': 'student.order({status: "all"})'
+            }, {
+                'id': 'order_1',
+                'i18n': 'TS_ORDER_NAVBAR_1',
+                'link': 'student.order({status: "transacting"})'
+            }, {
+                'id': 'recommend',
+                'i18n': 'TS_ORDER_NAVBAR_2',
+                'link': 'student.order({status: "paying"})'
+            }, {
+                'id': 'order_3',
+                'i18n': 'TS_ORDER_NAVBAR_3',
+                'link': 'student.order({status: "confirming"})'
+            }, {
+                'id': 'order_4',
+                'i18n': 'TS_ORDER_NAVBAR_4',
+                'link': 'student.order({status: "refunding"})'
+            }, {
+                'id': 'order_5',
+                'i18n': 'TS_ORDER_NAVBAR_5',
+                'link': 'student.order({status: "closing"})'
+            }]
         },{ // 我的钱包
             'id': 'wallet',
             'i18n': 'T_MENU_WALLET',
