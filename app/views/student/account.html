@@ -1,0 +1,249 @@
+<form name="frmAccount" ng-controller="SAccountCtrl" class="account">
+    <div>
+        <table class="table table-form">
+            <!-- 我的身份 -->
+            <tbody>
+                <tr>
+                    <td colspan="2" class="title">{{"S_ACCOUNT_MY_IDENTITY"|translate}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_REALNAME"|translate}}</td>
+                    <td>
+                        <input type="text" dn-form-input id="realname" name="realname" ng-model="user.realname" ng-change="detectInput('realname')" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_GENDER"|translate}}</td>
+                    <td>
+                        <input type="radio" name="gender" id="gender0" value="0" ng-model="user.gender" /> {{"S_ACCOUNT_GENDER_0"|translate}}
+                        <input type="radio" name="gender" id="gender1" value="1" ng-model="user.gender" /> {{"S_ACCOUNT_GENDER_1"|translate}}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td class="title">{{"S_ACCOUNT_MY_EDUCATION"|translate}}</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-link-blue" ng-click="eduAction('add')">{{"BT_ADD_SCHOOL"|translate}}</button>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- 我的学历 - 已有 不可删除 -->
+            <tbody ng-repeat="item in user.education">
+                <tr>
+                    <td colspan="2">{{"S_ACCOUNT_MY_EDUCATION"|translate}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_DEGREE"|translate}}</td>
+                    <td>{{item.degree}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_SCHOOL"|translate}}</td>
+                    <td>{{item.school}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_MAJOR"|translate}}</td>
+                    <td>{{item.major}} {{item.profession}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
+                    <td>{{item.time}}</td>
+                </tr>
+            </tbody>
+            <!-- 我的学历 - 新添加可删除 -->
+            <tbody ng-repeat="item in user.newedu">
+                <tr>
+                    <td colspan="2">{{"S_ACCOUNT_MY_EDUCATION"|translate}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_DEGREE"|translate}}</td>
+                    <td>
+                        <select ng-model="item.degree" ng-options="i.value as i.label for i in selDegree">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_SCHOOL"|translate}}</td>
+                    <td>
+                        <select ng-model="item.school" ng-options="i.value as i.label for i in school">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_MAJOR"|translate}}</td>
+                    <td>
+                        <select ng-model="item.major" ng-options="i.value as i.label for i in item.major_list" ng-change="changeMajor(item)">
+                        </select>
+                        <select ng-model="item.profession" ng-options="i.value as i.label for i in item.profession_list">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
+                    <td>
+                        <input type="text" dn-form-input data-picker id="time{{$index}}" dn-name="time{{$index}}" ng-model="item.time" ng-change="detectTime('time{{$index}}')" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" class="btn btn-link btn-link-blue" ng-click="eduAction('delete', item)">{{"BT_DELETE_SCHOOL"|translate}}</button>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- 成绩 -->
+            <tbody>
+                <tr>
+                    <td ccolspan="2" class="title">{{"S_ACCOUNT_ACHIEVEMENT"|translate}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox" id="no_score" ng-model="user.score.no_score" /> {{"S_ACCOUNT_NO_WAITING_EXAMINATION_"|translate}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="has_sat" ng-model="user.score.has_sat" /> {{"SAT"|translate}}
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="sat" name="sat" ng-model="user.score.sat" ng-change="detectScore('sat')" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="has_toefl" ng-model="user.score.has_toefl" /> {{"TOEFL"|translate}}
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="toefl" name="toefl" ng-model="user.score.toefl" ng-change="detectScore('toefl')" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="has_ielts" ng-model="user.score.has_ielts" /> {{"IELTS"|translate}}
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="ielts" name="ielts" ng-model="user.score.ielts" ng-change="detectScore('ielts')" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="has_gre" ng-model="user.score.has_gre" /> {{"GRE"|translate}}
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="gre" name="gre" ng-model="user.score.gre" ng-change="detectScore('gre')" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="has_gmat" ng-model="user.score.has_gmat" /> {{"GMAT"|translate}}
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="gmat" name="gmat" ng-model="user.score.gmat" ng-change="detectScore('gmat')" required/>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- 留学意向 -->
+            <tbody>
+                <tr>
+                    <td colspan="2" class="title">{{"S_ACCOUNT_INTENTION_OF_STUDYING_ABROAD"|translate}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_WANT_TO_APPLY"|translate}}</td>
+                    <td>
+                        <select dn-form-select name="" ng-model="user.intention.school" ng-options="i.value as i.label for i in intent_school">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_PROFESSIONAL_INTENTION"|translate}}</td>
+                    <td>
+                        <select dn-form-select name="" ng-model="user.intention.major" ng-options="i.value as i.label for i in intent_major" ng-change="changeIMajor()">
+                        </select>
+                        <select dn-form-select name="" ng-model="user.intention.profession" ng-options="i.value as i.label for i in intent_profession">
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- 我的联系方式 -->
+            <tbody>
+                <tr>
+                    <td colspan="2" class="title">{{"S_ACCOUNT_MY_CONTACT_WAY"|translate}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_EMAIL"|translate}}</td>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_PERMANENT_PLACE"|translate}}</td>
+                    <td>
+                        <select dn-form-select ng-model="user.liveplace.country" ng-options="i.value as i.label for i in country_list" ng-change="changeCountry()">
+                        </select>
+                        <select dn-form-select ng-model="user.liveplace.province" ng-options="i.value as i.label for i in province_list" ng-change="changeProvince()">
+                        </select>
+                        <select dn-form-select ng-model="user.liveplace.city" ng-options="i.value as i.label for i in city_list">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{"S_ACCOUNT_TIME_ZONE"|translate}}</td>
+                    <td>{{user.liveplace.timezone}}</td>
+                </tr>
+            </tbody>
+            <!-- 我的账户 -->
+            <tbody>
+                <tr>
+                    <td class="title">{{"S_ACCOUNT_MY_ACCOUNT"|translate}}</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-link-blue" ng-click="cardAction('add')">{{"BT_ADD"|translate}}</button>
+                    </td>
+                </tr>
+                <tr ng-repeat="item in user.account">
+                    <td ng-if="!item.isEdit && item.type == 'card'">{{"S_ACCOUNT_BANK_CARD"|translate}}</td>
+                    <td ng-if="!item.isEdit && item.type == 'alipay'">{{"S_ACCOUNT_ALIPAY"|translate}}</td>
+                    <td ng-if="item.isEdit">
+                        <select ng-model="item.type" ng-options="i.value as i.label for i in selType">
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="numid{{$index}}" dn-name="numid{{$index}}" ng-model="item.id" />
+		                    <button type="button" class="btn btn-link btn-link-blue" ng-click="cardAction('delete', item)">{{"BT_DELETE"|translate}}</button>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- 了解渠道 -->
+            <tbody>
+                <tr>
+                    <td colspan="2" class="title">{{"S_ACCOUNT_UNDERSTANDING_CHANNEL"|translate}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="knowway" id="knowway0" value="0" ng-model="user.knowway.way" /> {{"S_ACCOUNT_FRIENDS_RECOMMENDED"|translate}}
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="" name="" ng-model="textbox" ng-change="detectWay('', 1)" required placeholder="{{'S_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" />
+                        <input type="text" dn-form-input id="" name="" ng-model="textbox" ng-change="detectWay('', 1)" required placeholder="{{'S_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="knowway" id="knowway1" value="1" ng-model="user.knowway.way" /> {{"S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY"|translate}}
+                    </td>
+                    <td>
+                        <input type="text" dn-form-input id="" name="" ng-model="textbox" ng-change="detectWay('', 2)" required placeholder="{{'S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY'|translate}}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="knowway" id="knowway2" value="2" ng-model="user.knowway.way" /> {{"S_ACCOUNT_NETWORK"|translate}}
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="knowway" id="knowway3" value="3" ng-model="user.knowway.way" /> {{"S_ACCOUNT_OTHER"|translate}}
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

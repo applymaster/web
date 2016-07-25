@@ -3,8 +3,7 @@
  */
 'use strict';
 var getType = function(type) {
-    if (type == -1) return 'demo';
-    return ['user', 'teacher', 'student', 'admin'][type];
+    return ['user', 'teacher', 'student', 'admin'][type] ? ['user', 'teacher', 'student', 'admin'][type] : type;
 };
 
 var priServices = angular.module('primaryModule', ['ngResource']);
@@ -88,16 +87,16 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
     service.getUrl = function(_type, _path, _byId) {
         // For Test
         var baseUrl = "";
-        if (_byId)
-            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id' + '.json';
-        else
-            var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
+        // if (_byId)
+        //     var url = baseUrl + '/api/' + _type + '/' + _path + '/:id' + '.json';
+        // else
+        //     var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
         // For Project
-        // var baseUrl = "http://52.69.248.175:8000";
-        //     if (_byId)
-        //         var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
-        //     else
-        //         var url = baseUrl + '/api/' + _type + '/' + _path;
+        var baseUrl = "http://52.69.248.175:8000";
+            if (_byId)
+                var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
+            else
+                var url = baseUrl + '/api/' + _type + '/' + _path;
         return url;
     }
     return service;
@@ -158,6 +157,27 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
 
             return defer.promise;
         },
+        queryAll: function(type, path, id) {
+            var defer = $q.defer();
+
+            var sFunc = function(data, headers) {
+                console.log('rcServices data:', data)
+                defer.resolve(data);
+            };
+            var eFunc = function(data, headers) {
+                defer.reject(data);
+            };
+            var byId = id ? true : false,
+                _path = path.indexOf('/') == 0 ? path.substr(1) : path;
+            var tResource = resourceObj.init(getType(type), _path, byId);
+
+            if (byId)
+                tResource.query({ 'id': id }, sFunc, eFunc);
+            else
+                tResource.query(sFunc, eFunc);
+
+            return defer.promise;
+        },
         post: function(data) {
             /* data is an {object}
              * @type: 0, 1, 2
@@ -180,7 +200,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
 }]);
 
 // menu
-priServices.factory('menuServices', function($rootScope) {
+priServices.factory('menuServices', ['$rootScope', function($rootScope) {
     var menuTable = {
         // id - 二级菜单列表
         // children - 三级菜单列表
@@ -339,7 +359,12 @@ priServices.factory('menuServices', function($rootScope) {
         },{ // 我的钱包
             'id': 'wallet',
             'i18n': 'T_MENU_WALLET',
-            'link': 'student.wallet'
+            'link': 'student.wallet',
+            'children': [{
+                'id': 'account',
+                'i18n': 'T_MENU_WALLET',
+                'link': 'student.wallet'
+            }]
         },{ // 比较顾问
             'id': 'compare',
             'i18n': 'T_MENU_COMPARE_CONSULTANT',
@@ -351,7 +376,12 @@ priServices.factory('menuServices', function($rootScope) {
         },{ // 账户设置
             'id': 'account',
             'i18n': 'T_MENU_SET_ACCOUNT',
-            'link': 'student.account'
+            'link': 'student.account',
+            'children': [{
+                'id': 'account',
+                'i18n': 'T_MENU_INFOMATION',
+                'link': 'student.account'
+            }]
         }]
     };
     var _showFirst = function(type) {
@@ -414,9 +444,28 @@ priServices.factory('menuServices', function($rootScope) {
             return _showFirst(getType(type));
         }
     };
-});
+}]);
 
-priServices.factory('formService', function($translate) {
+priServices.factory('droplistSrc', ['rcServices', function(rcServices){
+    var service = {};
+    // 获取专业大类列表
+    service.getMarjor = function(){
+        rcServices.queryAll('experience', 'major').then(function(data){
+            console.log('获取专业大类列表:', data);
+            return data;
+        });
+    };
+    // 获取专业小类列表
+    service.getSubMarjor = function(id){
+        rcServices.queryAll('experience', 'sub_major', id).then(function(data){
+            console.log('获取专业小类列表:', data);
+            return data;
+        });
+    };
+    return service;
+}]);
+
+priServices.factory('formService', ['$translate', function($translate) {
     /* 结合指令 mz-detect-input & mz-detect-input2 */
     var obj = {};
     obj.isError = false;
@@ -450,4 +499,4 @@ priServices.factory('formService', function($translate) {
         }
     };
     return obj;
-})
+}])

@@ -245,7 +245,8 @@ angular.module('webApp', [
             url: '/wallet',
             views: {
                 'viewT': {
-                    templateUrl: '/views/student/wallet.html'
+                    templateUrl: '/views/student/wallet.html',
+                    controller: 'SWalletCtrl'
                 }
             }
         })

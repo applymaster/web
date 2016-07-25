@@ -74,7 +74,12 @@ a {
 .btn-link {
     padding: 0;
     border: none;
+    font-size: 18px;
     vertical-align: inherit;
+}
+
+.btn-link-blue {
+    color: $color-blue;
 }
 
 .btn-upload-group {
@@ -475,6 +480,13 @@ a {
     margin-top: 171px;
     background-color: white;
 }
+#student .account {
+    font-size: 18px;
+    .btn-link {
+        height: 30px;
+        line-height: 30px;
+    }
+}
 
 .navbar-default.secondary {
     border: none;
@@ -736,6 +748,10 @@ a {
     .error-message {
         width: 300px;
     }
+    .title {
+        font-weight: bold;
+        font-size: 22px;
+    }
 }
 .has-error {
     color: $state-danger-text;
@@ -836,9 +852,6 @@ a {
             .btn-link {
                 font-size: 14px;
                 padding: 0;
-            }
-            .btn-link-blue {
-                color: $color-blue;
             }
         }
         .dialog-icon {
