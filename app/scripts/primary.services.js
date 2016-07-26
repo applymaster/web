@@ -93,10 +93,11 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
         //     var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
         // For Project
         var baseUrl = "http://52.69.248.175:8000";
-            if (_byId)
-                var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
-            else
-                var url = baseUrl + '/api/' + _type + '/' + _path;
+        if (_byId)
+            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
+        else
+            var url = baseUrl + '/api/' + _type + '/' + _path;
+        console.log(url);
         return url;
     }
     return service;

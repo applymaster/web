@@ -20,7 +20,7 @@ priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', 
 
         var setUser = function(user) {
             $cookieStore.remove('user');
-            $scope.user = $cookieStore.get('user') ? $cookieStore.get('user') : { 'type': 2, 'name': 'username' };
+            $scope.user = $cookieStore.get('user') ? $cookieStore.get('user') : { 'type': 1, 'name': 'username' };
         };
 
         setUser();
