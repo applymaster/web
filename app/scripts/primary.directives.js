@@ -73,6 +73,13 @@ app.directive('calendarTable', ['calService', function(calService) {
         }
     }
 }]);
+app.directive('calendarEvent', ['calService', function(calService) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+        }
+    }
+}]);
 
 // 点击button时, 恢复原始数据
 app.directive('btnCancel', [function() {

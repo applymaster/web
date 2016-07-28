@@ -36,13 +36,15 @@
                                 <tr>
                                     <td>{{"T_CALENDAR_BEGIN"|translate}}</td>
                                     <td>
-                                        <input type="text" class="form-control" id="begin" data-picker>
+                                        <!-- <input type="date" class="form-control" ng-model="event.begin" id="begin" data-picker> -->
+                                        <input date-time format="yyyy-MM-dd" class="form-control" ng-model="event.begin" id="begin" data-picker>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>{{"T_CALENDAR_END"|translate}}</td>
                                     <td>
-                                        <input type="text" class="form-control" id="end">
+                                        <!-- <input type="date" class="form-control" ng-model="event.end" id="end"> -->
+                                        <input date-time format="yyyy-MM-dd" class="form-control" ng-model="event.end" id="end">
                                     </td>
                                 </tr>
                                 <tr>
@@ -52,12 +54,12 @@
                                     <td colspan="2">
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="way" id="way0" value="0"> {{"T_CALENDAR_EXPIRE"|translate}}
+                                                <input type="radio" ng-model="event.way" name="way" id="way0" value="0"> {{"T_CALENDAR_EXPIRE"|translate}}
                                             </label>
                                             <label>
-                                                <input type="radio" name="way" id="way1" value="1"> {{"T_CALENDAR_ADVANCE"|translate}}
+                                                <input type="radio" ng-model="event.way" name="way" id="way1" value="1"> {{"T_CALENDAR_ADVANCE"|translate}}
                                             </label>
-                                            <input type="text" class="form-control" id="way1value">
+                                            <input type="text" ng-model="event.way1value" class="form-control" id="way1value">
                                             <label>{{"T_CALENDAR_DAY"|translate}}</label>
                                         </div>
                                     </td>
@@ -66,10 +68,10 @@
                                     <td colspan="2">
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="way" id="way2" value="2"> {{"T_CALENDAR_MESSAGE"|translate}}
+                                                <input type="radio" ng-model="event.way" name="way" id="way2" value="2"> {{"T_CALENDAR_MESSAGE"|translate}}
                                             </label>
                                             <label>
-                                                <input type="radio" name="way" id="way3" value="3"> {{"T_CALENDAR_EMAIL"|translate}}
+                                                <input type="radio" ng-model="event.way" name="way" id="way3" value="3"> {{"T_CALENDAR_EMAIL"|translate}}
                                             </label>
                                         </div>
                                     </td>
@@ -77,160 +79,160 @@
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-success" ng-click="submit()">{{"BT_ADD"|translate}}</button>
-                        <button type="button" class="btn btn-primary" btn-cancel data="teacher">{{"BT_CANCEL"|translate}}</button>
+                        <button type="button" class="btn btn-primary" ng-click="cancel()">{{"BT_CANCEL"|translate}}</button>
                     </div>
                 </div>
             </td>
             <td>
-                <div>2
+                <div class="day">2
                     <div class='lunar'>廿七</div>
                 </div>
             </td>
             <td>
-                <div>3
+                <div class="day">3
                     <div class='lunar'>廿八</div>
                 </div>
             </td>
             <td>
-                <div>4
+                <div class="day">4
                     <div class='lunar'>廿九</div>
                 </div>
             </td>
             <td>
-                <div>5
+                <div class="day">5
                     <div class='lunar'>初一</div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <div>6
+                <div class="day">6
                     <div class='lunar'>初二</div>
                 </div>
             </td>
             <td>
-                <div>7
+                <div class="day">7
                     <div class='lunar'>初三</div>
                 </div>
             </td>
             <td>
-                <div>8
+                <div class="day">8
                     <div class='lunar'>初四</div>
                 </div>
             </td>
             <td>
-                <div>9
+                <div class="day">9
                     <div class='lunar'>初五</div>
                 </div>
             </td>
             <td>
-                <div>10
+                <div class="day">10
                     <div class='lunar'>初六</div>
                 </div>
             </td>
             <td>
-                <div>11
+                <div class="day">11
                     <div class='lunar'>初七</div>
                 </div>
             </td>
             <td>
-                <div>12
+                <div class="day">12
                     <div class='lunar'>初八</div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <div>13
+                <div class="day">13
                     <div class='lunar'>初九</div>
                 </div>
             </td>
             <td>
-                <div>14
+                <div class="day">14
                     <div class='lunar'>初十</div>
                 </div>
             </td>
             <td>
-                <div>15
+                <div class="day">15
                     <div class='lunar'>十一</div>
                 </div>
             </td>
             <td>
-                <div>16
+                <div class="day">16
                     <div class='lunar'>十二</div>
                 </div>
             </td>
             <td>
-                <div>17
+                <div class="day">17
                     <div class='lunar'>十三</div>
                 </div>
             </td>
             <td>
-                <div>18
+                <div class="day">18
                     <div class='lunar'>十四</div>
                 </div>
             </td>
             <td>
-                <div>19
+                <div class="day">19
                     <div class='lunar'>十五</div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <div>20
+                <div class="day">20
                     <div class='lunar'>十六</div>
                 </div>
             </td>
             <td>
-                <div>21
+                <div class="day">21
                     <div class='lunar'>十七</div>
                 </div>
             </td>
             <td>
-                <div>22
+                <div class="day">22
                     <div class='lunar'>十八</div>
                 </div>
             </td>
             <td>
-                <div>23
+                <div class="day">23
                     <div class='lunar'>十九</div>
                 </div>
             </td>
             <td>
-                <div>24
+                <div class="day">24
                     <div class='lunar'>二十</div>
                 </div>
             </td>
             <td>
-                <div>25
+                <div class="day">25
                     <div class='lunar'>廿一</div>
                 </div>
             </td>
             <td>
-                <div>26
+                <div class="day">26
                     <div class='lunar'>廿二</div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <div>27
+                <div class="day">27
                     <div class='lunar'>廿三</div>
                 </div>
             </td>
             <td>
-                <div>28
+                <div class="day">28
                     <div class='lunar'>廿四</div>
                 </div>
             </td>
             <td>
-                <div>29
+                <div class="day">29
                     <div class='lunar'>廿五</div>
                 </div>
             </td>
             <td>
-                <div>30
+                <div class="day">30
                     <div class='lunar'>廿六</div>
                 </div>
             </td>

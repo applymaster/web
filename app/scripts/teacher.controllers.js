@@ -219,9 +219,28 @@ app.controller('CreditCtrl', ['$rootScope', '$scope', 'rcServices', 'menuService
     }
 ]);
 
-app.controller('CalendarCtrl', ['$rootScope', '$scope', 'rcServices',
-    function($rootScope, $scope, rcServices) {
-
+app.controller('CalendarCtrl', ['$rootScope', '$scope', 'rcServices','$filter',
+    function($rootScope, $scope, rcServices, $filter) {
+        $scope.event = {
+            'way': '0'
+        };
+        $scope.submit = function(){
+            var begin = $filter('date')($scope.event.begin,'yyyy-MM-dd');
+            var end = $filter('date')($scope.event.end,'yyyy-MM-dd');
+            var postData = angular.copy($scope.event);
+            postData.begin = begin;
+            postData.end = end;
+            rcServices.post({
+                'type': 1,
+                'path': $rootScope.$state.current.url,
+                'postData': postData,
+                'sFunc': function() {},
+                'eFunc': function() {}
+            });
+        };
+        $scope.cancel = function(){
+            console.log($scope.event);
+        };
     }
 ]);
 
