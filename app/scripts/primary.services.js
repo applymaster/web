@@ -19,18 +19,18 @@ priServices.factory('httpService', function($http, $q) {
                 switch (rsp.status) {
                     case 0:
                         //fali
-                        if (typeof(s.funcF) == 'function') {
+                        if (typeof(s.funcF) === 'function') {
                             s.funcF(rsp);
                         }
                         break;
                     case 1:
                         //success
-                        if (typeof(s.funcS) == 'function') {
+                        if (typeof(s.funcS) === 'function') {
                             s.funcS(rsp);
                         }
                         break;
                 }
-                if (typeof s.funcA == 'function') {
+                if (typeof s.funcA === 'function') {
                     s.funcA(rsp);
                 }
                 deferred.resolve(rsp);
@@ -46,20 +46,20 @@ priServices.factory('httpService', function($http, $q) {
                 switch (rsp.status) {
                     case 0:
                         //fail
-                        if (typeof(s.funcF) == 'function') {
+                        if (typeof(s.funcF) === 'function') {
                             s.funcF(rsp);
                         }
                         break;
                     case 1:
                         //success
-                        if (typeof(s.funcS) == 'function') {
+                        if (typeof(s.funcS) === 'function') {
                             s.funcS(rsp);
                         }
                         break;
                     default:
                         break;
                 }
-                if (typeof(s.funcA) == 'function') {
+                if (typeof(s.funcA) === 'function') {
                     s.funcA(rsp);
                 }
                 deferred.resolve(rsp);
@@ -120,7 +120,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
                 defer.reject(data);
             };
             var byId = id ? true : false,
-                _path = path.indexOf('/') == 0 ? path.substr(1) : path;
+                _path = path.indexOf('/') === 0 ? path.substr(1) : path;
             var tResource = resourceObj.init(getType(type), _path, byId);
             if (byId)
                 tResource.get({
@@ -148,7 +148,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
             var byId = id ? true : false,
                 _offset = offset ? offset : 0,
                 _size = size ? size : 20,
-                _path = path.indexOf('/') == 0 ? path.substr(1) : path;
+                _path = path.indexOf('/') === 0 ? path.substr(1) : path;
             var tResource = resourceObj.init(getType(type), _path, byId);
 
             if (byId)
@@ -169,7 +169,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
                 defer.reject(data);
             };
             var byId = id ? true : false,
-                _path = path.indexOf('/') == 0 ? path.substr(1) : path;
+                _path = path.indexOf('/') === 0 ? path.substr(1) : path;
             var tResource = resourceObj.init(getType(type), _path, byId);
 
             if (byId)
@@ -189,7 +189,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
              * @eFunc: function, "eFunc"
              */
             var byId = data.id ? true : false,
-                _path = data.path.indexOf('/') == 0 ? data.path.substr(1) : data.path;
+                _path = data.path.indexOf('/') === 0 ? data.path.substr(1) : data.path;
             var tResource = resourceObj.init(getType(data.type), _path, byId);
             tResource.save(data.postData, data.sFunc, data.eFunc);
         },
@@ -405,10 +405,10 @@ priServices.factory('menuServices', ['$rootScope', function($rootScope) {
                 for (j = 0; j < fa.children.length; j++) {
                     fai = fa.children[j].link;
                     fai = fai.indexOf('(') > 0 ? fai.substr(0, fai.indexOf('(')) : fai;
-                    if (link == fai)
+                    if (link === fai)
                         return fa.children;
                 }
-            } else if (fa.link == link) {
+            } else if (fa.link === link) {
                 return fa;
             } else {
                 continue;
@@ -418,7 +418,7 @@ priServices.factory('menuServices', ['$rootScope', function($rootScope) {
     var _findLink = function(id, type, menus) {
         var i, res;
         for (i = 0; i < menus.length; i++) {
-            if (menus[i].id == id) {
+            if (menus[i].id === id) {
                 if (menus[i].link)
                     res = menus[i].link;
                 else
@@ -474,7 +474,7 @@ priServices.factory('formService', ['$translate', function($translate) {
     obj.init = function(element) {
         this.errMsg = '';
         this.isError = false;
-        if(getType(element) == 1)
+        if(getType(element) === 1)
             $(element).next('.error-message').find('.text-danger').empty();
         else
             $(element).parents('.form-group').find('.text-danger').empty();
@@ -483,7 +483,7 @@ priServices.factory('formService', ['$translate', function($translate) {
         if (isError) {
             this.isError = true;
             var message = $translate.instant(errMsg);
-            if(getType(element) == 1)
+            if(getType(element) === 1)
                 $(element).next('.error-message').find('.text-danger').html(message);
             else
                 $(element).parents('.form-group').find('.text-danger').html(message);

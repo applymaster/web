@@ -18,47 +18,51 @@ calendar.factory('calService', function($filter, $translate) {
         0x0a950, 0x0b4a0, 0x0baa4, 0x0ad50, 0x055d9, 0x04ba0, 0x0a5b0, 0x15176, 0x052b0, 0x0a930,
         0x07954, 0x06aa0, 0x0ad50, 0x05b52, 0x04b60, 0x0a6e6, 0x0a4e0, 0x0d260, 0x0ea65, 0x0d530,
         0x05aa0, 0x076a3, 0x096d0, 0x04bd7, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45,
-        0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0)
+        0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0);
     var Gan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
     var Zhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
-    var mEng = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var mEng = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var now = new Date();
     var SY = now.getFullYear();
-    var SM = now.getMonth();
+    var SM = now.getMonth()+1;
     var SME = mEng[now.getMonth()];
     var SD = now.getDate();
-    var SYMD = $filter('date')(now, 'yy-mm-dd'); // 使用angular filter
 
     //==== 传回农历 y年的总天数
     function lYearDays(y) {
-        var i, sum = 348
-        for (i = 0x8000; i > 0x8; i >>= 1) sum += (lunarInfo[y - 1900] & i) ? 1 : 0
-        return (sum + leapDays(y))
+        var i, sum = 348;
+        for (i = 0x8000; i > 0x8; i >>= 1) {
+            sum += (lunarInfo[y - 1900] & i) ? 1 : 0;
+        }
+        return (sum + leapDays(y));
     }
 
     //==== 传回农历 y年闰月的天数
     function leapDays(y) {
-        if (leapMonth(y)) return ((lunarInfo[y - 1900] & 0x10000) ? 30 : 29)
-        else return (0)
+        if (leapMonth(y)) {
+            return ((lunarInfo[y - 1900] & 0x10000) ? 30 : 29);
+        } else {
+            return (0);
+        }
     }
 
     //==== 传回农历 y年闰哪个月 1-12 , 没闰传回 0
     function leapMonth(y) {
-        return (lunarInfo[y - 1900] & 0xf)
+        return (lunarInfo[y - 1900] & 0xf);
     }
 
     //====================================== 传回农历 y年m月的总天数
     function monthDays(y, m) {
-        return ((lunarInfo[y - 1900] & (0x10000 >> m)) ? 30 : 29)
+        return ((lunarInfo[y - 1900] & (0x10000 >> m)) ? 30 : 29);
     }
 
     //==== 算出农历, 传入日期物件, 传回农历日期物件
     // 该物件属性有 .year .month .day .isLeap .yearCyl .dayCyl .monCyl
     function Lunar(objDate) {
         var i, leap = 0,
-            temp = 0
-        var baseDate = new Date(1900, 0, 31)
-        var offset = (objDate - baseDate) / 86400000
+            temp = 0,
+            baseDate = new Date(1900, 0, 31),
+            offset = (objDate - baseDate) / 86400000;
 
         this.dayCyl = offset + 40
         this.monCyl = 14
@@ -71,7 +75,7 @@ calendar.factory('calService', function($filter, $translate) {
         if (offset < 0) {
             offset += temp;
             i--;
-            this.monCyl -= 12
+            this.monCyl -= 12;
         }
 
         this.year = i
@@ -82,7 +86,7 @@ calendar.factory('calService', function($filter, $translate) {
 
         for (i = 1; i < 13 && offset > 0; i++) {
             //闰月
-            if (leap > 0 && i == (leap + 1) && this.isLeap == false) {
+            if (leap > 0 && i === (leap + 1) && this.isLeap === false) {
                 --i;
                 this.isLeap = true;
                 temp = leapDays(this.year);
@@ -91,13 +95,17 @@ calendar.factory('calService', function($filter, $translate) {
             }
 
             //解除闰月
-            if (this.isLeap == true && i == (leap + 1)) this.isLeap = false
+            if (this.isLeap === true && i === (leap + 1)) {
+                this.isLeap = false;
+            }
 
             offset -= temp
-            if (this.isLeap == false) this.monCyl++
-        }
+            if (this.isLeap === false) {
+                this.monCyl++;
+            }
+        };
 
-        if (offset == 0 && leap > 0 && i == leap + 1)
+        if (offset === 0 && leap > 0 && i === leap + 1)
             if (this.isLeap) {
                 this.isLeap = false;
             } else {
@@ -142,6 +150,7 @@ calendar.factory('calService', function($filter, $translate) {
             default:
                 s += nStr2[Math.floor(d / 10)];
                 s += nStr1[d % 10];
+                break;
         }
         return (s);
     };
@@ -196,14 +205,14 @@ calendar.factory('calService', function($filter, $translate) {
     // 获取生肖
     function getZodiac(year, month, day) {
         var zodiac = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"],
-
             myPos = (year - 1900) % 12,
             myZodiac = zodiac[myPos],
-            springDay = getSpringDay(year);
+            springDay = getSpringDay(year),
+            _myPos;
 
         switch (month) {
             case 1:
-                var _myPos = myPos - 1;
+                _myPos = myPos - 1;
                 if (_myPos < 0) {
                     _myPos = 11;
                 }
@@ -211,7 +220,7 @@ calendar.factory('calService', function($filter, $translate) {
                 break;
             case 2:
                 if (day < springDay) {
-                    var _myPos = myPos - 1;
+                    _myPos = myPos - 1;
                     if (_myPos < 0) {
                         _myPos = 11;
                     }
@@ -227,7 +236,9 @@ calendar.factory('calService', function($filter, $translate) {
     //获取该月天数有几天
     function getNowMonthDays(year, month) {
         var isy = false;
-        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) isy = true;
+        if (year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) {
+            isy = true;
+        }
         switch (month) {
             case 1:
             case 3:
@@ -258,13 +269,14 @@ calendar.factory('calService', function($filter, $translate) {
     var service = {};
     // 月视图 calendarService.showMonth
     service.showMonth = function() {
-        var days = getNowMonthDays(SY, SM + 1);
-        var startweek = getStartWeek();
-        var html = "";
-        var index = 0;
+        var days = getNowMonthDays(SY, SM + 1),
+            startweek = getStartWeek(),
+            html = "",
+            index = 0,
+            i, SYMD;
         /* 星期 */
         html += "<tr>";
-        for(var i = 1; i < 8; i++) {
+        for(i = 1; i < 8; i++) {
             html += "<th>"+$translate.instant('T_CALENDAR_'+i);+"</th>"
         }
         html += "</tr>";
@@ -272,23 +284,29 @@ calendar.factory('calService', function($filter, $translate) {
         html += "<tr>";
 
         /* 占位 */
-        for (var i = 1; i < startweek; i++) {
+        for (i = 1; i < startweek; i++) {
             html += "<td> </td>";
             index++;
         }
 
         /* 日期信息单元格 */
-        for (var i = 1; i <= days; i++) {
-            if (index % 7 == 0) {
+        for (i = 1; i <= days; i++) {
+            if (index % 7 === 0) {
                 html += "</tr><tr>";
             }
-            html += "<td id='" + SYMD + "'><div class='day'>" + i + "<div class='lunar'>" + getSolarDay(SY, SM, i) + "</div></div></td>";
+            SYMD = SY+'-'+SM+'-'+i;
+            html += '\
+                <td id="' + SYMD + '">\
+                    <div class="day">' + i + '\
+                        <div class="lunar">' + getSolarDay(SY, SM, i) + '</div>\
+                    </div>\
+                </td>';
             index++;
         }
 
         /* 占位 */
         for (var i = 0; i < 7; i++) {
-            if (index % 7 == 0) {
+            if (index % 7 === 0) {
                 break;
             }
             html += "<td> </td>";

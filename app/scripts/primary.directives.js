@@ -61,22 +61,31 @@ app.directive('calendarTitle', ['calService', function(calService) {
         scope: true,
         link: function(scope, element, attrs) {
             scope.title = calService.showTitle();
+            scope.cal = {
+                date: 1,
+                lunar: '廿六'
+            }
         }
     }
 }]);
-app.directive('calendarTable', ['calService', function(calService) {
+app.directive('calendarTable', ['calService', 'ngDialog', function(calService, ngDialog) {
     return {
-        restrict: 'A',
+        restrict: 'E',
+        template: '<table class="content"></table>',
+        replace: true,
+        scope: true,
         link: function(scope, element, attrs) {
-            $(element).addClass("content");
-            $(element).html(calService.showMonth());
-        }
-    }
-}]);
-app.directive('calendarEvent', ['calService', function(calService) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
+            element.html(calService.showMonth());
+            element.find('td').bind('click', function(evn) {
+                ngDialog.open({
+                    template: 'addCalender',
+                    controller: 'CalendarCtrl',
+                    showClose: false,
+                    data: {
+                        id: evn.currentTarget.id
+                    }
+                });
+            });
         }
     }
 }]);

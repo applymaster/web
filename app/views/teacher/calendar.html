@@ -9,8 +9,10 @@
 	            <div>March</div>
 	        </div>
 	    </div>
-    <table calendar-table></table>
     -->
+    <calendar-table>
+    </calendar-table>
+    <!--
     <table class="content">
         <tr>
             <th>一</th>
@@ -26,7 +28,8 @@
             <td> </td>
             <td> </td>
             <td>
-                <div class="day" calendar-event>1
+                <calendar-event></calendar-event>
+                <div class="day">1
                     <div class='lunar'>廿六</div>
                     <div class="event">
                         <div class="arrow"></div>
@@ -36,14 +39,12 @@
                                 <tr>
                                     <td>{{"T_CALENDAR_BEGIN"|translate}}</td>
                                     <td>
-                                        <!-- <input type="date" class="form-control" ng-model="event.begin" id="begin" data-picker> -->
                                         <input date-time format="yyyy-MM-dd" class="form-control" ng-model="event.begin" id="begin" data-picker>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>{{"T_CALENDAR_END"|translate}}</td>
                                     <td>
-                                        <!-- <input type="date" class="form-control" ng-model="event.end" id="end"> -->
                                         <input date-time format="yyyy-MM-dd" class="form-control" ng-model="event.end" id="end">
                                     </td>
                                 </tr>
@@ -241,4 +242,58 @@
             <td> </td>
         </tr>
     </table>
+    -->
 </div>
+<script  type="text/ng-template" id="addCalender">
+<div class="calendar event">
+    <!-- <div class="arrow"></div> -->
+    <h3>{{"T_CALENDAR_NEW"|translate}}</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td>{{"T_CALENDAR_BEGIN"|translate}}</td>
+                <td>
+                    <input type="date" format="yyyy-MM-dd" class="form-control datepicker" ng-model="event.begin" id="begin">
+                </td>
+            </tr>
+            <tr>
+                <td>{{"T_CALENDAR_END"|translate}}</td>
+                <td>
+                    <input type="date" format="yyyy-MM-dd" class="form-control datepicker" ng-model="event.end" id="end">
+                </td>
+            </tr>
+            <tr>
+                <td>{{"T_CALENDAR_WAY"|translate}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="event.way" name="way" id="way0" value="0"> {{"T_CALENDAR_EXPIRE"|translate}}
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="event.way" name="way" id="way1" value="1"> {{"T_CALENDAR_ADVANCE"|translate}}
+                        </label>
+                        <input type="text" ng-model="event.way1value" class="form-control" id="way1value">
+                        <label>{{"T_CALENDAR_DAY"|translate}}</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" ng-model="event.way" name="way" id="way2" value="2"> {{"T_CALENDAR_MESSAGE"|translate}}
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="event.way" name="way" id="way3" value="3"> {{"T_CALENDAR_EMAIL"|translate}}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-success" ng-click="submit()">{{"BT_ADD"|translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="closeThisDialog()">{{"BT_CANCEL"|translate}}</button>
+</div>
+</script>

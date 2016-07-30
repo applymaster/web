@@ -209,6 +209,7 @@ a {
     }
 }
 
+
 /* Home */
 
 #home {
@@ -332,6 +333,7 @@ a {
         }
     }
 }
+
 
 /* Login */
 
@@ -473,6 +475,7 @@ a {
     }
 }
 
+
 /* Student */
 
 #student {
@@ -480,6 +483,7 @@ a {
     margin-top: 171px;
     background-color: white;
 }
+
 #student .account {
     font-size: 18px;
     .btn-link {
@@ -753,15 +757,18 @@ a {
         font-size: 22px;
     }
 }
+
 .has-error {
     color: $state-danger-text;
 }
+
 .has-success {
     color: $state-success-text;
 }
 
 
 /* Order Page */
+
 .order {
     .container {
         width: 100%;
@@ -925,6 +932,7 @@ a {
     }
     .content {
         width: 100%;
+        position: relative;
         th {
             border-top: 1px solid $color-darkgrey;
             border-bottom: 2px solid $color-darkgrey;
@@ -933,7 +941,7 @@ a {
         }
         td {
             .day {
-                position: relative;
+                margin: 0 auto;
                 height: 93px;
                 width: 93px;
                 &:hover {
@@ -963,73 +971,35 @@ a {
             font-size: 18px;
         }
     }
-    .event {
-        position: absolute;
-        width: 300px;
-        padding: 20px;
-        height: 300px;
-        top: 26px;
-        right: 117px;
-        display: block;
-        font-size: 18px;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        z-index: 1060;
-        text-align: start;
-        text-decoration: none;
-        text-shadow: none;
-        text-transform: none;
-        letter-spacing: normal;
-        word-break: normal;
-        word-spacing: normal;
-        word-wrap: normal;
-        white-space: normal;
-        -webkit-background-clip: padding-box;
-        background-clip: padding-box;
-        line-break: auto;
-        h3 {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        table {
-            margin: 10px auto;
-        }
-        table td {
-            padding-right: 10px;
-            font-size: 21px;
-            color: white;
-        }
-        label {
-            font-size: 18px;
-        }
-        input {
-            width: 140px;
-            height: 26px;
-            display: inline-block;
-        }
-        input[type="radio"], input[type="checkbox"] {
-            width: 14px;
-            height: 15px;
-            display: inline-block;
-        }
-        #way1value {
-            width: 36px;
-            & + label {
-                padding: 0;
-            }
-        }
-        .radio {
-            display: inherit;
-        }
-        button {
-            font-size: 21px;
-            height: 42px;
-            width: 80px;
-            &:last-child {
-                float: right;
-            }
-        }
-    }
+}
+
+.calendar.event {
+    width: 300px;
+    padding: 20px;
+    height: 300px;
+    /*
+    position: absolute;
+    top: 26px;
+     */
+    margin: auto;
+    right: 117px;
+    display: block;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    z-index: 1060;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    white-space: normal;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    line-break: auto;
     .arrow {
         width: 0;
         height: 0;
@@ -1042,8 +1012,50 @@ a {
         border-top: 24px solid transparent;
         border-bottom: 24px solid transparent;
     }
+    h3 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    table {
+        margin: 10px auto;
+    }
+    table td {
+        padding-right: 10px;
+        font-size: 21px;
+        color: white;
+    }
+    label {
+        font-size: 18px;
+    }
+    input {
+        width: 140px;
+        height: 26px;
+        display: inline-block;
+    }
+    input[type="radio"],
+    input[type="checkbox"] {
+        width: 14px;
+        height: 15px;
+        display: inline-block;
+    }
+    #way1value {
+        width: 36px;
+        & + label {
+            padding: 0;
+        }
+    }
+    .radio {
+        display: inherit;
+    }
+    button {
+        font-size: 21px;
+        height: 42px;
+        width: 80px;
+        &:last-child {
+            float: right;
+        }
+    }
 }
-
 
 /* ngDialog */
 
@@ -1145,7 +1157,9 @@ a {
     }
 }
 
+
 /* Footer */
+
 footer {
     bottom: 0;
     background-color: $color-footer-bg;

@@ -224,6 +224,10 @@ app.controller('CalendarCtrl', ['$rootScope', '$scope', 'rcServices','$filter',
         $scope.event = {
             'way': '0'
         };
+        if($scope.ngDialogData){
+            $('.datepicker').datepicker();
+            $scope.event.begin = new Date($scope.ngDialogData.id);
+        }
         $scope.submit = function(){
             var begin = $filter('date')($scope.event.begin,'yyyy-MM-dd');
             var end = $filter('date')($scope.event.end,'yyyy-MM-dd');
@@ -237,9 +241,6 @@ app.controller('CalendarCtrl', ['$rootScope', '$scope', 'rcServices','$filter',
                 'sFunc': function() {},
                 'eFunc': function() {}
             });
-        };
-        $scope.cancel = function(){
-            console.log($scope.event);
         };
     }
 ]);

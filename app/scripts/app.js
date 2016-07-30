@@ -286,7 +286,7 @@ angular.module('webApp', [
                     templateUrl: '/views/student/account.html'
                 }
             }
-        })
+        });
         // catch all route
         // send users to the form page
         $urlRouterProvider.otherwise('/home');
