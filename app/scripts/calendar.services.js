@@ -24,7 +24,7 @@ calendar.factory('calService', function($filter, $translate) {
     var mEng = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var now = new Date();
     var SY = now.getFullYear();
-    var SM = now.getMonth()+1;
+    var SM = now.getMonth();
     var SME = mEng[now.getMonth()];
     var SD = now.getDate();
 
@@ -321,7 +321,7 @@ calendar.factory('calService', function($filter, $translate) {
     // 月视图 calendarService.showTitle
     service.showTitle = function() {
         var title = {
-            'month': SM < 10 ? '0'+SM : SM, // 本月NUM
+            'month': SM < 9 ? '0'+(SM+1) : SM+1, // 本月NUM
             'year': SY, // 年份NUM
             'zyear': getZodiac(SY, SM, SD), // 生肖年份
             'lyear': getSolarYear(SY), // 农历年份
