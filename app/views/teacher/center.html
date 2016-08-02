@@ -31,8 +31,7 @@
                 </td>
                 <td>
                     {{all.star}} {{"T_CENTER_STAR"|translate}}
-                    <input type="text" name="all_uplimit" ng-model="all.uplimit" ng-disabled="disStatus">
-                    {{"T_CENTER_DAN"|translate}}
+                    <input type="text" name="all_uplimit" ng-model="all.uplimit" ng-disabled="disStatus"> {{"T_CENTER_DAN"|translate}}
                 </td>
                 <td>
                     {{all.getNum}}
@@ -79,8 +78,7 @@
                 </td>
                 <td>
                     {{item.star}} {{"T_CENTER_STAR"|translate}}
-                    <input type="text" name="single_uplimit{{$index}}" ng-model="item.uplimit" ng-disabled="disStatus">
-                    {{"T_CENTER_DAN"|translate}}
+                    <input type="text" name="single_uplimit{{$index}}" ng-model="item.uplimit" ng-disabled="disStatus"> {{"T_CENTER_DAN"|translate}}
                 </td>
                 <td>
                     {{item.getNum}}
@@ -90,11 +88,11 @@
                 </td>
             </tr>
             <tr class="form-buttons">
-            <td>
-                <button type="button" class="btn btn-default" ng-click="submit()">{{"BT_SAVE"|translate}}</button>
-                <button type="button" class="btn btn-primary" ng-click="disStatus = false;">{{"BT_EDIT"|translate}}</button>
-            </td>
-        </tr>
+                <td>
+                    <button type="button" class="btn btn-default" ng-click="submit()">{{"BT_SAVE"|translate}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="disStatus = false;">{{"BT_EDIT"|translate}}</button>
+                </td>
+            </tr>
         </tbody>
     </table>
 </form>

@@ -87,17 +87,16 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
     service.getUrl = function(_type, _path, _byId) {
         // For Test
         var baseUrl = "";
-        // if (_byId)
-        //     var url = baseUrl + '/api/' + _type + '/' + _path + '/:id' + '.json';
-        // else
-        //     var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
-        // For Project
-        var baseUrl = "http://52.69.248.175:8000";
         if (_byId)
-            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
+            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id' + '.json';
         else
-            var url = baseUrl + '/api/' + _type + '/' + _path;
-        console.log(url);
+            var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
+        // For Project
+        // var baseUrl = "http://52.69.248.175:8000";
+        // if (_byId)
+        //     var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
+        // else
+        //     var url = baseUrl + '/api/' + _type + '/' + _path;
         return url;
     }
     return service;
@@ -158,7 +157,7 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
 
             return defer.promise;
         },
-        queryAll: function(type, path, id) {
+        queryAll: function(type, path, postData) {
             var defer = $q.defer();
 
             var sFunc = function(data, headers) {
@@ -168,12 +167,12 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
             var eFunc = function(data, headers) {
                 defer.reject(data);
             };
-            var byId = id ? true : false,
+            var byId = postData && postData.id ? true : false,
                 _path = path.indexOf('/') === 0 ? path.substr(1) : path;
-            var tResource = resourceObj.init(getType(type), _path, byId);
 
-            if (byId)
-                tResource.query({ 'id': id }, sFunc, eFunc);
+            var tResource = resourceObj.init(getType(type), _path, byId);
+            if (postData)
+                tResource.query(postData, sFunc, eFunc);
             else
                 tResource.query(sFunc, eFunc);
 
@@ -196,6 +195,32 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
         getUrl: function(_type, _path, _byId){
             return resourceObj.getUrl(getType(_type), _path, _byId);
         }
+    };
+    return service;
+}]);
+
+priServices.factory('listService', ['rcServices', '$translate', function(rcServices, $translate){
+    var service = {};
+    // 获取专业大类列表
+    service.getMarjor = function(){
+        return rcServices.queryAll('experience', 'major');
+    };
+    // 获取专业小类列表
+    service.getSubMarjor = function(majorId){
+        var postData = {'majorId': majorId};
+        return rcServices.queryAll('experience', 'sub_major', postData);
+    };
+    // 根据语言转换sellist
+    service.convertFormat =function(data){
+        var res = [];
+        data.forEach(function(item, i){
+            var _obj = {
+                'value': item.id,
+                'label': $translate.use() == 'zh' ? item.zhName : item.enName
+            }
+            res.push(_obj);
+        })
+        return res;
     };
     return service;
 }]);
@@ -445,25 +470,6 @@ priServices.factory('menuServices', ['$rootScope', function($rootScope) {
             return _showFirst(getType(type));
         }
     };
-}]);
-
-priServices.factory('droplistSrc', ['rcServices', function(rcServices){
-    var service = {};
-    // 获取专业大类列表
-    service.getMarjor = function(){
-        rcServices.queryAll('experience', 'major').then(function(data){
-            console.log('获取专业大类列表:', data);
-            return data;
-        });
-    };
-    // 获取专业小类列表
-    service.getSubMarjor = function(id){
-        rcServices.queryAll('experience', 'sub_major', id).then(function(data){
-            console.log('获取专业小类列表:', data);
-            return data;
-        });
-    };
-    return service;
 }]);
 
 priServices.factory('formService', ['$translate', function($translate) {

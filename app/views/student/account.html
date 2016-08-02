@@ -9,7 +9,7 @@
                 <tr>
                     <td>{{"S_ACCOUNT_REALNAME"|translate}}</td>
                     <td>
-                        <input type="text" dn-form-input id="realname" name="realname" ng-model="user.realname" ng-change="detectInput('realname')" required>
+                        <input type="text" dn-form-input id="realname" name="realname" ng-model="user.realname" ng-change="detectInput('realname', 'realname')" required>
                     </td>
                 </tr>
                 <tr>
@@ -219,8 +219,8 @@
                         <input type="radio" name="knowway" id="knowway0" value="0" ng-model="user.knowway.way" /> {{"S_ACCOUNT_FRIENDS_RECOMMENDED"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="" name="" ng-model="textbox" ng-change="detectWay('', 1)" required placeholder="{{'S_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" />
-                        <input type="text" dn-form-input id="" name="" ng-model="textbox" ng-change="detectWay('', 1)" required placeholder="{{'S_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" />
+                        <input type="text" dn-form-input id="way1name" name="way1name" ng-model="user.knowway.name" ng-change="detectInput('way0name', 'way0name')" required placeholder="{{'S_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" />
+                        <input type="text" dn-form-input id="way1mail" name="way1mail" ng-model="user.knowway.email" ng-change="detectInput('way0mail', 'way0mail')" required placeholder="{{'S_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" />
                     </td>
                 </tr>
                 <tr>
@@ -228,7 +228,7 @@
                         <input type="radio" name="knowway" id="knowway1" value="1" ng-model="user.knowway.way" /> {{"S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="" name="" ng-model="textbox" ng-change="detectWay('', 2)" required placeholder="{{'S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY'|translate}}" />
+                        <input type="text" dn-form-input id="way1name" name="way1name" ng-model="user.knowway.name2" ng-change="detectInput('way1name', 'way1name')" required placeholder="{{'S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY'|translate}}" />
                     </td>
                 </tr>
                 <tr>
@@ -242,6 +242,15 @@
                         <input type="radio" name="knowway" id="knowway3" value="3" ng-model="user.knowway.way" /> {{"S_ACCOUNT_OTHER"|translate}}
                     </td>
                     <td></td>
+                </tr>
+            </tbody>
+            <!-- Button -->
+            <tbody>
+                <tr class="form-buttons">
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="submit();">{{"BT_SAVE"|translate}}</button>
+                        <button type="button" class="btn btn-primary" btn-cancel data="user">{{"BT_EDIT"|translate}}</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
