@@ -13,21 +13,23 @@ app.controller('StudentCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServic
 ]);
 app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'menuServices', 'formService', 'listService',
     function($scope, $translate, $rootScope, rcServices, menuServices, formService, listService) {
-        /* 测试OK */
-        var init = function(){
-            rcServices.get(2, $rootScope.$state.current.url).then(function(data) {
-                $scope.user = data;
-                $scope.user.newedu = [];
-            });
-            // 专业大类
-            listService.getMarjor().then(function(data){
-                $scope.major_list = listService.convertFormat(data);
-                listService.getSubMarjor($scope.major_list[0]['value']).then(function(data){
-                    $scope.profession_list = data;
-                });
-            });
-        };
-        init();
+        // 留学意向 - 国家
+        $scope.intent_country = [{
+            'value': 0,
+            'label': $translate.instant('COUNTRY_AMERICA')
+        }, {
+            'value': 1,
+            'label': $translate.instant('COUNTRY_CHINA')
+        }];
+        // 我的联系方式 - 国家
+        $scope.liveplace_country = [{
+            'value': 0,
+            'label': $translate.instant('COUNTRY_AMERICA')
+        }, {
+            'value': 1,
+            'label': $translate.instant('COUNTRY_CHINA')
+        }];
+        // 我的账户
         $scope.selType = [{
             'value': 'card',
             'label': $translate.instant('S_ACCOUNT_BANK_CARD')
@@ -35,16 +37,33 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             'value': 'alipay',
             'label': $translate.instant('S_ACCOUNT_ALIPAY')
         }];
-        $scope.selDegree = [{
-            'value': '',
-            'label': ''
-        }, {
-            'value': '',
-            'label': ''
-        }, {
-            'value': '',
-            'label': ''
-        }];
+        // 初始化
+        var init = function(){
+            // 获取用户信息
+            rcServices.get(2, $rootScope.$state.current.url).then(function(data) {
+                $scope.user = data;
+                $scope.user.newedu = [];
+                // 留学意向 - 学校list & 专业大类list & 小类list
+                listService.getSchool($scope.user.intention.country).then(function(data){
+                    $scope.intent_school = listService.convertFormat(data);
+                });
+                listService.getMarjor().then(function(data){
+                    $scope.intent_major = listService.convertFormat(data);
+                });
+                listService.getSubMarjor($scope.user.intention.major).then(function(data){
+                    $scope.intent_profession = listService.convertFormat(data);
+                });
+                // 我的联系方式 － province list & 城市list & 时区
+                listService.getProvince($scope.user.liveplace.country).then(function(data){
+                    $scope.liveplace_province = listService.convertFormat(data);
+                });
+                listService.getCity($scope.user.liveplace.province).then(function(data){
+                    $scope.liveplace_city = listService.convertFormat(data);
+                    $scope.user.liveplace.timezone = menuServices.getTimezone($scope.user.liveplace);
+                });
+            });
+        };
+        init();
         $scope.eduAction = function(action, item) {
             switch (action) {
                 case 'add':
@@ -71,7 +90,7 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     var newItem = {
                         'isEdit': true,
                         'type': $scope.selType[0]['value'],
-                        'id': ''
+                        'numid': ''
                     };
                     $scope.user.account.push(newItem);
                     break;
@@ -81,43 +100,6 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     break;
             }
         };
-        /* 未测试 */
-        // web服务器获取
-        $scope.intent_school = [{
-            'value': '',
-            'label': ''
-        }, {
-            'value': '',
-            'label': ''
-        }, {
-            'value': '',
-            'label': ''
-        }];
-        $scope.school_list = [{
-            'value': '',
-            'label': ''
-        }, {
-            'value': '',
-            'label': ''
-        }, {
-            'value': '',
-            'label': ''
-        }];
-        $scope.country_list = [{
-            'value': '',
-            'label': ''
-        }];
-        $scope.province_list = [{
-            'value': '',
-            'label': ''
-        }];
-        $scope.city_list = [{
-            'value': '',
-            'label': ''
-        }];
-        // JS 初始化
-        $scope.intent_major = angular.copy($scope.major_list);
-        $scope.intent_profession = angular.copy($scope.profession_list);
         $scope.detectInput = function(type, inputName) {
             formService.init($('#' + inputName));
             switch(type) {
@@ -126,16 +108,16 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_PLZ_ENTER_NAME', $('#' + inputName));
                     break;
                 // 渠道 - 推荐人姓名
-                case 'way1name':
-                    formService.detectInput($scope.frmWanQueuing[inputName].$invalid, 'ERR_PLZ_ENTER_NAME');
+                case 'way0name':
+                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_PLZ_ENTER_NAME');
                     break;
                 // 渠道 - 推荐人邮箱
-                case 'way1mail':
-                    formService.detectInput($scope.frmWanQueuing[inputName].$invalid, 'ERR_PLZ_ENTER_NAME');
+                case 'way0mail':
+                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_PLZ_ENTER_NAME');
                     break;
                 // 渠道 - 学生会/社团
-                case 'way2name':
-                    formService.detectInput($scope.frmWanQueuing[inputName].$invalid, 'ERR_PLZ_ENTER_NAME');
+                case 'way1name':
+                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_PLZ_ENTER_NAME');
                     break;
             }
         };
@@ -150,26 +132,32 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_PLZ_ENTER_TIME', $('#' + inputName));
         };
         // 留学意向
+        $scope.changeICountry = function() {
+            listService.getSchool($scope.user.intention.country).then(function(data){
+                $scope.intent_school = listService.convertFormat(data);
+                $scope.user.intention.school = $scope.intent_school[0]['value'];
+            });
+        };
         $scope.changeIMajor = function() {
-            // post major 值, 更改对应的 intent_profession 菜单选项
-            $scope.intent_profession = menuServices.getProfession($scope.user.intention.major);
-            $scope.user.intention.profession = $scope.intent_profession[0]['value'];
+            listService.getSubMarjor($scope.intent_major[0]['value']).then(function(data){
+                $scope.intent_profession = listService.convertFormat(data);
+                $scope.user.intention.profession = $scope.intent_profession[0]['value'];
+            });
         };
         // 我的联系方式
         $scope.changeCountry = function() {
-            // post country 值, 更改对应的 profession_list 菜单选项
-            $scope.province_list = menuServices.getProvince($scope.user.liveplace.country);
-            $scope.user.liveplace.province = $scope.province_list[0]['value'];
-            $scope.city_list = menuServices.getCity($scope.user.liveplace.province);
-            $scope.user.liveplace.city = $scope.city_list[0]['value'];
-            // post liveplace 值, 获取时区
-            $scope.user.liveplace.timezone = menuServices.getTimezone($scope.user.liveplace);
+            listService.getProvince($scope.user.liveplace.country).then(function(data){
+                $scope.liveplace_province = listService.convertFormat(data);
+                $scope.user.liveplace.province = $scope.liveplace_province[0]['value'];
+                $scope.changeProvince();
+            });
         };
         $scope.changeProvince = function() {
-            $scope.city_list = menuServices.getCity($scope.user.liveplace.province);
-            $scope.user.liveplace.city = $scope.city_list[0]['value'];
-            // post liveplace 值, 获取时区
-            $scope.user.liveplace.timezone = menuServices.getTimezone($scope.user.liveplace);
+            listService.getCity($scope.user.liveplace.province).then(function(data){
+                $scope.liveplace_city = listService.convertFormat(data);
+                $scope.user.liveplace.city = $scope.liveplace_city[0]['value'];
+                $scope.user.liveplace.timezone = menuServices.getTimezone($scope.user.liveplace);
+            });
         };
         // Post
         $scope.submit = function() {
@@ -192,6 +180,15 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             formService.detectInput($scope.user.score.has_gre && form.gre.$invalid, 'ERR_PLZ_ENTER_SCORE', $('#gre'));
             formService.detectInput($scope.user.score.has_gmat && form.gmat.$invalid, 'ERR_PLZ_ENTER_SCORE', $('#gmat'));
             // 渠道
+            // Post
+            var postData = angular.copy($scope.user);
+            rcServices.post({
+                'type': 2,
+                'path': $rootScope.$state.current.url,
+                'postData': postData,
+                'sFunc': function() {},
+                'eFunc': function() {}
+            });
         };
     }
 ]);

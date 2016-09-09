@@ -201,6 +201,21 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
 
 priServices.factory('listService', ['rcServices', '$translate', function(rcServices, $translate){
     var service = {};
+    // 获取省份or美国大洲列表
+    service.getProvince = function(countryId){
+        var postData = {'countryId': countryId};
+        return rcServices.queryAll('experience', 'province', postData);
+    };
+    // 获取城市列表
+    service.getCity = function(provinceId){
+        var postData = {'provinceId': provinceId};
+        return rcServices.queryAll('experience', 'city', postData);
+    };
+    // 获取学校列表
+    service.getSchool = function(countryId){
+        var postData = {'countryId': countryId};
+        return rcServices.queryAll('experience', 'school', postData);
+    };
     // 获取专业大类列表
     service.getMarjor = function(){
         return rcServices.queryAll('experience', 'major');

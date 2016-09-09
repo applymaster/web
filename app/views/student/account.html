@@ -105,7 +105,7 @@
                         <input type="checkbox" id="has_sat" ng-model="user.score.has_sat" /> {{"SAT"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="sat" name="sat" ng-model="user.score.sat" ng-change="detectScore('sat')" required/>
+                        <input type="text" dn-form-input id="sat" name="sat" ng-model="user.score.sat" ng-change="detectScore('sat')" required ng-disabled="!user.score.has_sat"/>
                     </td>
                 </tr>
                 <tr>
@@ -113,7 +113,7 @@
                         <input type="checkbox" id="has_toefl" ng-model="user.score.has_toefl" /> {{"TOEFL"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="toefl" name="toefl" ng-model="user.score.toefl" ng-change="detectScore('toefl')" required/>
+                        <input type="text" dn-form-input id="toefl" name="toefl" ng-model="user.score.toefl" ng-change="detectScore('toefl')" required ng-disabled="!user.score.has_toefl"/>
                     </td>
                 </tr>
                 <tr>
@@ -121,7 +121,7 @@
                         <input type="checkbox" id="has_ielts" ng-model="user.score.has_ielts" /> {{"IELTS"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="ielts" name="ielts" ng-model="user.score.ielts" ng-change="detectScore('ielts')" required/>
+                        <input type="text" dn-form-input id="ielts" name="ielts" ng-model="user.score.ielts" ng-change="detectScore('ielts')" required  ng-disabled="!user.score.has_ielts"/>
                     </td>
                 </tr>
                 <tr>
@@ -129,7 +129,7 @@
                         <input type="checkbox" id="has_gre" ng-model="user.score.has_gre" /> {{"GRE"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="gre" name="gre" ng-model="user.score.gre" ng-change="detectScore('gre')" required/>
+                        <input type="text" dn-form-input id="gre" name="gre" ng-model="user.score.gre" ng-change="detectScore('gre')" required  ng-disabled="!user.score.has_gre"/>
                     </td>
                 </tr>
                 <tr>
@@ -137,7 +137,7 @@
                         <input type="checkbox" id="has_gmat" ng-model="user.score.has_gmat" /> {{"GMAT"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="gmat" name="gmat" ng-model="user.score.gmat" ng-change="detectScore('gmat')" required/>
+                        <input type="text" dn-form-input id="gmat" name="gmat" ng-model="user.score.gmat" ng-change="detectScore('gmat')" required  ng-disabled="!user.score.has_gmat"/>
                     </td>
                 </tr>
             </tbody>
@@ -149,6 +149,8 @@
                 <tr>
                     <td>{{"S_ACCOUNT_WANT_TO_APPLY"|translate}}</td>
                     <td>
+                        <select dn-form-select name="" ng-model="user.intention.country" ng-options="i.value as i.label for i in intent_country">
+                        </select>
                         <select dn-form-select name="" ng-model="user.intention.school" ng-options="i.value as i.label for i in intent_school">
                         </select>
                     </td>
@@ -175,11 +177,11 @@
                 <tr>
                     <td>{{"S_ACCOUNT_PERMANENT_PLACE"|translate}}</td>
                     <td>
-                        <select dn-form-select ng-model="user.liveplace.country" ng-options="i.value as i.label for i in country_list" ng-change="changeCountry()">
+                        <select dn-form-select ng-model="user.liveplace.country" ng-options="i.value as i.label for i in liveplace_country" ng-change="changeCountry()">
                         </select>
-                        <select dn-form-select ng-model="user.liveplace.province" ng-options="i.value as i.label for i in province_list" ng-change="changeProvince()">
+                        <select dn-form-select ng-model="user.liveplace.province" ng-options="i.value as i.label for i in liveplace_province" ng-change="changeProvince()">
                         </select>
-                        <select dn-form-select ng-model="user.liveplace.city" ng-options="i.value as i.label for i in city_list">
+                        <select dn-form-select ng-model="user.liveplace.city" ng-options="i.value as i.label for i in liveplace_city">
                         </select>
                     </td>
                 </tr>
@@ -204,7 +206,7 @@
                         </select>
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="numid{{$index}}" dn-name="numid{{$index}}" ng-model="item.id" />
+                        <input type="text" dn-form-input id="numid{{$index}}" dn-name="numid{{$index}}" ng-model="item.numid" />
 		                    <button type="button" class="btn btn-link btn-link-blue" ng-click="cardAction('delete', item)">{{"BT_DELETE"|translate}}</button>
                     </td>
                 </tr>
@@ -219,8 +221,8 @@
                         <input type="radio" name="knowway" id="knowway0" value="0" ng-model="user.knowway.way" /> {{"S_ACCOUNT_FRIENDS_RECOMMENDED"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="way1name" name="way1name" ng-model="user.knowway.name" ng-change="detectInput('way0name', 'way0name')" required placeholder="{{'S_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" />
-                        <input type="text" dn-form-input id="way1mail" name="way1mail" ng-model="user.knowway.email" ng-change="detectInput('way0mail', 'way0mail')" required placeholder="{{'S_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" />
+                        <input type="text" dn-form-input id="way0name" name="way0name" ng-model="user.knowway.name" ng-change="detectInput('way0name', 'way0name')" required placeholder="{{'S_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" ng-disabled="user.knowway.way != 0"/>
+                        <input type="text" dn-form-input id="way0mail" name="way0mail" ng-model="user.knowway.email" ng-change="detectInput('way0mail', 'way0mail')" required placeholder="{{'S_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" ng-disabled="user.knowway.way != 0"/>
                     </td>
                 </tr>
                 <tr>
@@ -228,7 +230,7 @@
                         <input type="radio" name="knowway" id="knowway1" value="1" ng-model="user.knowway.way" /> {{"S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="way1name" name="way1name" ng-model="user.knowway.name2" ng-change="detectInput('way1name', 'way1name')" required placeholder="{{'S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY'|translate}}" />
+                        <input type="text" dn-form-input id="way1name" name="way1name" ng-model="user.knowway.union" ng-change="detectInput('way1name', 'way1name')" required placeholder="{{'S_ACCOUNT_STUDENT_UNION_OR_COMMUNITY'|translate}}" ng-disabled="user.knowway.way != 1"/>
                     </td>
                 </tr>
                 <tr>

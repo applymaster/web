@@ -349,6 +349,9 @@
     "BT_IMG": "图片",
 
     "COMMON_STR_DOLLOR": "元",
+    
+    "COUNTRY_AMERICA": "美国",
+    "COUNTRY_CHINA": "中国",
 
     "NULL": "NULL"
 }

@@ -71,6 +71,12 @@ angular.module('webApp', [
                 controller: 'TMeCtrl'
             })
 
+            /* 寻找顾问 */
+            .state('search', {
+                url: '/search',
+                templateUrl: '/views/search/search.html'
+            })
+
             .state('teacher', {
                 //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
                 abstract: true,
@@ -249,16 +255,6 @@ angular.module('webApp', [
                     controller: 'SWalletCtrl'
                 }
             }
-        })
-
-        .state('student.search', {
-            url: '/search',
-            templateUrl: '/views/search/search.html'
-        })
-
-        .state('search.details', {
-            url: '/details',
-            templateUrl: '/views/search/details.html'
         })
 
         .state('student.compare', {
