@@ -330,6 +330,13 @@
     "S_ACCOUNT_OTHER": "其他",
     "S_ACCOUNT_NAME_OF_THE_RECOMMENDER": "推荐人真实姓名",
     "S_ACCOUNT_EMAIL_OF_THE_RECOMMENDER": "推荐人邮箱",
+    "S_ACCOUNT_DEGREE_0": "本科",
+    "S_ACCOUNT_DEGREE_1": "硕士",
+    "S_ACCOUNT_DEGREE_2": "博士",
+    "S_ACCOUNT_DEGREE_3": "博士后",
+    "S_ACCOUNT_GRADUATED_0": "在读",
+    "S_ACCOUNT_GRADUATED_1": "已毕业",
+
     "BT_ADD_SCHOOL": "添加大学",
     "BT_DELETE_SCHOOL": "删除该大学",
     "BT_DELETE": "删除",
@@ -349,7 +356,7 @@
     "BT_IMG": "图片",
 
     "COMMON_STR_DOLLOR": "元",
-    
+
     "COUNTRY_AMERICA": "美国",
     "COUNTRY_CHINA": "中国",
 
