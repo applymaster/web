@@ -4,7 +4,6 @@
 /.sass-cache
 /app/bower_components
 bower_components
-/app/api
 /.editorconfig
 /.idea
 *.patch

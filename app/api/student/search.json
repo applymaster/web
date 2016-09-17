@@ -1,0 +1,23 @@
+[{
+	"tid": "tid",
+    "name": "name",
+    "images": "../images/user.png",
+    "service": 0,
+    "degree": 0,
+    "major": "专业名",
+    "background": "留学顾问背景",
+    "graduated": true,
+    "star": 5,
+    "price": 566,
+    "note": {
+    	"tid": "string, tid － 顾问识别id",
+        "name": "string, 姓名",
+        "images": "string, 头像地址",
+        "service": "int, 服务内容",
+        "degree": "string, 学历",
+	    "major": "string 专业",
+	    "graduated": "boolean 是否已经毕业",
+        "star": "int, 星级",
+        "price": "int, 价格"
+    }
+}]
