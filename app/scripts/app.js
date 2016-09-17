@@ -71,12 +71,6 @@ angular.module('webApp', [
                 controller: 'TMeCtrl'
             })
 
-            /* 寻找顾问 */
-            .state('search', {
-                url: '/search',
-                templateUrl: '/views/search/search.html'
-            })
-
             .state('teacher', {
                 //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
                 abstract: true,
@@ -90,7 +84,7 @@ angular.module('webApp', [
                 views: {
                     'viewT': {
                         templateUrl: '/views/teacher/account.html',
-                        controller: 'AccountCtrl'
+                        controller: 'TAccountCtrl'
                     }
                 }
             })
@@ -209,27 +203,6 @@ angular.module('webApp', [
             }
         })
 
-        /*
-
-        .state('teacher.message', {
-        url: '/message',
-        views: {
-        'viewT': {
-        templateUrl: '/views/teacher/message.html'
-        }
-        }
-        })
-
-        .state('teacher.help', {
-        url: '/help',
-        views: {
-        'viewT': {
-        templateUrl: '/views/teacher/help.html'
-        }
-        }
-        })
-        */
-
         .state('student', {
             abstract: true,
             url: '/student',
@@ -279,7 +252,19 @@ angular.module('webApp', [
             url: '/account',
             views: {
                 'viewT': {
-                    templateUrl: '/views/student/account.html'
+                    templateUrl: '/views/student/account.html',
+                    controller: 'SAccountCtrl'
+                }
+            }
+        })
+
+        /* 寻找顾问 */
+        .state('student.search', {
+            url: '/search',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/search/search.html',
+                    controller: 'SearchCtrl'
                 }
             }
         });

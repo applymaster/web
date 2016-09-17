@@ -16,16 +16,16 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         // 学位
         $scope.degrees = [{
             'value': 0,
-            'label': $translate.instant('S_ACCOUNT_DEGREE_0')
+            'label': $translate.instant('TS_ACCOUNT_DEGREE_0')
         }, {
             'value': 1,
-            'label': $translate.instant('S_ACCOUNT_DEGREE_1')
+            'label': $translate.instant('TS_ACCOUNT_DEGREE_1')
         }, {
             'value': 2,
-            'label': $translate.instant('S_ACCOUNT_DEGREE_2')
+            'label': $translate.instant('TS_ACCOUNT_DEGREE_2')
         }, {
             'value': 3,
-            'label': $translate.instant('S_ACCOUNT_DEGREE_3')
+            'label': $translate.instant('TS_ACCOUNT_DEGREE_3')
         }];
         // 国家
         $scope.countries = [{
@@ -38,10 +38,10 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         // 支付方式 - 银行卡 ｜ 支付宝
         $scope.selType = [{
             'value': 'card',
-            'label': $translate.instant('S_ACCOUNT_BANK_CARD')
+            'label': $translate.instant('TS_ACCOUNT_BANK_CARD')
         }, {
             'value': 'alipay',
-            'label': $translate.instant('S_ACCOUNT_ALIPAY')
+            'label': $translate.instant('TS_ACCOUNT_ALIPAY')
         }];
         // 初始化
         var init = function(){
@@ -301,5 +301,79 @@ app.controller('SWalletCtrl', ['$rootScope', '$scope', 'rcServices', '$translate
                 'value': num
             }];
         });
+    }
+]);
+app.controller('SearchCtrl', ['$scope', '$rootScope', 'listService', '$translate', 'rcServices',
+    function($scope, $rootScope, listService, $translate, rcServices) {
+        // Init
+        $scope.countries = [{
+            'value': 0,
+            'label': $translate.instant('COUNTRY_AMERICA')
+        }, {
+            'value': 1,
+            'label': $translate.instant('COUNTRY_CHINA')
+        }];
+        listService.getMarjor().then(function(data){
+            $scope.majors = listService.convertFormat(data);
+            listService.getSubMarjor($scope.majors[0]['value']).then(function(data){
+                $scope.professions = listService.convertFormat(data);
+                $scope.search = {
+                    'query': {
+                        'service': 'fullset',
+                        'degree': 'bachelor',
+                        'major': $scope.majors[0]['value'],
+                        'profession': $scope.professions[0]['value'],
+                        'gender': 'male',
+                        'education': 'master0',
+                        'liveplace': $scope.countries[0]['value'],
+                        'sort': '1',
+                    },
+                    'offset': 0,
+                    'size': 20,
+                };
+                $scope.submitCondition();
+                rcServices.query(2, $rootScope.$state.current.url).then(function(data) {
+                    $scope.teachers = data;
+                });
+            });
+        });
+        // droplist action
+        $scope.changeMajor = function() {
+            listService.getSubMarjor($scope.search.query.major).then(function(data){
+                $scope.professions = listService.convertFormat(data);
+                $scope.search.query.profession = $scope.professions[0]['value'];
+            });
+        };
+        // submit action
+        $scope.submitCondition = function() {
+            var postData = angular.copy($scope.search);
+            rcServices.post({
+                'type': 2,
+                'path': $rootScope.$state.current.url,
+                'postData': postData,
+                'sFunc': function(data) {
+                    $scope.teachers = data;
+                },
+                'eFunc': function() {}
+            });
+        };
+        $scope.addToComparison = function() {
+            srchConsultant.saveFavorate({
+                postData: {
+                    tid: this.teacher.tid
+                },
+                sFunc: function(data) {
+                },
+                eFunc: function(response) {
+                    $scope.loginError = response.data;
+                }
+            });
+        };
+        // goto teacher detail
+        $scope.detail = function() {
+            $scope.navTo('/search/teacherInfo', {
+                tid: this.teacher.tid
+            });
+        };
     }
 ]);

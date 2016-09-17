@@ -13,6 +13,9 @@ tFilters.filter('tFilter', function($rootScope) {
             case 'order-status':
             str = ['TS_ORDER_STATUS_0','TS_ORDER_STATUS_1','TS_ORDER_STATUS_2','TS_ORDER_STATUS_3','TS_ORDER_STATUS_4','TS_ORDER_STATUS_5','TS_ORDER_STATUS_6','TS_ORDER_STATUS_7','TS_ORDER_STATUS_8'][input];
             break;
+            case 'degree-status':
+            str = $translate.instant(['TS_ACCOUNT_DEGREE_0','TS_ACCOUNT_DEGREE_1','TS_ACCOUNT_DEGREE_2','TS_ACCOUNT_DEGREE_3'][input]);
+            break;
         }
         return str;
     }

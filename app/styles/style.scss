@@ -1232,3 +1232,88 @@ footer {
         }
     }
 }
+
+/* Search Page */
+.search {
+    p {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .left {
+        width: 380px;
+        height: 1170px;
+        margin-right: 16px;
+        padding: 16px;
+        float: left;
+        background-color: #FFF;
+        .offset-right {
+            margin-left: 20px;
+        }
+    }
+    .right {
+        width: 774px;
+        height: 100%;
+        padding: 16px;
+        float: left;
+        background-color: #FFF;
+        .thumbnail {
+            display: block;
+            margin-bottom: 93px;
+            .head-img, .content, .price {
+                float: left;
+                margin: 16px;
+            }
+            .content {
+                width: 45%;
+                .name {
+                    margin: 0;
+                }
+                .info {
+                    font-size: 18px;
+                    font-weight: normal;
+                    margin-top: 10px;
+                    margin-bottom: 35px;
+                }
+                hr {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }
+                .experience {
+                    font-size: 14px;
+                    color: rgb(160, 160, 160);
+                }
+            }
+            .price {
+                padding-top: 80px;
+            }
+            .price p {
+                display: inline;
+                font-size: 36px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,204 @@
+<div class="search">
+    <!-- left -->
+    <div class="left">
+        <form role="form">
+            <!-- 欲寻找服务 -->
+            <p>{{"SEARCH_H1"|translate}}</p>
+            <div class="form-group">
+                <div class="radio">
+                    <label for="fullset">
+                        <input type="radio" name="service" id="fullset" value="fullset" ng-model="search.query.service"> {{"SEARCH_SERVICE_FULLSET"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="radio">
+                    <label for="consultation">
+                        <input type="radio" name="single" id="single" ng-select="search.query.service != 'fullset'"> {{"SEARCH_SERVICE_SINGLE"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="consultation">
+                        <input type="radio" name="service" id="consultation" value="consultation" ng-model="search.query.service"> {{"SEARCH_SERVICE_CONSULTATION"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="paper1">
+                        <input type="radio" name="service" id="paper1" value="paper1" ng-model="search.query.service"> {{"SEARCH_SERVICE_PAPER1"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="paper2">
+                        <input type="radio" name="service" id="paper2" value="paper2" ng-model="search.query.service"> {{"SEARCH_SERVICE_PAPER2"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="paper3">
+                        <input type="radio" name="service" id="paper3" value="paper3" ng-model="search.query.service"> {{"SEARCH_SERVICE_PAPER3"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="ps800">
+                        <input type="radio" name="service" id="ps800" value="ps800" ng-model="search.query.service"> {{"SEARCH_SERVICE_PS800"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="ps1000">
+                        <input type="radio" name="service" id="ps1000" value="ps1000" ng-model="search.query.service"> {{"SEARCH_SERVICE_PS1000"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="rl300">
+                        <input type="radio" name="service" id="rl300" value="rl300" ng-model="search.query.service"> {{"SEARCH_SERVICE_RL300"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="cv">
+                        <input type="radio" name="service" id="cv" value="cv" ng-model="search.query.service"> CV
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="composition">
+                        <input type="radio" name="service" id="composition" value="composition" ng-model="search.query.service"> {{"SEARCH_SERVICE_COMPOSITION"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group offset-right">
+                <div class="radio">
+                    <label for="others">
+                        <input type="radio" name="service" id="others" value="others" ng-model="search.query.service"> {{"SEARCH_SERVICE_OTHER"|translate}}
+                    </label>
+                </div>
+            </div>
+            <!-- 欲申请学位 -->
+            <div class="form-group">
+                <p>{{"SEARCH_H2"|translate}}</p>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="degree" id="bachelor" value="bachelor" ng-model="search.query.degree"> {{"SEARCH_DEGREE_0"|translate}}
+                    </label>
+                    <label>
+                        <input type="radio" name="degree" id="master" value="master" ng-model="search.query.degree"> {{"SEARCH_DEGREE_1"|translate}}
+                    </label>
+                    <label>
+                        <input type="radio" name="degree" id="doctor" value="doctor" ng-model="search.query.degree"> {{"SEARCH_DEGREE_2"|translate}}
+                    </label>
+                </div>
+            </div>
+            <!-- 欲申请专业大类 -->
+            <div class="form-group">
+                <p>{{"SEARCH_H3"|translate}}</p>
+                <select name="major" id="major" class="form-control" ng-model="search.query.major" ng-options="m.value as m.label for m in majors" ng-change="changeMajor()">
+                </select>
+            </div>
+            <!-- 欲申请具体专业 -->
+            <div class="form-group">
+                <p>{{"SEARCH_H4"|translate}}</p>
+                <select name="profession" id="profession" class="form-control" ng-model="search.query.profession" ng-options="p.value as p.label for p in professions">
+                </select>
+            </div>
+            <!-- 顾问性别 -->
+            <div class="form-group">
+                <p>{{"SEARCH_H5"|translate}}</p>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="gender" id="male" value="male" ng-model="search.query.gender"> {{"SEARCH_GENDER_0"|translate}}
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" id="female" value="female" ng-model="search.query.gender"> {{"SEARCH_GENDER_1"|translate}}
+                    </label>
+                </div>
+            </div>
+            <!-- 顾问学历 -->
+            <div class="form-group">
+                <p>{{"SEARCH_H6"|translate}}</p>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="education" id="master0" value="master0" ng-model="search.query.education"> {{"SEARCH_EDU_MASTTER0"|translate}}
+                    </label>
+                    <label>
+                        <input type="radio" name="education" id="doctor0" value="doctor0" ng-model="search.query.education"> {{"SEARCH_EDU_DOCTOER0"|translate}}
+                    </label>
+                    <label>
+                        <input type="radio" name="education" id="master1" value="master1" ng-model="search.query.education"> {{"SEARCH_EDU_MASTTER1"|translate}}
+                    </label>
+                    <label>
+                        <input type="radio" name="education" id="doctor1" value="doctor1" ng-model="search.query.education"> {{"SEARCH_EDU_DOCTOR1"|translate}}
+                    </label>
+                </div>
+            </div>
+            <!-- 所在区域 -->
+            <div class="form-group">
+                <p>{{"SEARCH_H7"|translate}}</p>
+                <select name="liveplace" id="liveplace" class="form-control" ng-model="search.query.liveplace" ng-options="m.value as m.label for m in countries">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="submitCondition()" style="width: 100%">{{"BT_SEARCH"|translate}}</button>
+        </form>
+    </div>
+    <!-- right -->
+    <div class="right">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <form class="navbar-form form-inline">
+                <div class="form-group">
+                    <label for="sort">{{"SEARCH_SORT_TYPE"|translate}}</label>
+                    <select name="sort" id="sort" class="form-control" ng-model="search.query.sort" ng-change="submitCondition()">
+                        <option value="1">{{"SEARCH_SORT_PRICE"|translate}}</option>
+                        <option value="2">{{"SEARCH_SORT_CREDIT"|translate}}</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="row thumbnail" ng-repeat="teacher in teachers">
+            <img class="head-img" ng-src="{{teacher.images}}" alt="teacher_photo" width="150px" height="150px">
+            <div class="content">
+                <h3 class="name">{{teacher.name}}</h3>
+                <div class="info">
+                    {{teacher.service|sFilter: 'service-type'}} : {{teacher.degree|sFilter: 'degree-status'}} {{teacher.major}}
+                </div>
+                <div class="experience">
+                    {{"SEARCH_TEACHER_BG"|translate}} ：{{teacher.background}} {{teacher.graduated|sFilter: 'gradute-status'}}
+                </div>
+                <hr>
+                <div>
+                    <!-- Star -->
+                    <span>
+                        <span class="glyphicon glyphicon-star orange" ng-if="teacher.star > 0"></span>
+                        <span class="glyphicon glyphicon-star orange" ng-if="teacher.star > 1"></span>
+                        <span class="glyphicon glyphicon-star orange" ng-if="teacher.star > 2"></span>
+                        <span class="glyphicon glyphicon-star orange" ng-if="teacher.star > 3"></span>
+                        <span class="glyphicon glyphicon-star orange" ng-if="teacher.star > 4"></span>
+                    </span>
+                    <!-- Button -->
+                    <span class="glyphicon glyphicon-user" role="button" ng-click="addToComparison(teacher.tid)">{{"SEARCH_ADDTO_COMPARE"|translate}}</span>
+                </div>
+            </div>
+            <div class="price">
+                <span>{{"SEARCH_PRICE"|translate}}</span>
+                <p>￥{{teacher.price}}</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-default" ng-click="submitPage('next');">{{"BT_NEXT"|translate}}</button>
+            <button type="button" class="btn btn-primary" ng-click="submitPage('prev');">{{"BT_PREV"|translate}}</button>
+        </div>
+    </div>
+</div>
