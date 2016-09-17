@@ -409,7 +409,12 @@ priServices.factory('menuServices', ['$rootScope', function($rootScope) {
         },{ // 比较顾问
             'id': 'compare',
             'i18n': 'T_MENU_COMPARE_CONSULTANT',
-            'link': 'student.compare'
+            'link': 'student.compare',
+            'children': [{
+                'id': 'compare',
+                'i18n': 'T_MENU_COMPARE_CONSULTANT',
+                'link': 'student.compare'
+            }]
         },{ // 我的学堂
             'id': 'class',
             'i18n': 'T_MENU_MY_CLASS',

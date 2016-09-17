@@ -230,15 +230,6 @@ angular.module('webApp', [
             }
         })
 
-        .state('student.compare', {
-            url: '/compare',
-            views: {
-                'viewT': {
-                    templateUrl: '/views/student/compare.html'
-                }
-            }
-        })
-
         .state('student.class', {
             url: '/class',
             views: {
@@ -265,6 +256,16 @@ angular.module('webApp', [
                 'viewT': {
                     templateUrl: '/views/search/search.html',
                     controller: 'SearchCtrl'
+                }
+            }
+        })
+
+        .state('student.compare', {
+            url: '/compare',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/student/compare.html',
+                    controller: 'SCompareCtrl'
                 }
             }
         });

@@ -369,11 +369,28 @@ app.controller('SearchCtrl', ['$scope', '$rootScope', 'listService', '$translate
                 }
             });
         };
-        // goto teacher detail
-        $scope.detail = function() {
-            $scope.navTo('/search/teacherInfo', {
-                tid: this.teacher.tid
+    }
+]);
+app.controller('SCompareCtrl', ['$rootScope', '$scope', 'rcServices', '$translate',
+    function($rootScope, $scope, rcServices, $translate) {
+        rcServices.query(2, $rootScope.$state.current.url).then(function(data) {
+            $scope.teachers = data;
+        });
+        $scope.postAction = function(item, type) {
+            var postData = {
+                'tid': item.tid,
+                'action': item.action
+            };
+            postData.action[type] = !item.action[type];
+            rcServices.post({
+                'type': 2,
+                'path': $rootScope.$state.current.url,
+                'postData': postData,
+                'sFunc': function(data) {
+                    $scope.teachers = data;
+                },
+                'eFunc': function() {}
             });
-        };
+        }
     }
 ]);

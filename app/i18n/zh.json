@@ -372,6 +372,16 @@
     "SEARCH_GRADUATED_0": "在读",
     "SEARCH_GRADUATED_1": "毕业",
 
+    "S_COMPARE_TH1": "顾问列表",
+    "S_COMPARE_TH2": "留学背景",
+    "S_COMPARE_TH3": "擅长专业",
+    "S_COMPARE_TH4": "成交量",
+    "S_COMPARE_TH5": "综合评分",
+    "S_COMPARE_TH6": "信用星级",
+    "S_COMPARE_TH7": "价格",
+    "S_COMPARE_DAN": "单",
+    "S_COMPARE_FEN": "分",
+
     "BT_ADD_SCHOOL": "添加大学",
     "BT_DELETE_SCHOOL": "删除该大学",
     "BT_DELETE": "删除",

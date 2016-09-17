@@ -1,1 +1,55 @@
-<h1>compare.html</h1>
+<table class="table compare">
+    <!-- Title -->
+    <thead>
+        <tr>
+            <th>{{"S_COMPARE_TH1"|translate}}</th>
+            <th>{{"S_COMPARE_TH2"|translate}}</th>
+            <th>{{"S_COMPARE_TH3"|translate}}</th>
+            <th>{{"S_COMPARE_TH4"|translate}}</th>
+            <th>{{"S_COMPARE_TH5"|translate}}</th>
+            <th>{{"S_COMPARE_TH6"|translate}}</th>
+            <th>{{"S_COMPARE_TH7"|translate}}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <!-- Content -->
+    <tr ng-repeat="item in teachers">
+        <td>
+            <img ng-src="{{item.images}}" width="150px" height="150px">
+            <div>{{item.name}}</div>
+        </td>
+        <td>
+            <div ng-repeat="edu in item.education">
+                <div>{{edu.school}}</div>
+                <div>{{edu.major}}&nbsp;{{edu.degree|sFilter: 'degree-status'}}</div>
+            </div>
+        </td>
+        <td>
+        	<div>{{item.expert.major}}</div>
+        	<div>{{item.expert.profession}}</div>
+        </td>
+        <td>
+            {{item.trading}} {{"S_COMPARE_DAN"|translate}}
+        </td>
+        <td>
+            {{item.score}} {{"S_COMPARE_FEN"|translate}}
+        </td>
+        <td>
+            <span class="glyphicon glyphicon-star orange" ng-if="item.star > 0"></span>
+            <span class="glyphicon glyphicon-star orange" ng-if="item.star > 1"></span>
+            <span class="glyphicon glyphicon-star orange" ng-if="item.star > 2"></span>
+            <span class="glyphicon glyphicon-star orange" ng-if="item.star > 3"></span>
+            <span class="glyphicon glyphicon-star orange" ng-if="item.star > 4"></span>
+        </td>
+        <td>
+        	¥{{item.price}}
+        </td>
+        <td width="58px" class="icon">
+        	<div class="icon-chat"></div>
+        	<div class="icon-xin" ng-class="{'checked': item.action.xin}" ng-click="postAction(item, 'xin')"></div>
+        	<div class="icon-eye" ng-class="{'checked': item.action.eye}" ng-click="postAction(item, 'eye')"></div>
+        	<div class="icon-up" ng-class="{'checked': item.action.up}" ng-click="postAction(item, 'up')"></div>
+        	<div class="icon-down" ng-class="{'checked': item.action.down}" ng-click="postAction(item, 'down')"></div>
+        </td>
+    </tr>
+</table>

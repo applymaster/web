@@ -1295,7 +1295,136 @@ footer {
     }
 }
 
-
+.compare {
+    thead tr {
+        background: black;
+        color: white;
+    }
+    th, tr {
+        text-align: center;
+    }
+    tbody {
+        font-size: 18px;
+        td:first-child {
+            font-size: 21px;
+        }
+        .icon {
+            &:hover {
+                background-color: black;
+                .icon-chat {
+                    background: url('../images/compare/chat-hover.png') no-repeat;
+                    &.checked {
+                        background: url('../images/compare/chat1.png') no-repeat;
+                    }
+                }
+                .icon-xin {
+                    background: url('../images/compare/xin-hover.png') no-repeat;
+                    &.checked {
+                        background: url('../images/compare/xin1.png') no-repeat;
+                    }
+                }
+                .icon-eye {
+                    background: url('../images/compare/eye-hover.png') no-repeat;
+                    &.checked {
+                        background: url('../images/compare/eye1.png') no-repeat;
+                    }
+                }
+                .icon-up {
+                    background: url('../images/compare/up-hover.png') no-repeat;
+                    &.checked {
+                        background: url('../images/compare/up1.png') no-repeat;
+                    }
+                }
+                .icon-down {
+                    background: url('../images/compare/down-hover.png') no-repeat;
+                    &.checked {
+                        background: url('../images/compare/down1.png') no-repeat;
+                    }
+                }
+            }
+        }
+        .icon-chat {
+            width: 27px;
+            height: 27px;
+            margin: 5px 5px 15px;
+            cursor: pointer;
+            background: url('../images/compare/chat0.png') no-repeat;
+            &:hover {
+                background: url('../images/compare/chat1.png') no-repeat;
+            }
+            &.checked {
+                background: url('../images/compare/chat1.png') no-repeat;
+                &:hover {
+                    background: url('../images/compare/chat-hover.png') no-repeat;
+                }
+            }
+        }
+        .icon-xin {
+            width: 27px;
+            height: 27px;
+            margin: 10px 5px;
+            cursor: pointer;
+            background: url('../images/compare/xin0.png') no-repeat;
+            &:hover {
+                background: url('../images/compare/xin1.png') no-repeat;
+            }
+            &.checked {
+                background: url('../images/compare/xin1.png') no-repeat;
+                &:hover {
+                    background: url('../images/compare/xin-hover.png') no-repeat;
+                }
+            }
+        }
+        .icon-eye {
+            width: 27px;
+            height: 27px;
+            margin: 10px 5px;
+            cursor: pointer;
+            background: url('../images/compare/eye0.png') no-repeat;
+            &:hover {
+                background: url('../images/compare/eye1.png') no-repeat;
+            }
+            &.checked {
+                background: url('../images/compare/eye1.png') no-repeat;
+                &:hover {
+                    background: url('../images/compare/eye-hover.png') no-repeat;
+                }
+            }
+        }
+        .icon-up {
+            width: 27px;
+            height: 27px;
+            margin: 10px;
+            cursor: pointer;
+            background: url('../images/compare/up0.png') no-repeat;
+            &:hover {
+                background: url('../images/compare/up1.png') no-repeat;
+            }
+            &.checked {
+                background: url('../images/compare/up1.png') no-repeat;
+                &:hover {
+                    background: url('../images/compare/up-hover.png') no-repeat;
+                }
+            }
+        }
+        .icon-down {
+            width: 27px;
+            height: 27px;
+            margin: 10px;
+            cursor: pointer;
+            background: url('../images/compare/down0.png') no-repeat;
+            &:hover {
+                background: url('../images/compare/down1.png') no-repeat;
+            }
+            &.checked {
+                background: url('../images/compare/down1.png') no-repeat;
+                &:hover {
+                    background: url('../images/compare/down-hover.png') no-repeat;
+                }
+            }
+        }
+    }
+}
 
 
 
