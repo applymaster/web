@@ -1,13 +1,4 @@
 <div id="home">
-    <!-- guest -->
-    <div ng-if="user.type == 0" class="guest-home">
-        <img src="../images/main/slogan.png" alt="slogan" class="slogan">
-        <img src="../images/main/play.png" alt="play" class="play">
-        <div class="button-group">
-            <button type="button" class="btn btn-info"><a ui-sref="register({type:2})">{{"HOME_REGISTER_1"|translate}}</a></button>
-            <button type="button" class="btn btn-success"><a ui-sref="register({type:1})">{{"HOME_REGISTER_2"|translate}}</a></button>
-        </div>
-    </div>
     <!-- teacher -->
     <div ng-if="user.type == 1" class="teacher-home row">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-repeat="item in menus" id="{{item.id}}" mz-teacher-hover>

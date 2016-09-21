@@ -355,11 +355,9 @@ app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices
                                         if (response.success) {
                                             $scope.closeThisDialog();
                                         } else {
-                                            $scope.loginError = response.msg;
                                         }
                                     },
                                     'eFunc': function(response) {
-                                        $scope.loginError = response.data;
                                     }
                                 });
                             };

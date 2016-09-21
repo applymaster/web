@@ -47,142 +47,137 @@ angular.module('webApp', [
     .config(function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('home', {
-                url: '/home',
-                templateUrl: '/views/home.html'
-            })
-
-            .state('login', {
-                url: '/login',
-                templateUrl: '/views/user/login.html',
-                controller: 'LoginCtrl'
-            })
-
-            .state('register', {
-                url: '/register?type',
-                templateUrl: '/views/user/register.html',
-                controller: 'RegisterCtrl'
-            })
-
-            /* 顾问首页 */
-            .state('teacherme', {
-                url: '/myself',
-                templateUrl: '/views/teacher/myself.html',
-                controller: 'TMeCtrl'
-            })
-
-            .state('teacher', {
-                //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
-                abstract: true,
-                url: '/teacher',
-                templateUrl: '/views/teacher/teacher.html',
-                controller: 'TeacherCtrl'
-            })
-
-            .state('teacher.account', {
-                url: '/account',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/account.html',
-                        controller: 'TAccountCtrl'
-                    }
+        /* 游客 */
+        .state('index', {
+            url: '/index',
+            templateUrl: '/views/user/index.html'
+        })
+        .state('home', {
+            url: '/home',
+            templateUrl: '/views/home.html'
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: '/views/user/login.html',
+            controller: 'LoginCtrl'
+        })
+        .state('register', {
+            url: '/register?type',
+            templateUrl: '/views/user/register.html',
+            controller: 'RegisterCtrl'
+        })
+        /* 顾问 */
+        .state('teacherme', {
+            url: '/myself',
+            templateUrl: '/views/teacher/myself.html',
+            controller: 'TMeCtrl'
+        })
+        .state('teacher', {
+            //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
+            abstract: true,
+            url: '/teacher',
+            templateUrl: '/views/teacher/teacher.html',
+            controller: 'TeacherCtrl'
+        })
+        .state('teacher.account', {
+            url: '/account',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/account.html',
+                    controller: 'TAccountCtrl'
                 }
-            })
-            .state('teacher.diploma', {
-                url: '/diploma',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/diploma.html',
-                        controller: 'DiplomaCtrl'
-                    }
+            }
+        })
+        .state('teacher.diploma', {
+            url: '/diploma',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/diploma.html',
+                    controller: 'DiplomaCtrl'
                 }
-            })
-            .state('teacher.security', {
-                url: '/security',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/security.html',
-                        controller: 'SecurityCtrl'
-                    }
+            }
+        })
+        .state('teacher.security', {
+            url: '/security',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/security.html',
+                    controller: 'SecurityCtrl'
                 }
-            })
-
-            .state('teacher.center', {
-                url: '/center',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/center.html',
-                        controller: 'CenterCtrl'
-                    }
+            }
+        })
+        .state('teacher.center', {
+            url: '/center',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/center.html',
+                    controller: 'CenterCtrl'
                 }
-            })
-
-            .state('teacher.order', {
-                url: '/order/:status',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/order.html',
-                        controller: 'OrderCtrl'
-                    }
+            }
+        })
+        .state('teacher.order', {
+            url: '/order/:status',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/order.html',
+                    controller: 'OrderCtrl'
                 }
-            })
-
-            .state('teacher.wallet', {
-                url: '/wallet',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/wallet.html',
-                        controller: 'WalletCtrl'
-                    }
+            }
+        })
+        .state('teacher.wallet', {
+            url: '/wallet',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/wallet.html',
+                    controller: 'WalletCtrl'
                 }
-            })
-            .state('teacher.income', {
-                url: '/income',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/wallet.html',
-                        controller: 'WalletCtrl'
-                    }
+            }
+        })
+        .state('teacher.income', {
+            url: '/income',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/wallet.html',
+                    controller: 'WalletCtrl'
                 }
-            })
-            .state('teacher.recommend', {
-                url: '/recommend',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/wallet.html',
-                        controller: 'WalletCtrl'
-                    }
+            }
+        })
+        .state('teacher.recommend', {
+            url: '/recommend',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/wallet.html',
+                    controller: 'WalletCtrl'
                 }
-            })
-
+            }
+        })
         .state('teacher.assess', {
-                url: '/assess',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/credit.html',
-                        controller: 'CreditCtrl'
-                    }
+            url: '/assess',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/credit.html',
+                    controller: 'CreditCtrl'
                 }
-            })
-            .state('teacher.point', {
-                url: '/point',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/credit.html',
-                        controller: 'CreditCtrl'
-                    }
+            }
+        })
+        .state('teacher.point', {
+            url: '/point',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/credit.html',
+                    controller: 'CreditCtrl'
                 }
-            })
-            .state('teacher.star', {
-                url: '/star',
-                views: {
-                    'viewT': {
-                        templateUrl: '/views/teacher/credit.html',
-                        controller: 'CreditCtrl'
-                    }
+            }
+        })
+        .state('teacher.star', {
+            url: '/star',
+            views: {
+                'viewT': {
+                    templateUrl: '/views/teacher/credit.html',
+                    controller: 'CreditCtrl'
                 }
-            })
-
+            }
+        })
         .state('teacher.calendar', {
             url: '/calendar',
             views: {
@@ -192,7 +187,6 @@ angular.module('webApp', [
                 }
             }
         })
-
         .state('teacher.community', {
             url: '/community',
             views: {
@@ -202,14 +196,13 @@ angular.module('webApp', [
                 }
             }
         })
-
+        /* 学生 */
         .state('student', {
             abstract: true,
             url: '/student',
             templateUrl: '/views/student/student.html',
             controller: 'StudentCtrl'
         })
-
         .state('student.order', {
             url: '/order/:status',
             views: {
@@ -219,7 +212,6 @@ angular.module('webApp', [
                 }
             }
         })
-
         .state('student.wallet', {
             url: '/wallet',
             views: {
@@ -229,7 +221,6 @@ angular.module('webApp', [
                 }
             }
         })
-
         .state('student.class', {
             url: '/class',
             views: {
@@ -238,7 +229,6 @@ angular.module('webApp', [
                 }
             }
         })
-
         .state('student.account', {
             url: '/account',
             views: {
@@ -248,8 +238,6 @@ angular.module('webApp', [
                 }
             }
         })
-
-        /* 寻找顾问 */
         .state('student.search', {
             url: '/search',
             views: {
@@ -259,7 +247,6 @@ angular.module('webApp', [
                 }
             }
         })
-
         .state('student.compare', {
             url: '/compare',
             views: {
@@ -271,7 +258,7 @@ angular.module('webApp', [
         });
         // catch all route
         // send users to the form page
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/index');
     })
     .run(['$rootScope', '$state', '$stateParams',
         function($rootScope, $state, $stateParams) {

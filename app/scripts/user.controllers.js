@@ -34,15 +34,14 @@ app.controller('LoginCtrl', ['$scope', 'rcServices', '$cookies', 'formService',
                 'postData': { email: $scope.user.email, password: md5($scope.user.password, $scope.user.email) },
                 'sFunc': function(response) {
                     if (response.success) {
-                        $cookies.putObject('user', response.user);
-                        $scope.setUser(response.user);
+                        $cookies.putObject('user', response);
+                        $scope.setUser(response);
                         $location.path('/home');
                     } else {
-                        $scope.loginError = response.msg;
                     }
                 },
                 'eFunc': function(response) {
-                    $scope.loginError = response.data;
+                    console.log('error code:', response.code);
                 }
             });
         };
@@ -94,11 +93,9 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
                         $scope.setUser(response.user);
                         $location.path('/home');
                     } else {
-                        $scope.loginError = response.msg;
                     }
                 },
                 'eFunc': function(response) {
-                    $scope.loginError = response.data;
                 }
             });
         };
@@ -113,11 +110,9 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
                         $scope.setUser(response.user);
                         $location.path('/home');
                     } else {
-                        $scope.loginError = response.msg;
                     }
                 },
                 'eFunc': function(response) {
-                    $scope.loginError = response.data;
                 }
             });
         };

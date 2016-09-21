@@ -1,20 +1,32 @@
-<form name="frmLogin" class="form-horizontal login">
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-            <input type="email" mz-detect-input2 class="form-control" id="email" name="email" ng-model="user.email" placeholder="{{'LOGIN_EMAIL'|translate}}" required ng-change="detectEmail('email')">
-        </div>
+<div class="user-body">
+    <div class="main-content">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <img src="../images/logo.png" class="logo" alt="logo" width="180px" height="60px">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-href="login">{{"HEAD_LOGIN"|translate}}</a></li>
+                </ul>
+            </div>
+        </nav>
+        <form name="frmLogin" class="login form-horizontal">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                    <input type="email" mz-detect-input2 class="form-control" id="email" name="email" ng-model="user.email" placeholder="{{'LOGIN_EMAIL'|translate}}" required ng-change="detectEmail('email')">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                    <input type="password" mz-detect-input2 class="form-control" id="password" name="password" ng-model="user.password" placeholder="{{'LOGIN_PASSWORD'|translate}}" required ng-change="detectPwd('password')">
+                </div>
+            </div>
+            <div class="form-group forgot">
+                <button type="button" class="btn btn-link" ng-click="forgot()">{{"BT_FORGOT_PASSWORD"|translate}}</button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-default" ng-click="login()" ng-disabled="frmLogin.$invalid">{{"BT_LOGIN"|translate}}</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-            <input type="password" mz-detect-input2 class="form-control" id="password" name="password" ng-model="user.password" placeholder="{{'LOGIN_PASSWORD'|translate}}" required ng-change="detectPwd('password')">
-        </div>
-    </div>
-    <div class="form-group forgot">
-        <button type="button" class="btn btn-link" ng-click="forgot()">{{"BT_FORGOT_PASSWORD"|translate}}</button>
-    </div>
-    <div class="form-group">
-        <button type="button" class="btn btn-default" ng-click="login()" ng-disabled="frmLogin.$invalid">{{"BT_LOGIN"|translate}}</button>
-    </div>
-</form>
+</div>

@@ -8,69 +8,6 @@ var getType = function(type) {
 
 var priServices = angular.module('primaryModule', ['ngResource']);
 
-// http
-priServices.factory('httpService', function($http, $q) {
-    return {
-        get: function(s) {
-            //url, funcA, funcS, funcF
-            var fileUrl = 'api/' + s.url;
-            var deferred = $q.defer();
-            $http.get(fileUrl).success(function(rsp) {
-                switch (rsp.status) {
-                    case 0:
-                        //fali
-                        if (typeof(s.funcF) === 'function') {
-                            s.funcF(rsp);
-                        }
-                        break;
-                    case 1:
-                        //success
-                        if (typeof(s.funcS) === 'function') {
-                            s.funcS(rsp);
-                        }
-                        break;
-                }
-                if (typeof s.funcA === 'function') {
-                    s.funcA(rsp);
-                }
-                deferred.resolve(rsp);
-            }).error(function(rsp) {
-                deferred.reject(rsp);
-            });
-            return deferred.promise;
-        },
-        post: function(s) {
-            //url, data, funcF, funcS, funcA
-            var deferred = $q.defer();
-            $http.post('api/' + s.url, s.data).success(function(rsp) {
-                switch (rsp.status) {
-                    case 0:
-                        //fail
-                        if (typeof(s.funcF) === 'function') {
-                            s.funcF(rsp);
-                        }
-                        break;
-                    case 1:
-                        //success
-                        if (typeof(s.funcS) === 'function') {
-                            s.funcS(rsp);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                if (typeof(s.funcA) === 'function') {
-                    s.funcA(rsp);
-                }
-                deferred.resolve(rsp);
-            }).error(function(rsp) {
-                deferred.reject(rsp);
-            });
-            return deferred.promise;
-        }
-    };
-});
-
 // resource
 priServices.factory('resourceObj', ['$resource', function($resource) {
     var service = {};
@@ -92,11 +29,11 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
         else
             var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
         // For Project
-        // var baseUrl = "http://52.69.248.175:8000";
-        // if (_byId)
-        //     var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
-        // else
-        //     var url = baseUrl + '/api/' + _type + '/' + _path;
+        var baseUrl = "http://52.69.248.175:8000";
+        if (_byId)
+            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
+        else
+            var url = baseUrl + '/api/' + _type + '/' + _path;
         return url;
     }
     return service;

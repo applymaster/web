@@ -277,11 +277,9 @@ app.controller('SOrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuService
                                         if (response.success) {
                                             $scope.closeThisDialog();
                                         } else {
-                                            $scope.loginError = response.msg;
                                         }
                                     },
                                     'eFunc': function(response) {
-                                        $scope.loginError = response.data;
                                     }
                                 });
                             };
@@ -365,7 +363,6 @@ app.controller('SearchCtrl', ['$scope', '$rootScope', 'listService', '$translate
                 sFunc: function(data) {
                 },
                 eFunc: function(response) {
-                    $scope.loginError = response.data;
                 }
             });
         };

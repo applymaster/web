@@ -59,10 +59,6 @@ a {
     height: 47px;
     width: 115px;
     font-size: 24px;
-}
-
-.btn-info,
-.btn-success {
     a {
         color: white;
         &:hover {
@@ -112,23 +108,22 @@ a {
 
 .main-content {
     @include out-container;
-    > div,
-    > form {
+    > div {
         @include in-container;
     }
     background: transparent;
     padding-bottom: 40px;
 }
 
-.user-body {
-    background-size: 100% 925px;
-}
-
 .teacher-body {
     .main-content {
         background-color: $color-bg-secondary;
         margin-bottom: $footer-height;
+        margin-top: 173px;
         z-index: 10;
+        > form {
+            @include in-container;
+        }
     }
 }
 
@@ -137,6 +132,9 @@ a {
         background-color: $color-bg-secondary;
         margin-bottom: $footer-height;
         z-index: 10;
+        > form {
+            @include in-container;
+        }
     }
 }
 
@@ -150,7 +148,6 @@ a {
 
 /* Header */
 
-.user-body,
 .special-body {
     header nav {
         background: transparent;
@@ -214,35 +211,6 @@ a {
 
 #home {
     cursor: pointer;
-    .user-home {
-        width: $mz-breakpoint;
-        .slogan {
-            display: block;
-            margin: 298px auto 0 auto;
-        }
-        .play {
-            display: block;
-            margin: 160px auto 0 auto;
-        }
-        .button-group {
-            text-align: center;
-            margin-top: 100px;
-            .btn {
-                padding: 1px;
-                width: 180px;
-                height: 47px;
-                a {
-                    font-size: 24px;
-                }
-                &:first-child {
-                    margin-right: 90px;
-                }
-                &:last-child {
-                    margin-left: 90px;
-                }
-            }
-        }
-    }
     .teacher-home {
         text-align: center;
         margin: 280px auto;
@@ -335,8 +303,50 @@ a {
 }
 
 
-/* Login */
+/* Guest Module */
 
+.user-body {
+    width: 100%;
+    background: url('../images/user/header.png') repeat 0 0;
+    background-size: 100%;
+    .navbar-default {
+        padding-top: 20px;
+        background: transparent;
+        border-color: transparent;
+        .navbar-nav > li > a {
+            font-size: 24px;
+        }
+    }
+    .content {
+        width: $mz-breakpoint;
+        .slogan {
+            display: block;
+            margin: 250px auto 0 auto;
+        }
+        .play {
+            display: block;
+            margin: 160px auto 0 auto;
+        }
+        .button-group {
+            text-align: center;
+            padding: 60px;
+            .btn {
+                padding: 1px;
+                width: 180px;
+                height: 47px;
+                a {
+                    font-size: 24px;
+                }
+                &:first-child {
+                    margin-right: 90px;
+                }
+                &:last-child {
+                    margin-left: 90px;
+                }
+            }
+        }
+    }
+}
 .login {
     width: 430px;
     height: 545px;
@@ -413,11 +423,31 @@ a {
             }
         }
     }
-    .pic-list {
-        .row .item {
+    &.rs {
+        .error-message .text-danger {
+            color: rgb(38, 176, 214);
+        }
+        .pic-list {
+            margin-top: 250px;
+        }
+    }
+    &.rt {
+        .error-message .text-danger {
+            color: rgb(124, 187, 5);
+        }
+    }
+}
+.register-piclist {
+    @include out-container;
+    margin-top: 175px;
+    .row {
+        @include in-container;
+        &:not(:first-child) {
+            margin-top: 16px;
+        }
+        .item {
             float: left;
             display: block;
-            margin-top: 16px;
             position: relative;
             &:not(:first-child) {
                 margin-left: 16px;
@@ -454,27 +484,12 @@ a {
             }
         }
     }
-    &.rs {
-        .error-message .text-danger {
-            color: rgb(38, 176, 214);
-        }
-        .pic-list {
-            margin-top: 250px;
-        }
-        .banner {
-            margin: 175px auto;
-        }
-    }
-    &.rt {
-        .error-message .text-danger {
-            color: rgb(124, 187, 5);
-        }
-        .banner {
-            margin: 250px auto 175px;
-        }
-    }
 }
-
+.register-banner {
+    @include out-container;
+    text-align: center;
+    margin: 175px auto;
+}
 
 /* Student */
 
@@ -529,9 +544,6 @@ a {
 /* Teacher */
 
 .teacher-body {
-    .main-content {
-        margin-top: 173px;
-    }
     .navbar-default.header {
         border: none;
         margin-bottom: 0;
@@ -1162,6 +1174,7 @@ a {
 
 footer {
     bottom: 0;
+    height: 400px;
     background-color: $color-footer-bg;
     @include out-container;
     > div {
