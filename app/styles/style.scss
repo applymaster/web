@@ -145,10 +145,75 @@ a {
     width: 100%;
 }
 
+.student-home {
+    color: white;
+    header {
+        width: 100%;
+        height: 100%;
+        background: url('../images/user/header.png') repeat 0 0;
+        background-size: 100%;
+        .logo {
+            margin-right: 113px;
+        }
+        .direct {
+            margin-right: 88px;
+        }
+    }
+    .slogan {
+        display: block;
+        margin: 420px auto;
+    }
+    .pic-list {
+        margin: 175px auto 175px;
+        .row .item {
+            float: left;
+            display: block;
+            margin-top: 16px;
+            position: relative;
+            &:not(:first-child) {
+                margin-left: 16px;
+            }
+            .lg-cover {
+                position: absolute;
+                top: 0;
+                width: 775px;
+                height: 379px;
+            }
+            .sm-cover {
+                position: absolute;
+                top: 0;
+                width: 379px;
+                height: 379px;
+            }
+            .info {
+                font-size: 24px;
+                font-weight: bold;
+                position: absolute;
+                top: 0;
+                height: 379px;
+                line-height: 379px;
+                margin: 0 auto;
+                z-index: 99;
+                text-align: center;
+                color: white;
+                &.lg-info {
+                    width: 775px;
+                }
+                &.sm-info {
+                    width: 379px;
+                }
+            }
+        }
+    }
+    .banner {
+        margin-bottom: 175px;
+    }
+}
 
 /* Header */
 
-.special-body {
+.special-body,
+.student-home {
     header nav {
         background: transparent;
         border-color: transparent;
@@ -156,6 +221,7 @@ a {
 }
 
 .student-body,
+.student-home,
 .special-body {
     header {
         .navbar-right {
@@ -248,58 +314,6 @@ a {
             text-decoration: none;
         }
     }
-    .student-home {
-        color: white;
-        .slogan {
-            display: block;
-            margin: 420px auto;
-        }
-        .pic-list {
-            margin: 590px auto 175px;
-            .row .item {
-                float: left;
-                display: block;
-                margin-top: 16px;
-                position: relative;
-                &:not(:first-child) {
-                    margin-left: 16px;
-                }
-                .lg-cover {
-                    position: absolute;
-                    top: 0;
-                    width: 775px;
-                    height: 379px;
-                }
-                .sm-cover {
-                    position: absolute;
-                    top: 0;
-                    width: 379px;
-                    height: 379px;
-                }
-                .info {
-                    font-size: 24px;
-                    font-weight: bold;
-                    position: absolute;
-                    top: 0;
-                    height: 379px;
-                    line-height: 379px;
-                    margin: 0 auto;
-                    z-index: 99;
-                    text-align: center;
-                    color: white;
-                    &.lg-info {
-                        width: 775px;
-                    }
-                    &.sm-info {
-                        width: 379px;
-                    }
-                }
-            }
-        }
-        .banner {
-            margin-bottom: 175px;
-        }
-    }
 }
 
 
@@ -369,7 +383,7 @@ a {
             }
             .btn-link {
                 color: rgb(160, 160, 160);
-                margin-left: 277px;
+                margin-left: 268px;
                 margin-bottom: 78px;
             }
         }

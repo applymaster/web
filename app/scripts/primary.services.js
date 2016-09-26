@@ -29,11 +29,10 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
         else
             var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
         // For Project
-        var baseUrl = "http://52.69.248.175:8000";
         if (_byId)
-            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id';
+            var url = '/api/' + _type + '/' + _path + '/:id';
         else
-            var url = baseUrl + '/api/' + _type + '/' + _path;
+            var url = '/api/' + _type + '/' + _path;
         return url;
     }
     return service;
@@ -49,7 +48,6 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
         get: function(type, path, id) {
             var defer = $q.defer();
             var sFunc = function(data, headers) {
-                console.log('rcServices data:', data)
                 defer.resolve(data);
             };
             var eFunc = function(data, headers) {

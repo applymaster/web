@@ -10,6 +10,9 @@
         </nav>
         <form name="frmLogin" class="login form-horizontal">
             <div class="form-group">
+                <div class="error-message"><span class="text-danger">{{loginError}}</span></div>
+            </div>
+            <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
                     <input type="email" mz-detect-input2 class="form-control" id="email" name="email" ng-model="user.email" placeholder="{{'LOGIN_EMAIL'|translate}}" required ng-change="detectEmail('email')">

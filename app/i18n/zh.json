@@ -260,6 +260,7 @@
     "REGISTER_HEADER_2": "我想申请留学",
     "REGISTER_INFO_2": "只需几个步骤，准备开始新的留学之旅",
     "REGISTER_VERIFY_ERROR": "验证失败，请重新验证",
+    "REGISTER_VERIFY_SUCCESS": "邮箱未注册，可使用",
 
     "FOOTER_LICENCE_3": "信息网路传播视听节目许可证：1109364号",
     "FOOTER_LICENCE_2": "增值电信业务经营许可证：闽B2 - 20080224-1",
@@ -404,6 +405,9 @@
 
     "COUNTRY_AMERICA": "美国",
     "COUNTRY_CHINA": "中国",
+
+    "ERR_LOGIN": "用户名或密码错误，请重新输入",
+    "ERR_11005": "参数错误，请重新输入",
 
     "NULL": "NULL"
 }

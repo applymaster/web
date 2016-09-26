@@ -6,6 +6,8 @@ var priCtrl = angular.module('primaryModule');
 
 priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', '$cookieStore', 'menuServices',
     function($rootScope, $scope, $location, $element, $cookieStore, menuServices) {
+        $cookieStore.remove('user');
+        // console.log('cookieStore:', $cookieStore.get('user'));
         $scope.navTo = function(path, params) {
             if (params) {
                 $location.path(path).search(params);
@@ -18,14 +20,22 @@ priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', 
             history.back();
         };
 
-        var setUser = function(user) {
-            $cookieStore.remove('user');
+        $scope.setUser = function() {
             $scope.user = $cookieStore.get('user') ? $cookieStore.get('user') : { 'type': 0 };
+            $scope.user.name = '未设置';
+            if($scope.user.type == 1) {
+                $location.path('/main');
+            } else if($scope.user.type == 2) {
+                $location.path('/home');
+            } else {
+                $location.path('/');
+            }
         };
 
-        setUser();
-
         // For head page
-        $scope.menus = menuServices.init1($scope.user.type);
+        $scope.setUser();
+        if($scope.user.type !== 0) {
+            $scope.menus = menuServices.init1($scope.user.type);
+        }
     }
 ]);

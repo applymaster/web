@@ -1,0 +1,77 @@
+<div class="main-content student-home">
+    <!-- student -->
+    <header>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><img src="../images/logo.png" class="logo" alt="logo"></li>
+                    <li><a class="direct" ui-sref="home">{{"HEAD_HOME"|translate}}</a></li>
+                    <li><a class="direct" ui-sref="student.search">{{"HEAD_SEARCH_CONSULTANT"|translate}}</a></li>
+                    <li><a class="direct" ui-sref="student.class">{{"HEAD_CLASS"|translate}}</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown-list-link">
+                        <a ui-sref="home">{{user.name}}</a>
+                        <ul class="dropdown-list">
+                            <li ng-repeat="item in menus">
+                                <a ui-sref="{{item.link}}">{{ item.i18n | translate }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <img src="../images/main/slogan.png" alt="slogan" class="slogan">
+    </header>
+    <!-- Center -->
+    <div class="pic-list">
+        <div class="row">
+            <div class="item">
+                <img src="../../images/main/item1.png">
+                <a class="info lg-info" href="#">{{"HOME_INFO_1"|translate}}</a>
+                <img src="../../images/main/cover.png" class="lg-cover">
+            </div>
+            <div class="item">
+                <img src="../../images/main/item2.png">
+                <a class="info sm-info" href="#">{{"HOME_INFO_2"|translate}}</a>
+                <img src="../../images/main/cover.png" class="sm-cover">
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../../images/main/item3.png">
+                <a class="info sm-info" href="#">{{"HOME_INFO_3"|translate}}</a>
+                <img src="../../images/main/cover.png" class="sm-cover">
+            </div>
+            <div class="item">
+                <img src="../../images/main/item4.png">
+                <a class="info sm-info" href="#">{{"HOME_INFO_4"|translate}}</a>
+                <img src="../../images/main/cover.png" class="sm-cover">
+            </div>
+            <div class="item">
+                <img src="../../images/main/item5.png">
+                <a class="info sm-info" href="#">{{"HOME_INFO_5"|translate}}</a>
+                <img src="../../images/main/cover.png" class="sm-cover">
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../../images/main/item6.png">
+                <a class="info sm-info" href="#">{{"HOME_INFO_6"|translate}}</a>
+                <img src="../../images/main/cover.png" class="sm-cover">
+            </div>
+            <div class="item">
+                <img src="../../images/main/cover.png">
+                <a class="info sm-info" href="#">{{"HOME_INFO_7"|translate}}</a>
+            </div>
+            <div class="item">
+                <img src="../../images/main/cover.png">
+                <a class="info sm-info" href="#">{{"HOME_INFO_8"|translate}}</a>
+            </div>
+        </div>
+    </div>
+    <!-- Banner -->
+    <div class="row banner">
+        <img src="../../images/main/04.png">
+    </div>
+</div>

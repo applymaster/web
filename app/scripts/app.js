@@ -44,17 +44,13 @@ angular.module('webApp', [
         $translateProvider.fallbackLanguage('zh');
     })
     // ui-router
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
         /* 游客 */
         .state('index', {
             url: '/index',
             templateUrl: '/views/user/index.html'
-        })
-        .state('home', {
-            url: '/home',
-            templateUrl: '/views/home.html'
         })
         .state('login', {
             url: '/login',
@@ -197,6 +193,10 @@ angular.module('webApp', [
             }
         })
         /* 学生 */
+        .state('home', {
+            url: '/home',
+            templateUrl: '/views/student/home.html',
+        })
         .state('student', {
             abstract: true,
             url: '/student',
@@ -259,10 +259,45 @@ angular.module('webApp', [
         // catch all route
         // send users to the form page
         $urlRouterProvider.otherwise('/index');
-    })
+    }])
+    // Interceptor
+    .config([ '$httpProvider', function($httpProvider) {
+      $httpProvider.interceptors.push('httpInterceptor');
+    }])
     .run(['$rootScope', '$state', '$stateParams',
         function($rootScope, $state, $stateParams) {
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
+    }])
+    .factory('httpInterceptor', ['$q', '$injector', '$cookieStore', function($q, $injector, $cookieStore) {
+        var httpInterceptor = {
+            'responseError': function(response) {
+                console.log('[httpInterceptor]responseError:', response);
+                return $q.reject(response.data);
+            },
+            'response': function(response) {
+                console.log('[httpInterceptor]response:', response);
+                return response;
+            },
+            'request': function(config) {
+                console.log('[httpInterceptor]request.url:', config);
+                var baseUrl = "http://52.69.248.175:8000";
+                var user = $cookieStore.get('user') ? $cookieStore.get('user') : undefined;
+                if(user) {
+                    config.headers.Authentication = user.accessToken;
+                    config.headers['User-Id'] = user.userId;
+                }
+                if(config.method === "POST") {
+                    config.url = baseUrl + config.url;
+                } else if (config.method === "GET" && config.url.indexOf('/api/') > -1) {
+                    config.url = baseUrl + config.url;
+                }
+                return config;
+            },
+            'requestError': function(config) {
+                console.log('[httpInterceptor]requestError:', config);
+                return $q.reject(config);
+            }
         }
-    ]);
+        return httpInterceptor;
+    }]);
