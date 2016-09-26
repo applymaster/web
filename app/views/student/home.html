@@ -1,5 +1,5 @@
 <div class="main-content student-home">
-    <!-- student -->
+    <!-- Header -->
     <header>
         <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <div class="container">
@@ -11,7 +11,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown-list-link">
-                        <a ui-sref="home">{{user.name}}</a>
+                        <a>{{user.name}}</a>
                         <ul class="dropdown-list">
                             <li ng-repeat="item in menus">
                                 <a ui-sref="{{item.link}}">{{ item.i18n | translate }}</a>

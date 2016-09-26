@@ -98,6 +98,7 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
                         'userId': response.accessToken.userId,
                         'type': response.user.type,
                         'name': response.user.name,
+                        'perfect': response.user.perfect,
                     };
                     $cookies.putObject('user', user);
                     $scope.setUser();
@@ -116,7 +117,6 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
                 'path': 'register',
                 'postData': { type: type, email: $scope.user.email, password: $scope.user.password },
                 'sFunc': function(response) {
-                    console.log('sFunc', response);
                     var user = {
                         'accessToken': response.accessToken,
                         'userId': response.userId,

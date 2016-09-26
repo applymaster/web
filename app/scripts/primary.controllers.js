@@ -6,7 +6,7 @@ var priCtrl = angular.module('primaryModule');
 
 priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', '$cookieStore', 'menuServices',
     function($rootScope, $scope, $location, $element, $cookieStore, menuServices) {
-        $cookieStore.remove('user');
+        // $cookieStore.remove('user');
         // console.log('cookieStore:', $cookieStore.get('user'));
         $scope.navTo = function(path, params) {
             if (params) {
@@ -26,7 +26,11 @@ priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', 
             if($scope.user.type == 1) {
                 $location.path('/main');
             } else if($scope.user.type == 2) {
-                $location.path('/home');
+                if($scope.user.perfect) {
+                    $location.path('/home');
+                } else {
+                    $location.path('/student/account');
+                }
             } else {
                 $location.path('/');
             }

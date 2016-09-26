@@ -1,3 +1,29 @@
+<nav class="navbar navbar-default secondary" role="navigation">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li ui-sref-active="active">
+                    <a ui-sref="student.order({status: 'all'})">{{"TS_ORDER_NAVBAR_0"|translate}}</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="student.order({status: 'transacting'})">{{"TS_ORDER_NAVBAR_1"|translate}}</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="student.order({status: 'paying'})">{{"TS_ORDER_NAVBAR_2"|translate}}</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="student.order({status: 'confirming'})">{{"TS_ORDER_NAVBAR_3"|translate}}</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="student.order({status: 'refunding'})">{{"TS_ORDER_NAVBAR_4"|translate}}</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="student.order({status: 'closing'})">{{"TS_ORDER_NAVBAR_5"|translate}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="table-page order">
     <div class="container" ng-repeat="item in orders">
         <div class="order-title">

@@ -129,8 +129,9 @@ a {
 
 .student-body {
     .main-content {
-        background-color: $color-bg-secondary;
-        margin-bottom: $footer-height;
+        background-color: white;
+        margin: 175px auto $footer-height;
+        width: $mz-breakpoint;
         z-index: 10;
         > form {
             @include in-container;
@@ -147,17 +148,12 @@ a {
 
 .student-home {
     color: white;
+    cursor: pointer;
     header {
         width: 100%;
-        height: 100%;
+        height: 925px;
         background: url('../images/user/header.png') repeat 0 0;
         background-size: 100%;
-        .logo {
-            margin-right: 113px;
-        }
-        .direct {
-            margin-right: 88px;
-        }
     }
     .slogan {
         display: block;
@@ -212,54 +208,55 @@ a {
 
 /* Header */
 
-.special-body,
-.student-home {
-    header nav {
+.special-body header,
+.student-home header{
+    nav {
         background: transparent;
         border-color: transparent;
     }
+    .dropdown-list-link {
+        padding-bottom: 30px;
+    }
 }
 
-.student-body,
-.student-home,
-.special-body {
-    header {
-        .navbar-right {
-            text-align: right;
+.student-home header,
+.student-body header,
+.special-body header{
+    nav {
+        font-size: 24px;
+        font-weight: normal;
+        .logo {
+            margin-right: 113px;
         }
-        .dropdown-list-link {
-            color: white;
-            cursor: pointer;
-            position: relative;
-            padding-bottom: 30px;
+        .direct {
+            margin-right: 88px;
         }
-        .dropdown-list {
-            display: none;
-        }
-        .dropdown-list-link:hover .dropdown-list {
+    }
+    .navbar-nav {
+        padding: 10px 0;
+    }
+    .navbar-right {
+        text-align: right;
+    }
+    .dropdown-list-link {
+        color: white;
+        cursor: pointer;
+        position: relative;
+        &:hover .dropdown-list {
             position: absolute;
             top: 66px;
             left: -50px;
             display: block;
             cursor: pointer;
-            &:before {
-                content: '';
-                position: absolute;
-                right: 0;
-                top: -15px;
-                border-bottom: 15px solid rgb(60, 60, 60);
-                ;
-                border-left: 18px solid transparent;
-                border-right: 17px solid transparent;
-            }
+            font-size: 18px;
             li {
                 width: 143px;
                 height: 30px;
+                line-height: 30px;
                 text-align: center;
                 background-color: rgba(0, 0, 0, 0.7);
                 a {
                     color: rgb(85, 85, 85);
-                    font-size: 18px;
                 }
                 &:hover {
                     background-color: $color-black;
@@ -269,6 +266,31 @@ a {
                 }
             }
         }
+    }
+    .dropdown-list {
+        display: none;
+    }
+}
+.student-body header .dropdown-list-link:hover .dropdown-list li:first-child{
+    &:before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: -15px;
+        border-left: 18px solid transparent;
+        border-right: 17px solid transparent;
+        border-bottom: 15px solid rgb(60, 60, 60);
+    }
+}
+.student-home header .dropdown-list-link:hover .dropdown-list {
+    &:before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: -15px;
+        border-left: 18px solid transparent;
+        border-right: 17px solid transparent;
+        border-bottom: 15px solid rgb(0, 0, 0);
     }
 }
 
@@ -396,7 +418,6 @@ a {
         }
     }
 }
-
 .register {
     color: white;
     .slogan {
@@ -507,12 +528,6 @@ a {
 
 /* Student */
 
-#student {
-    /* 我的订单 */
-    margin-top: 171px;
-    background-color: white;
-}
-
 #student .account {
     font-size: 18px;
     .btn-link {
@@ -545,9 +560,11 @@ a {
                 }
             }
             &.black-item {
-                background-color: $color-bg-primary;
-                a {
-                    color: white;
+                &, &:hover {
+                    background-color: $color-bg-primary;
+                    a {
+                        color: white;
+                    }
                 }
             }
         }
@@ -1452,24 +1469,3 @@ footer {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,40 +1,29 @@
 <div class="student-body">
     <!-- Header -->
-    <nav ng-if="$state.current.name != 'student'" class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li><img src="../images/logo.png" class="logo" alt="logo"></li>
-                <li><a ui-sref="home">{{"HEAD_HOME"|translate}}</a></li>
-                <li><a ui-sref="student.search">{{"HEAD_SEARCH_CONSULTANT"|translate}}</a></li>
-                <li><a ui-sref="student.class">{{"HEAD_CLASS"|translate}}</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown-list-link">
-                    <a ui-sref="home">{{user.name}}</a>
-                    <ul class="dropdown-list">
-                        <li ng-repeat="item in menus">
-                            <a ui-sref="{{item.link}}">{{ item.i18n | translate }}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- Content -->
-    <div id="student" ng-if="$state.current.name != 'student'">
-        <nav class="navbar navbar-default secondary" role="navigation" ng-hide="$state.current.name == 'student.search'||$state.current.name == 'student.compare'">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <li ng-repeat="item in smenu" ui-sref-active="active" ng-class="{'black-item': smenu.length <= 1}">
-                            <a ui-sref="{{item.link}}">{{item.i18n|translate}}</a>
-                        </li>
-                    </ul>
-                </div>
+    <header>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><img src="../images/logo.png" class="logo" alt="logo"></li>
+                    <li><a class="direct" ui-sref="home">{{"HEAD_HOME"|translate}}</a></li>
+                    <li><a class="direct" ui-sref="student.search">{{"HEAD_SEARCH_CONSULTANT"|translate}}</a></li>
+                    <li><a class="direct" ui-sref="student.class">{{"HEAD_CLASS"|translate}}</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right dropdown-list-link">
+                    <li>
+                        <a>{{user.name}}</a>
+                        <ul class="dropdown-list">
+                            <li ng-repeat="item in menus">
+                                <a ui-sref="{{item.link}}">{{ item.i18n | translate }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </nav>
-        <div class="mz-container">
-            <div ui-view="viewT"></div>
-        </div>
+    </header>
+    <!-- Content -->
+    <div id="student" class="main-content">
+        <div ui-view="viewT"></div>
     </div>
 </div>
