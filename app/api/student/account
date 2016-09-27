@@ -1,0 +1,65 @@
+{
+	"name": "用户名",
+	"gender": 0,
+	"education": [{
+		"degree": 0,
+		"school": "0",
+		"major": "0",
+		"time": "2012-12-12"
+	},{
+		"degree": 1,
+		"school": "1",
+		"major": "1",
+		"time": "2012-12-12"
+	},{
+		"degree": 2,
+		"school": "2",
+		"major": "2",
+		"time": "2012-12-12"
+	},{
+		"degree": 3,
+		"school": "3",
+		"major": "3",
+		"time": "2012-12-12"
+	}],
+	"score": {
+		"no_score": true,
+		"has_sat": false,
+		"sat": "123",
+		"has_toefl": false,
+		"toefl": "123",
+		"has_ielts": false,
+		"ielts": "123",
+		"has_gre": false,
+		"gre": "123",
+		"has_gmat": false,
+		"gmat": "123"
+	},
+	"intention": {
+		"country": 1,
+		"school": 1,
+		"major": 1,
+		"profession": 1
+	},
+	"liveplace": {
+		"country": 1,
+		"province": 1,
+		"city": 1,
+		"timezone": 1
+	},
+	"knowway": {
+		"way": "0",
+		"name": "name",
+		"email": "email@qq.com",
+		"union": "union"
+	},
+	"String": {
+		"gender": "性别[0 － 男， 1 - 女]",
+		"education": "学历",
+		"score": "成绩",
+		"intention": "留学意向",
+		"liveplace": "联系方式",
+		"account": "账户信息(银行卡or支付宝)",
+		"knowway": "了解渠道"
+	}
+}

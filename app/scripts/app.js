@@ -281,7 +281,8 @@ angular.module('webApp', [
             },
             'request': function(config) {
                 console.log('[httpInterceptor]request.url:', config);
-                var baseUrl = "http://52.69.248.175:8000";
+                // var baseUrl = "http://52.69.248.175:8000";
+                var baseUrl = "";
                 var user = $cookieStore.get('user') ? $cookieStore.get('user') : undefined;
                 if(user) {
                     config.headers.Authentication = user.accessToken;

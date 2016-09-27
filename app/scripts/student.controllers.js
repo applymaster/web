@@ -35,14 +35,6 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             'value': 1,
             'label': $translate.instant('COUNTRY_CHINA')
         }];
-        // 支付方式 - 银行卡 ｜ 支付宝
-        $scope.selType = [{
-            'value': 'card',
-            'label': $translate.instant('TS_ACCOUNT_BANK_CARD')
-        }, {
-            'value': 'alipay',
-            'label': $translate.instant('TS_ACCOUNT_ALIPAY')
-        }];
         // 初始化
         var init = function(){
             // 获取用户信息
@@ -188,23 +180,6 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                 $scope.user.liveplace.city = $scope.liveplace_city[0]['value'];
                 $scope.user.liveplace.timezone = getTimezone($scope.user.liveplace);
             });
-        };
-        // 我的账户
-        $scope.cardAction = function(action, item) {
-            switch (action) {
-                case 'add':
-                    var newItem = {
-                        'isEdit': true,
-                        'type': $scope.selType[0]['value'],
-                        'numid': ''
-                    };
-                    $scope.user.account.push(newItem);
-                    break;
-                case 'delete':
-                    var items = $scope.user.account;
-                    $scope.user.account.splice(items.indexOf(item), 1);
-                    break;
-            }
         };
         var getTimezone = function(liveplace) {
             return '-';

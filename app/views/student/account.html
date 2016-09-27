@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{"TS_ACCOUNT_REALNAME"|translate}}</td>
                     <td>
-                        <input type="text" dn-form-input id="username" name="username" ng-model="user.username" ng-change="detectInput('username', 'username')" required>
+                        <input type="text" dn-form-input id="username" name="username" ng-model="user.name" ng-change="detectInput('username', 'username')" required>
                     </td>
                 </tr>
                 <tr>
@@ -238,27 +238,6 @@
                 <tr>
                     <td>{{"TS_ACCOUNT_TIME_ZONE"|translate}}</td>
                     <td>{{user.liveplace.timezone}}</td>
-                </tr>
-            </tbody>
-            <!-- 我的账户 -->
-            <tbody>
-                <tr>
-                    <td class="title">{{"TS_ACCOUNT_MY_ACCOUNT"|translate}}</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-link-blue" ng-click="cardAction('add')">{{"BT_ADD"|translate}}</button>
-                    </td>
-                </tr>
-                <tr ng-repeat="item in user.account">
-                    <td ng-if="!item.isEdit && item.type == 'card'">{{"TS_ACCOUNT_BANK_CARD"|translate}}</td>
-                    <td ng-if="!item.isEdit && item.type == 'alipay'">{{"TS_ACCOUNT_ALIPAY"|translate}}</td>
-                    <td ng-if="item.isEdit">
-                        <select ng-model="item.type" ng-options="i.value as i.label for i in selType">
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" dn-form-input id="numid{{$index}}" mz-name="numid{{$index}}" ng-model="item.numid" />
-                            <button type="button" class="btn btn-link btn-link-blue" ng-click="cardAction('delete', item)">{{"BT_DELETE"|translate}}</button>
-                    </td>
                 </tr>
             </tbody>
             <!-- 了解渠道 -->
