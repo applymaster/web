@@ -172,14 +172,6 @@ priServices.factory('menuServices', ['$rootScope', function($rootScope) {
     var menuTable = {
         // id - 二级菜单列表
         // children - 三级菜单列表
-        'user': [{
-            'id': 'login',
-            'children': [{
-                'id': 'login',
-                'i18n': 'T_MENU_LOGIN',
-                'link': 'guest.login'
-            }]
-        }],
         'teacher': [{ // 我的账户
             'id': 'account',
             'i18n': 'T_MENU_ACCOUNT',

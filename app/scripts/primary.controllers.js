@@ -4,8 +4,8 @@
 'use strict';
 var priCtrl = angular.module('primaryModule');
 
-priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', '$cookieStore', 'menuServices',
-    function($rootScope, $scope, $location, $element, $cookieStore, menuServices) {
+priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', '$cookieStore',
+    function($rootScope, $scope, $location, $element, $cookieStore) {
         // $cookieStore.remove('user');
         console.log('cookieStore:', $cookieStore.get('user'));
         $scope.navTo = function(path, params) {
@@ -24,10 +24,10 @@ priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', 
             $scope.user = $cookieStore.get('user') ? $cookieStore.get('user') : { 'type': 0 };
             $scope.user.name = '未设置';
             if($scope.user.type == 1) {
-                $location.path('/main');
+                $location.path('/th');
             } else if($scope.user.type == 2) {
                 if($scope.user.perfect) {
-                    $location.path('/home');
+                    $location.path('/sh');
                 } else {
                     $location.path('/student/account');
                 }
@@ -35,11 +35,5 @@ priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', 
                 $location.path('/');
             }
         };
-
-        // For head page
-        $scope.setUser();
-        if($scope.user.type !== 0) {
-            $scope.menus = menuServices.init1($scope.user.type);
-        }
     }
 ]);

@@ -7,14 +7,47 @@ var app = angular.module('teacherModule');
 app.controller('TeacherCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices', '$location',
     function($rootScope, $scope, rcServices, menuServices, $location) {
         $scope.$on('$stateChangeSuccess', function() {
-            $scope.tmenu = menuServices.init2($rootScope.$state.current.name, 1);
+            $scope.menus = [{ // 我的账户
+            'id': 'account',
+            'i18n': 'T_MENU_ACCOUNT',
+            'link': 'teacher.account'
+        }, { // 我的产品中心
+            'id': 'center',
+            'i18n': 'T_MENU_MY_CENTER',
+            'link': 'teacher.center'
+        }, { // 交易管理
+            'id': 'deal',
+            'i18n': 'T_MENU_ORDER_MAN',
+            'link': 'teacher.order({status: "all"})'
+        }, { // 我的钱包
+            'id': 'wallet',
+            'i18n': 'T_MENU_WALLET',
+            'link': 'teacher.wallet'
+        }, { // 我的信用评级
+            'id': 'credit',
+            'i18n': 'T_MENU_CREDIT',
+            'link': 'teacher.assess'
+        }, { // 日历
+            'id': 'calendar',
+            'i18n': 'T_MENU_CALENDAR',
+            'link': 'teacher.calendar'
+        }, { // 社区互动
+            'id': 'community',
+            'i18n': 'T_MENU_COMMUNITY',
+            'link': 'teacher.community'
+        }, { // 主页展示
+            'id': 'me',
+            'i18n': 'T_MENU_MAIN',
+            'link': 'teacherme'
+        }];
+        $scope.tmenu = menuServices.init2($rootScope.$state.current.name, 1);
             $('body').css('background-image', '');
         });
     }
 ]);
 
-app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'menuServices', 'formService', 'listService',
-    function($scope, $translate, $rootScope, rcServices, menuServices, formService, listService) {
+app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'formService', 'listService',
+    function($scope, $translate, $rootScope, rcServices, formService, listService) {
         // 学位
         $scope.degrees = [{
             'value': 0,
@@ -320,8 +353,8 @@ app.controller('SecurityCtrl', ['$rootScope', '$scope', 'rcServices', 'formServi
     }
 ]);
 
-app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices', 'ngDialog', 'formService',
-    function($rootScope, $scope, rcServices, menuServices, ngDialog, formService) {
+app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'ngDialog', 'formService',
+    function($rootScope, $scope, rcServices, ngDialog, formService) {
         rcServices.query(1, $rootScope.$state.current.url+'/'+$rootScope.$stateParams.status).then(function(data) {
             $scope.orders = data;
         });
@@ -369,8 +402,8 @@ app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices
     }
 ]);
 
-app.controller('WalletCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices', '$translate',
-    function($rootScope, $scope, rcServices, menuServices, $translate) {
+app.controller('WalletCtrl', ['$rootScope', '$scope', 'rcServices', '$translate',
+    function($rootScope, $scope, rcServices, $translate) {
         var init = function() {
             if ($rootScope.$state.is('teacher.wallet')) {
                 rcServices.get(1, $rootScope.$state.current.url).then(function(data) {
@@ -398,8 +431,8 @@ app.controller('WalletCtrl', ['$rootScope', '$scope', 'rcServices', 'menuService
     }
 ]);
 
-app.controller('CreditCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices', '$translate',
-    function($rootScope, $scope, rcServices, menuServices, $translate) {
+app.controller('CreditCtrl', ['$rootScope', '$scope', 'rcServices', '$translate',
+    function($rootScope, $scope, rcServices, $translate) {
         if ($rootScope.$state.is('teacher.assess')) {
             rcServices.get(1, $rootScope.$state.current.url).then(function(assessData) {
                 $scope.content = [{

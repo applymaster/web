@@ -116,7 +116,7 @@ a {
 }
 
 .teacher-body {
-    .main-content {
+    .main-centent {
         background-color: $color-bg-secondary;
         margin-bottom: $footer-height;
         margin-top: 173px;
@@ -291,50 +291,6 @@ a {
         border-left: 18px solid transparent;
         border-right: 17px solid transparent;
         border-bottom: 15px solid rgb(0, 0, 0);
-    }
-}
-
-
-/* Home */
-
-#home {
-    cursor: pointer;
-    .teacher-home {
-        text-align: center;
-        margin: 280px auto;
-        > div {
-            padding-top: 20px;
-            margin-bottom: 150px;
-            color: $color-black;
-            .thumbnail {
-                width: 285px;
-                height: 285px;
-                padding: 100px;
-            }
-            .caption {
-                margin-top: 15px;
-                font-size: 24px;
-                font-weight: bold;
-            }
-            &:hover {
-                background-color: $color-black;
-                color: white;
-                .thumbnail {
-                    background-color: $color-black;
-                    border-color: $color-black;
-                }
-                a {
-                    color: white;
-                }
-            }
-        }
-        a {
-            color: $color-black;
-        }
-        a:hover {
-            color: white;
-            text-decoration: none;
-        }
     }
 }
 
@@ -572,7 +528,48 @@ a {
 }
 
 
-/* Teacher */
+/* Teacher Home */
+
+.teacher-content {
+    cursor: pointer;
+    text-align: center;
+    margin: 280px auto !important;
+    .menu-item {
+        padding-top: 20px;
+        margin-bottom: 150px;
+        color: $color-black;
+        .thumbnail {
+            width: 285px;
+            height: 285px;
+            padding: 100px;
+        }
+        .caption {
+            margin-top: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        &:hover {
+            background-color: $color-black;
+            color: white;
+            .thumbnail {
+                background-color: $color-black;
+                border-color: $color-black;
+            }
+            a {
+                color: white;
+            }
+        }
+    }
+    a {
+        color: $color-black;
+    }
+    a:hover {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+/* Teacher Body */
 
 .teacher-body {
     .navbar-default.header {

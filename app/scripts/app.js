@@ -68,6 +68,11 @@ angular.module('webApp', [
             templateUrl: '/views/teacher/myself.html',
             controller: 'TMeCtrl'
         })
+        .state('th', {
+            url: '/th',
+            templateUrl: '/views/teacher/home.html',
+            controller: 'TeacherCtrl'
+        })
         .state('teacher', {
             //abstract: true 表明此状态不能被显性激活，只能被子状态隐性激活
             abstract: true,
@@ -193,8 +198,8 @@ angular.module('webApp', [
             }
         })
         /* 学生 */
-        .state('home', {
-            url: '/home',
+        .state('sh', {
+            url: '/sh',
             templateUrl: '/views/student/home.html',
         })
         .state('student', {

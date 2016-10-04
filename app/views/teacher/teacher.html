@@ -1,14 +1,33 @@
-<div>
-    <nav class="navbar navbar-default secondary" role="navigation" ng-if="$state.current.name != 'teacher.me'">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
+<div class="teacher-body">
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-default navbar-static-top header" role="navigation">
+            <div class="container">
                 <ul class="nav navbar-nav">
-                    <li ng-repeat="item in tmenu" ui-sref-active="active" ng-class="{'black-item': tmenu.length <= 1}">
-                        <a ui-sref="{{item.link}}">{{item.i18n|translate}}</a>
-                    </li>
+                    <li><img src="../images/logo.png" class="logo" alt="logo"></li>
+                    <li><a ui-sref="th">{{"HEAD_HOME"|translate}}</a></li>
+                    <li><a ui-sref="teacher.community">{{"HEAD_COMMUNITY"|translate}}</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="th">{{user.name}}</a></li>
                 </ul>
             </div>
-        </div>
-    </nav>
-    <div ui-view="viewT" class="content"></div>
+        </nav>
+    <header>
+    <div id="teacher" class="container" style="margin-top: 173px;">
+        <!-- Secondary Menus -->
+        <nav class="navbar navbar-default secondary" role="navigation">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ng-repeat="item in tmenu" ui-sref-active="active" ng-class="{'black-item': tmenu.length <= 1}">
+                            <a ui-sref="{{item.link}}">{{item.i18n|translate}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Content -->
+        <div ui-view="viewT" class="content"></div>
+    </div>
 </div>

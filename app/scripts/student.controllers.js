@@ -4,15 +4,12 @@
 'use strict';
 
 var app = angular.module('studentModule', []);
-app.controller('StudentCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices', '$location',
-    function($rootScope, $scope, rcServices, menuServices, $location) {
-        $scope.$on('$stateChangeSuccess', function() {
-            $scope.smenu = menuServices.init2($rootScope.$state.current.name, 2);
-        });
+app.controller('StudentCtrl', ['$rootScope', '$scope', 'rcServices', '$location',
+    function($rootScope, $scope, rcServices, $location) {
     }
 ]);
-app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'menuServices', 'formService', 'listService',
-    function($scope, $translate, $rootScope, rcServices, menuServices, formService, listService) {
+app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'formService', 'listService',
+    function($scope, $translate, $rootScope, rcServices, formService, listService) {
         // 初始化
         var init = function() {
             // 获取用户信息
@@ -227,8 +224,8 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         }];
     }
 ]);
-app.controller('SOrderCtrl', ['$rootScope', '$scope', 'rcServices', 'menuServices', 'ngDialog', 'formService',
-    function($rootScope, $scope, rcServices, menuServices, ngDialog, formService) {
+app.controller('SOrderCtrl', ['$rootScope', '$scope', 'rcServices', 'ngDialog', 'formService',
+    function($rootScope, $scope, rcServices, ngDialog, formService) {
         rcServices.query(2, $rootScope.$state.current.url + '/' + $rootScope.$stateParams.status).then(function(data) {
             $scope.orders = data;
         });
