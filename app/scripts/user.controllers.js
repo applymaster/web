@@ -34,17 +34,14 @@ app.controller('LoginCtrl', ['$scope', 'rcServices', '$cookies', 'formService', 
                 'path': 'login',
                 'postData': $scope.user,
                 'sFunc': function(response) {
-                    var user = {
-                        'accessToken': response.accessToken.accessToken,
-                        'userId': response.accessToken.userId,
-                        'type': response.user.type,
-                        'name': response.user.name,
-                    };
+                    var user = response.user;
+                    user.Authentication = response.accessToken.tokenString;
+                    user.userId = response.accessToken.userId;
                     $cookies.putObject('user', user);
                     $scope.setUser();
                 },
                 'eFunc': function(resp) {
-                    $scope.loginError = $translate.instant('ERR_LOGIN');
+                    $scope.loginError = $translate.instant('ERR_12004');
                 }
             });
         };
@@ -70,7 +67,6 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
                 'path': 'verifyEmail',
                 'postData': { email: $scope.user.email },
                 'sFunc': function(response) {
-                    console.log('sFunc', response);
                     if (response.result) {
                         formService.detectInput(true, 'REGISTER_VERIFY_SUCCESS', $('#' + inputName));
                     } else {
@@ -93,18 +89,14 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
                 'path': 'login',
                 'postData': $scope.user,
                 'sFunc': function(response) {
-                    var user = {
-                        'accessToken': response.accessToken.accessToken,
-                        'userId': response.accessToken.userId,
-                        'type': response.user.type,
-                        'name': response.user.name,
-                        'perfect': response.user.perfect,
-                    };
+                    var user = response.user;
+                    user.Authentication = response.accessToken.tokenString;
+                    user.userId = response.accessToken.userId;
                     $cookies.putObject('user', user);
                     $scope.setUser();
                 },
                 'eFunc': function(resp) {
-                    $scope.loginError = $translate.instant('ERR_LOGIN');
+                    $scope.regError = $translate.instant('ERR_12004');
                 }
             });
         };
@@ -117,13 +109,9 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
                 'path': 'register',
                 'postData': { type: type, email: $scope.user.email, password: $scope.user.password },
                 'sFunc': function(response) {
-                    var user = {
-                        'accessToken': response.accessToken,
-                        'userId': response.userId,
-                        'type': type,
-                        'name': name,
-                        'perfect': false,
-                    };
+                    var user = response.user;
+                    user.Authentication = response.accessToken.tokenString;
+                    user.userId = response.accessToken.userId;
                     $cookies.putObject('user', user);
                     $scope.setUser();
                 },

@@ -242,7 +242,7 @@ angular.module('webApp', [
             url: '/search',
             views: {
                 'viewT': {
-                    templateUrl: '/views/search/search.html',
+                    templateUrl: '/views/student/search.html',
                     controller: 'SearchCtrl'
                 }
             }
@@ -280,17 +280,19 @@ angular.module('webApp', [
                 return response;
             },
             'request': function(config) {
-                console.log('[httpInterceptor]request.url:', config);
-                // var baseUrl = "http://52.69.248.175:8000";
-                var baseUrl = "";
+                // console.log('[httpInterceptor]request.url:', config);
                 var user = $cookieStore.get('user') ? $cookieStore.get('user') : undefined;
+                console.log(user);
                 if(user) {
-                    config.headers.Authentication = user.accessToken;
+                    config.headers.Authentication = user.Authentication;
                     config.headers['User-Id'] = user.userId;
                 }
+                // var baseUrl = "http://52.69.248.175:8000";
                 if(config.method === "POST") {
+                    var baseUrl = ""; config.url = config.url + '.json';
                     config.url = baseUrl + config.url;
                 } else if (config.method === "GET" && config.url.indexOf('/api/') > -1) {
+                    var baseUrl = ""; config.url = config.url + '.json';
                     config.url = baseUrl + config.url;
                 }
                 return config;

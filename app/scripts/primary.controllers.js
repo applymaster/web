@@ -7,7 +7,7 @@ var priCtrl = angular.module('primaryModule');
 priCtrl.controller('TopCtrl', ['$rootScope', '$scope', '$location', '$element', '$cookieStore', 'menuServices',
     function($rootScope, $scope, $location, $element, $cookieStore, menuServices) {
         // $cookieStore.remove('user');
-        // console.log('cookieStore:', $cookieStore.get('user'));
+        console.log('cookieStore:', $cookieStore.get('user'));
         $scope.navTo = function(path, params) {
             if (params) {
                 $location.path(path).search(params);

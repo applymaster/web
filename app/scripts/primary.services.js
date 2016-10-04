@@ -14,25 +14,17 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
     // For Test
     var baseUrl = "";
     service.init = function(_type, _path, _byId) {
-        // 1. url : /api/teacher/account
-        //    url : /api/teacher/account/:id
-        // 2. param : { tId: '@id' }
-        // 3. other function
         var url = this.getUrl(_type, _path, _byId);
         return $resource(url, { id: '@id' }, {});
     };
     service.getUrl = function(_type, _path, _byId) {
-        // For Test
-        var baseUrl = "";
+        if(_type !== '') {
+            _type = _type + '/';
+        }
         if (_byId)
-            var url = baseUrl + '/api/' + _type + '/' + _path + '/:id' + '.json';
+            var url = '/api/' + _type + _path + '/:id';
         else
-            var url = baseUrl + '/api/' + _type + '/' + _path + '.json';
-        // For Project
-        if (_byId)
-            var url = '/api/' + _type + '/' + _path + '/:id';
-        else
-            var url = '/api/' + _type + '/' + _path;
+            var url = '/api/' + _type + _path;
         return url;
     }
     return service;
