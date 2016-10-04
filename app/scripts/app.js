@@ -287,12 +287,12 @@ angular.module('webApp', [
                     config.headers.Authentication = user.Authentication;
                     config.headers['User-Id'] = user.userId;
                 }
-                // var baseUrl = "http://52.69.248.175:8000";
+                var baseUrl = "http://52.69.248.175:8000";
                 if(config.method === "POST") {
-                    var baseUrl = ""; config.url = config.url + '.json';
+                    // var baseUrl = ""; config.url = config.url + '.json';
                     config.url = baseUrl + config.url;
                 } else if (config.method === "GET" && config.url.indexOf('/api/') > -1) {
-                    var baseUrl = ""; config.url = config.url + '.json';
+                    // var baseUrl = ""; config.url = config.url + '.json';
                     config.url = baseUrl + config.url;
                 }
                 return config;

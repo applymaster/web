@@ -40,17 +40,17 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     $scope.orig_major = listService.convertFormat(data);
                 });
                 listService.getSubMarjor($scope.orig_major[0]['value']).then(function(data) {
-                    $scope.orig_profession = listService.convertFormat(data);
+                    $scope.orig_subMajor = listService.convertFormat(data);
                 });
                 $scope.newItem = {
                     'degree': angular.copy($scope.degrees[0]['value']),
                     'country': angular.copy($scope.countries[0]['value']),
                     'school': angular.copy($scope.orig_school[0]['value']),
                     'major': angular.copy($scope.orig_major[0]['value']),
-                    'profession': angular.copy($scope.orig_profession[0]['value']),
+                    'subMajor': angular.copy($scope.orig_subMajor[0]['value']),
                     'edu_school': angular.copy($scope.orig_school),
                     'edu_major': angular.copy($scope.orig_major),
-                    'edu_profession': angular.copy($scope.orig_profession),
+                    'edu_subMajor': angular.copy($scope.orig_subMajor),
                     'time': null,
                     'graduated': 1,
                     'isEdit': true
@@ -67,7 +67,7 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     $scope.intent_major = listService.convertFormat(data);
                 });
                 listService.getSubMarjor($scope.intention.major).then(function(data) {
-                    $scope.intent_profession = listService.convertFormat(data);
+                    $scope.intent_subMajor = listService.convertFormat(data);
                 });
             });
             rcServices.get('student', $rootScope.$state.current.url).then(function(data) {
@@ -146,9 +146,9 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                             break;
                         }
                     }
-                    for (i in $scope.orig_profession) {
-                        if ($scope.orig_profession[i]['value'] == item.school) {
-                            item.proName = $scope.orig_profession[i]['label'];
+                    for (i in $scope.orig_subMajor) {
+                        if ($scope.orig_subMajor[i]['value'] == item.school) {
+                            item.proName = $scope.orig_subMajor[i]['label'];
                             break;
                         }
                     }
@@ -164,8 +164,8 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         $scope.changeEMajor = function(item) {
             // post major_list 值, 更改对应的 changeEMajor 菜单选项
             listService.getSubMarjor(item.major).then(function(data) {
-                $scope.edu_profession = listService.convertFormat(data);
-                item.profession = item.edu_profession[0]['value'];
+                $scope.edu_subMajor = listService.convertFormat(data);
+                item.subMajor = item.edu_subMajor[0]['value'];
             });
         };
         $scope.detectTime = function(inputName) {
@@ -181,8 +181,8 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         };
         $scope.changeIMajor = function() {
             listService.getSubMarjor($scope.intention.major).then(function(data) {
-                $scope.intent_profession = listService.convertFormat(data);
-                $scope.intention.profession = $scope.intent_profession[0]['value'];
+                $scope.intent_subMajor = listService.convertFormat(data);
+                $scope.intention.subMajor = $scope.intent_subMajor[0]['value'];
             });
         };
         // 我的联系方式

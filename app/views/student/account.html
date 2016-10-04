@@ -58,7 +58,7 @@
                 </tr>
                 <tr>
                     <td>{{"TS_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
-                    <td>{{item.start|date:'medium'}} - {{item.end|date:'medium'}}</td>
+                    <td>{{item.start|date:'yyyy-MM'}} - {{item.end|date:'yyyy-MM'}}</td>
                 </tr>
             </tbody>
             <!-- 我的学历 - 新添加可删除 -->
@@ -111,7 +111,7 @@
                     <td>
                         <select ng-model="item.major" ng-options="i.value as i.label for i in item.edu_major" ng-change="changeEMajor(item)">
                         </select>
-                        <select ng-model="item.profession" ng-options="i.value as i.label for i in item.edu_profession">
+                        <select ng-model="item.subMajor" ng-options="i.value as i.label for i in item.edu_subMajor">
                         </select>
                     </td>
                 </tr>
@@ -197,7 +197,7 @@
                     <td>
                         <select ng-model="intention.major" ng-options="i.value as i.label for i in intent_major" ng-change="changeIMajor()">
                         </select>
-                        <select ng-model="intention.profession" ng-options="i.value as i.label for i in intent_profession">
+                        <select ng-model="intention.subMajor" ng-options="i.value as i.label for i in intent_subMajor">
                         </select>
                     </td>
                 </tr>
