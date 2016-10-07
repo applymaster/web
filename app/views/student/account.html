@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{"TS_ACCOUNT_REALNAME"|translate}}</td>
                     <td>
-                        <input type="text" dn-form-input id="username" name="username" ng-model="uInfo.referredName" ng-change="detectInput('username', 'username')" required>
+                        <input type="text" dn-form-input id="username" name="username" ng-model="uInfo.name" ng-change="detectInput('username', 'username')" required>
                     </td>
                 </tr>
                 <tr>
@@ -31,7 +31,7 @@
                     </td>
                 </tr>
             </tbody>
-            <!-- 我的学历 - 已有 不可删除 -->
+            <!-- 我的学历 -->
             <tbody>
                 <tr>
                     <td class="title">{{"TS_ACCOUNT_MY_EDUCATION"|translate}}</td>
@@ -42,102 +42,27 @@
             </tbody>
             <tbody ng-repeat="item in education">
                 <tr>
-                    <td colspan="2">{{"TS_ACCOUNT_MY_EDUCATION"|translate}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_DEGREE"|translate}}</td>
-                    <td>{{item.degree|sFilter: 'degree-status'}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_SCHOOL"|translate}}</td>
-                    <td>{{item.school}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_MAJOR"|translate}}</td>
-                    <td>{{item.major}} {{item.subMajor}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
-                    <td>{{item.start|date:'yyyy-MM'}} - {{item.end|date:'yyyy-MM'}}</td>
-                </tr>
-            </tbody>
-            <!-- 我的学历 - 新添加可删除 -->
-            <tbody ng-repeat="item in newedu" ng-show="!item.isEdit">
-                <tr>
-                    <td colspan="2">{{"TS_ACCOUNT_MY_EDUCATION"|translate}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_DEGREE"|translate}}</td>
-                    <td>{{item.degree|sFilter: 'degree-status'}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_SCHOOL"|translate}}</td>
-                    <td>{{item.scName}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_MAJOR"|translate}}</td>
-                    <td>{{item.mjName}} {{item.proName}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
-                    <td>{{item.time|date: 'yyyy-MM'}}</td>
-                </tr>
-                <td colspan="2">
-                    <button type="button" class="btn btn-link btn-link-blue" ng-click="eduAction('delete', item)">{{"BT_DELETE_SCHOOL"|translate}}</button>
-                </td>
-            </tbody>
-            <tbody ng-repeat="item in newedu" ng-show="item.isEdit">
-                <tr>
-                    <td colspan="2">{{"TS_ACCOUNT_MY_EDUCATION"|translate}}</td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_DEGREE"|translate}}</td>
+                    <td>{{"TS_ACCOUNT_MY_EDUCATION"|translate}}</td>
                     <td>
-                        <select ng-model="item.degree" ng-options="i.value as i.label for i in degrees">
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_SCHOOL"|translate}}</td>
-                    <td>
-                        <select ng-model="item.country" ng-options="i.value as i.label for i in countries" ng-change="changeECountry(item)">
-                        </select>
-                        <select ng-model="item.school" ng-options="i.value as i.label for i in item.edu_school">
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_MAJOR"|translate}}</td>
-                    <td>
-                        <select ng-model="item.major" ng-options="i.value as i.label for i in item.edu_major" ng-change="changeEMajor(item)">
-                        </select>
-                        <select ng-model="item.subMajor" ng-options="i.value as i.label for i in item.edu_subMajor">
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
-                    <td>
-                    <input type="date" format="yyyy-MM" class="form-control datepicker" ng-model="item.time" id="time{{$index}}" mz-name="time{{$index}}" ng-change="detectTime('time{{$index}}')" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="radio" name="graduated" id="graduated0" value="0" ng-model="item.graduated" /> {{"TS_ACCOUNT_GRADUATED_0"|translate}}
-                        <input type="radio" name="graduated" id="graduated1" value="1" ng-model="item.graduated" /> {{"TS_ACCOUNT_GRADUATED_1"|translate}}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
+                        <button type="button" class="btn btn-link btn-link-blue" ng-click="eduAction('edit', item)">{{"BT_EDIT_SCHOOL"|translate}}</button>
                         <button type="button" class="btn btn-link btn-link-blue" ng-click="eduAction('delete', item)">{{"BT_DELETE_SCHOOL"|translate}}</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <button type="button" class="btn btn-default" ng-click="eduAction('save', item)">{{"BT_SAVE"|translate}}</button>
-                        <button type="button" class="btn btn-primary" ng-click="eduAction('delete', item)">{{"BT_CANCEL"|translate}}</button>
-                    </td>
+                    <td>{{"TS_ACCOUNT_DEGREE"|translate}}</td>
+                    <td>{{item.degree|sFilter: 'degree-status'}}</td>
+                </tr>
+                <tr>
+                    <td>{{"TS_ACCOUNT_SCHOOL"|translate}}</td>
+                    <td>{{item['school-string']}}</td>
+                </tr>
+                <tr>
+                    <td>{{"TS_ACCOUNT_MAJOR"|translate}}</td>
+                    <td>{{item['major-string']}} {{item['subMajor-string']}}</td>
+                </tr>
+                <tr>
+                    <td>{{"TS_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
+                    <td>{{item.start|date:'yyyy-MM'}} {{"TS_ACCOUNT_TIME_TO"|translate}} {{item.end|date:'yyyy-MM'}}</td>
                 </tr>
             </tbody>
             <!-- 成绩 -->
@@ -186,8 +111,6 @@
                 <tr>
                     <td>{{"TS_ACCOUNT_WANT_TO_APPLY"|translate}}</td>
                     <td>
-                        <select ng-model="intention.country" ng-options="i.value as i.label for i in countries" ng-change="changeICountry()">
-                        </select>
                         <select ng-model="intention.school" ng-options="i.value as i.label for i in intent_school">
                         </select>
                     </td>
@@ -208,23 +131,13 @@
                     <td colspan="2" class="title">{{"TS_ACCOUNT_MY_CONTACT_WAY"|translate}}</td>
                 </tr>
                 <tr>
-                    <td>{{"TS_ACCOUNT_EMAIL"|translate}}</td>
-                    <td>{{uInfo.email}}</td>
-                </tr>
-                <tr>
                     <td>{{"TS_ACCOUNT_PERMANENT_PLACE"|translate}}</td>
                     <td>
-                        <select ng-model="uInfo.country" ng-options="i.value as i.label for i in countries" ng-change="changeLCountry()">
-                        </select>
                         <select ng-model="uInfo.province" ng-options="i.value as i.label for i in liveplace_province" ng-change="changeLProvince()">
                         </select>
                         <select ng-model="uInfo.city" ng-options="i.value as i.label for i in liveplace_city">
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td>{{"TS_ACCOUNT_TIME_ZONE"|translate}}</td>
-                    <td>{{uInfo.timezone}}</td>
                 </tr>
             </tbody>
             <!-- 了解渠道 -->
@@ -234,30 +147,27 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="radio" name="channel" id="channel0" value="0" ng-model="uInfo.channel.way" /> {{"TS_ACCOUNT_FRIENDS_RECOMMENDED"|translate}}
+                        <input type="radio" name="channel" id="channel0" value="0" ng-model="uInfo.channel" /> {{"TS_ACCOUNT_FRIENDS_RECOMMENDED"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="way0name" name="way0name" ng-model="uInfo.channel.name" ng-change="detectInput('way0name', 'way0name')" required placeholder="{{'TS_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel.way != 0"/>
-                        <input type="text" dn-form-input id="way0mail" name="way0mail" ng-model="uInfo.channel.email" ng-change="detectInput('way0mail', 'way0mail')" required placeholder="{{'TS_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel.way != 0"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" name="channel" id="channel1" value="1" ng-model="uInfo.channel.way" /> {{"TS_ACCOUNT_STUDENT_UNION_OR_COMMUNITY"|translate}}
-                    </td>
-                    <td>
-                        <input type="text" dn-form-input id="way1name" name="way1name" ng-model="uInfo.channel.union" ng-change="detectInput('way1name', 'way1name')" required placeholder="{{'TS_ACCOUNT_STUDENT_UNION_OR_COMMUNITY'|translate}}" ng-disabled="uInfo.channel.way != 1"/>
+                        <input type="text" dn-form-input id="way0name" name="way0name" ng-model="uInfo.referrerName" ng-change="detectInput('way0name', 'way0name')" required placeholder="{{'TS_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel != 0"/>
+                        <input type="text" dn-form-input id="way0mail" name="way0mail" ng-model="uInfo.referrerEmail" ng-change="detectInput('way0mail', 'way0mail')" required placeholder="{{'TS_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel != 0"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="radio" name="channel" id="channel2" value="2" ng-model="uInfo.channel.way" /> {{"TS_ACCOUNT_NETWORK"|translate}}
+                        <input type="radio" name="channel" id="channel1" value="1" ng-model="uInfo.channel" /> {{"TS_ACCOUNT_STUDENT_UNION_OR_COMMUNITY"|translate}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="channel" id="channel2" value="2" ng-model="uInfo.channel" /> {{"TS_ACCOUNT_NETWORK"|translate}}
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="radio" name="channel" id="channel3" value="3" ng-model="uInfo.channel.way" /> {{"TS_ACCOUNT_OTHER"|translate}}
+                        <input type="radio" name="channel" id="channel3" value="3" ng-model="uInfo.channel" /> {{"TS_ACCOUNT_OTHER"|translate}}
                     </td>
                     <td></td>
                 </tr>
@@ -274,3 +184,54 @@
         </table>
     </div>
 </form>
+<!-- 添加/编辑 -->
+<script  type="text/ng-template" id="eduPage">
+<form name="frmAccount">
+<div class="saccount">
+    <h3>{{"TS_ACCOUNT_MY_EDUCATION"|translate}}</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td>{{"TS_ACCOUNT_DEGREE"|translate}}</td>
+                <td>
+                    <select ng-model="eduItem.degree" ng-options="i.value as i.label for i in degrees">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>{{"TS_ACCOUNT_SCHOOL"|translate}}</td>
+                <td>
+                    <select ng-model="eduItem.school" ng-options="i.value as i.label for i in edu_school">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>{{"TS_ACCOUNT_MAJOR"|translate}}</td>
+                <td>
+                    <select ng-model="eduItem.major" ng-options="i.value as i.label for i in edu_major" ng-change="changeEMajor(eduItem)">
+                    </select>
+                    <select ng-model="eduItem.subMajor" ng-options="i.value as i.label for i in edu_subMajor">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>{{"TS_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
+                <td>
+                <input type="date" format="yyyy-MM" class="form-control datepicker" ng-model="eduItem.start" id="start{{$index}}" mz-name="start{{$index}}" ng-change="detectTime('start{{$index}}')" required>
+                {{"TS_ACCOUNT_TIME_TO"|translate}}
+                <input type="date" format="yyyy-MM" class="form-control datepicker" ng-model="eduItem.end" id="end{{$index}}" mz-name="end{{$index}}" ng-change="detectTime('end{{$index}}')" required ng-disabled="eduItem.graduated">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="checkbox" name="graduated" id="graduated0" ng-model="eduItem.graduated" /> {{"TS_ACCOUNT_GRADUATED_0"|translate}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-success" ng-click="saveEdu()">{{"BT_SAVE"|translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="closeThisDialog()">{{"BT_CANCEL"|translate}}</button>
+</form>
+</div>
+</script>

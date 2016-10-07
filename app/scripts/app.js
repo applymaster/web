@@ -277,23 +277,23 @@ angular.module('webApp', [
     .factory('httpInterceptor', ['$q', '$injector', '$cookieStore', function($q, $injector, $cookieStore) {
         var httpInterceptor = {
             'responseError': function(response) {
-                console.log('[httpInterceptor]responseError:', response);
+                // console.log('[httpInterceptor]responseError:', response);
                 return $q.reject(response.data);
             },
             'response': function(response) {
-                console.log('[httpInterceptor]response:', response);
+                // console.log('[httpInterceptor]response:', response);
                 return response;
             },
             'request': function(config) {
                 // console.log('[httpInterceptor]request.url:', config);
                 var user = $cookieStore.get('user') ? $cookieStore.get('user') : undefined;
-                console.log(user);
+                // console.log(user);
                 if(user) {
                     config.headers.Authentication = user.Authentication;
                     config.headers['User-Id'] = user.userId;
                 }
                 var baseUrl = "http://52.69.248.175:8000";
-                if(config.method === "POST") {
+                if(config.method === "POST" || config.method === "PUT" || config.method === "DELETE") {
                     // var baseUrl = ""; config.url = config.url + '.json';
                     config.url = baseUrl + config.url;
                 } else if (config.method === "GET" && config.url.indexOf('/api/') > -1) {
@@ -303,7 +303,7 @@ angular.module('webApp', [
                 return config;
             },
             'requestError': function(config) {
-                console.log('[httpInterceptor]requestError:', config);
+                // console.log('[httpInterceptor]requestError:', config);
                 return $q.reject(config);
             }
         }

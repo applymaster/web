@@ -1012,15 +1012,21 @@ a {
         }
     }
 }
-
 .calendar.event {
     width: 300px;
     padding: 20px;
     height: 300px;
-    /*
-    position: absolute;
-    top: 26px;
-     */
+}
+.saccount {
+    width: 550px;
+    padding: 20px;
+    height: 330px;
+    table tr td {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+}
+.calendar.event, .saccount {
     margin: auto;
     right: 117px;
     display: block;

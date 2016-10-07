@@ -8,198 +8,8 @@ app.controller('StudentCtrl', ['$rootScope', '$scope', 'rcServices', '$location'
     function($rootScope, $scope, rcServices, $location) {
     }
 ]);
-app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'formService', 'listService',
-    function($scope, $translate, $rootScope, rcServices, formService, listService) {
-        // 初始化
-        var init = function() {
-            // 获取用户信息
-            rcServices.get('student', 'studentInfo').then(function(data) {
-                $scope.uInfo = data;
-                // 我的联系方式 － province list & 城市list & 时区
-                listService.getProvince($scope.uInfo.country).then(function(data) {
-                    $scope.liveplace_province = listService.convertFormat(data);
-                });
-                listService.getCity($scope.uInfo.province).then(function(data) {
-                    $scope.liveplace_city = listService.convertFormat(data);
-                    $scope.uInfo.timezone = getTimezone($scope.uInfo);
-                });
-            });
-            // 我的学历
-            rcServices.queryAll('education', '').then(function(data) {
-                $scope.education = data;
-                // 添加新学历时先设置默认选项
-                // 学校list & 专业大类list & 小类list
-                $scope.newedu = [];
-                listService.getSchool($scope.countries[0]['value']).then(function(data) {
-                    $scope.orig_school = listService.convertFormat(data);
-                });
-                listService.getMarjor().then(function(data) {
-                    $scope.orig_major = listService.convertFormat(data);
-                });
-                listService.getSubMarjor($scope.orig_major[0]['value']).then(function(data) {
-                    $scope.orig_subMajor = listService.convertFormat(data);
-                });
-                $scope.newItem = {
-                    'degree': angular.copy($scope.degrees[0]['value']),
-                    'country': angular.copy($scope.countries[0]['value']),
-                    'school': angular.copy($scope.orig_school[0]['value']),
-                    'major': angular.copy($scope.orig_major[0]['value']),
-                    'subMajor': angular.copy($scope.orig_subMajor[0]['value']),
-                    'edu_school': angular.copy($scope.orig_school),
-                    'edu_major': angular.copy($scope.orig_major),
-                    'edu_subMajor': angular.copy($scope.orig_subMajor),
-                    'time': null,
-                    'graduated': 1,
-                    'isEdit': true
-                };
-            });
-            // 留学意向
-            rcServices.queryAll('', 'intention').then(function(data) {
-                $scope.intention = data;
-                // 学校list & 专业大类list & 小类list
-                listService.getSchool($scope.intention.country).then(function(data) {
-                    $scope.intent_school = listService.convertFormat(data);
-                });
-                listService.getMarjor().then(function(data) {
-                    $scope.intent_major = listService.convertFormat(data);
-                });
-                listService.getSubMarjor($scope.intention.major).then(function(data) {
-                    $scope.intent_subMajor = listService.convertFormat(data);
-                });
-            });
-            rcServices.get('student', $rootScope.$state.current.url).then(function(data) {
-            });
-        };
-        init();
-        // uInfo
-        $scope.detectInput = function(type, inputName) {
-            formService.init($('#' + inputName));
-            switch (type) {
-                // 我的身份
-                case 'username':
-                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
-                    break;
-                    // 我的成绩
-                case 'score':
-                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_SCORE', $('#' + inputName));
-                    break;
-                    // 渠道 - 推荐人姓名
-                case 'way0name':
-                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
-                    break;
-                    // 渠道 - 推荐人邮箱
-                case 'way0mail':
-                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
-                    break;
-                    // 渠道 - 学生会/社团
-                case 'way1name':
-                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
-                    break;
-            }
-        };
-        $scope.submit = function() {
-            formService.init($('#' + inputName));
-            var form = $scope.frmAccount;
-            // 我的身份
-            $scope.detectInput('username', 'username');
-            // 成绩
-            $scope.detectInput('score', 'sat');
-            $scope.detectInput('score', 'toefl');
-            $scope.detectInput('score', 'ielts');
-            $scope.detectInput('score', 'gre');
-            $scope.detectInput('score', 'gmat');
-            // Post
-            var postData = angular.copy($scope.uInfo);
-            rcServices.post({
-                'type': 2,
-                'path': $rootScope.$state.current.url,
-                'postData': postData,
-                'sFunc': function() {},
-                'eFunc': function() {}
-            });
-        };
-        // 我的学历
-        $scope.eduAction = function(action, item) {
-            switch (action) {
-                case 'add':
-                    $scope.newedu.push($scope.newItem);
-                    break;
-                case 'delete':
-                    var items = $scope.newedu;
-                    $scope.newedu.splice(items.indexOf(item), 1);
-                    break;
-                case 'save':
-                    var i;
-                    item.isEdit = false;
-                    for (i in $scope.orig_school) {
-                        if ($scope.orig_school[i]['value'] == item.school) {
-                            item.scName = $scope.orig_school[i]['label'];
-                            break;
-                        }
-                    }
-                    for (i in $scope.orig_major) {
-                        if ($scope.orig_major[i]['value'] == item.school) {
-                            item.mjName = $scope.orig_major[i]['label'];
-                            break;
-                        }
-                    }
-                    for (i in $scope.orig_subMajor) {
-                        if ($scope.orig_subMajor[i]['value'] == item.school) {
-                            item.proName = $scope.orig_subMajor[i]['label'];
-                            break;
-                        }
-                    }
-                    break;
-            }
-        };
-        $scope.changeECountry = function(item) {
-            listService.getSchool(item.country).then(function(data) {
-                $scope.edu_school = listService.convertFormat(data);
-                item.school = $scope.edu_school[0]['value'];
-            });
-        };
-        $scope.changeEMajor = function(item) {
-            // post major_list 值, 更改对应的 changeEMajor 菜单选项
-            listService.getSubMarjor(item.major).then(function(data) {
-                $scope.edu_subMajor = listService.convertFormat(data);
-                item.subMajor = item.edu_subMajor[0]['value'];
-            });
-        };
-        $scope.detectTime = function(inputName) {
-            formService.init($('#' + inputName));
-            formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_PLZ_ENTER_TIME', $('#' + inputName));
-        };
-        // 留学意向
-        $scope.changeICountry = function() {
-            listService.getSchool($scope.intention.country).then(function(data) {
-                $scope.intent_school = listService.convertFormat(data);
-                $scope.intention.school = $scope.intent_school[0]['value'];
-            });
-        };
-        $scope.changeIMajor = function() {
-            listService.getSubMarjor($scope.intention.major).then(function(data) {
-                $scope.intent_subMajor = listService.convertFormat(data);
-                $scope.intention.subMajor = $scope.intent_subMajor[0]['value'];
-            });
-        };
-        // 我的联系方式
-        $scope.changeLCountry = function() {
-            listService.getProvince($scope.uInfo.country).then(function(data) {
-                $scope.liveplace_province = listService.convertFormat(data);
-                $scope.uInfo.province = $scope.liveplace_province[0]['value'];
-                $scope.changeLProvince();
-            });
-        };
-        $scope.changeLProvince = function() {
-            listService.getCity($scope.uInfo.province).then(function(data) {
-                $scope.liveplace_city = listService.convertFormat(data);
-                $scope.uInfo.city = $scope.liveplace_city[0]['value'];
-                $scope.uInfo.timezone = getTimezone($scope.uInfo);
-            });
-        };
-        var getTimezone = function(liveplace) {
-            return '-';
-        };
+app.controller('SAccountEduCtrl', ['$rootScope', '$scope', 'rcServices', 'listService', '$translate', '$cookieStore', 'formService',
+    function($rootScope, $scope, rcServices, listService, $translate, $cookieStore, formService) {
         // 学位
         $scope.degrees = [{
             'value': 0,
@@ -214,14 +24,233 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             'value': 3,
             'label': $translate.instant('TS_ACCOUNT_DEGREE_3')
         }];
-        // 国家
-        $scope.countries = [{
-            'value': 0,
-            'label': $translate.instant('COUNTRY_AMERICA')
-        }, {
-            'value': 1,
-            'label': $translate.instant('COUNTRY_CHINA')
-        }];
+        // 学校list & 专业大类list & 小类list
+        listService.getSchool().then(function(data) {
+            $scope.edu_school = listService.convertFormat(data);
+            listService.getMarjor().then(function(data) {
+                $scope.edu_major = listService.convertFormat(data);
+                listService.getSubMarjor($scope.edu_major[0]['value']).then(function(data) {
+                    $scope.edu_subMajor = listService.convertFormat(data);
+                    if($scope.ngDialogData.actType === 'add') {
+                        $scope.eduItem = {
+                            'degree': angular.copy($scope.degrees[0]['value']),
+                            'school': angular.copy($scope.edu_school[0]['value']),
+                            'major': angular.copy($scope.edu_major[0]['value']),
+                            'subMajor': angular.copy($scope.edu_subMajor[0]['value']),
+                            'start': new Date(),
+                            'end': new Date,
+                            'graduated': false
+                        };
+                    } else {
+                        $scope.eduItem = angular.copy($scope.ngDialogData.eduItem);
+                        $scope.eduItem.start = convertTime($scope.eduItem.start);
+                        $scope.eduItem.end = $scope.eduItem.end ? convertTime($scope.eduItem.end) : $translate.instant('TS_ACCOUNT_GRADUATED_0');
+                    }
+                });
+            });
+        });
+        var convertTime = function(str){
+            return new Date(str);
+        };
+        $scope.changeEMajor = function(item) {
+            // post major_list 值, 更改对应的 changeEMajor 菜单选项
+            listService.getSubMarjor(item.major).then(function(data) {
+                $scope.edu_subMajor = listService.convertFormat(data);
+                item.subMajor = item.edu_subMajor[0]['value'];
+            });
+        };
+        $scope.detectTime = function(inputName) {
+            formService.init($('#' + inputName));
+            formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_PLZ_ENTER_TIME', $('#' + inputName));
+        };
+        $scope.saveEdu = function() {
+            if($scope.eduItem.graduated) {
+                $scope.eduItem.end = null;
+            }
+            var postData = angular.copy($scope.eduItem);
+            postData.userId = $cookieStore.get('user').userId;
+            if($scope.ngDialogData.actType === 'add') {
+                rcServices.put({
+                    'type': 'education',
+                    'postData': postData,
+                    'sFunc': function(resp) {
+                        location.reload();
+                    },
+                    'eFunc': function(resp) {
+                        console.log('eFunc', resp);
+                    }
+                });
+            } else {
+                var id = angular.copy(postData.id);
+                delete postData.id;
+                rcServices.post({
+                    'type': 'education',
+                    'path': id.toString(),
+                    'postData': postData,
+                    'sFunc': function(resp) {
+                        location.reload();
+                    },
+                    'eFunc': function(resp) {
+                        console.log('eFunc', resp);
+                    }
+                });
+            }
+        };
+    }
+]);
+app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'formService', 'listService', 'ngDialog',
+    function($scope, $translate, $rootScope, rcServices, formService, listService, ngDialog) {
+        // 初始化
+        var init = function() {
+            // 获取用户信息
+            rcServices.get('user', 'studentInfo').then(function(data) {
+                $scope.uInfo = data;
+                // 我的联系方式 － province list & 城市list & 时区
+                $scope.liveplace_province = listService.getProvince();
+                $scope.uInfo.province = $scope.uInfo.province || $scope.liveplace_province[0]['value'];
+                $scope.liveplace_city = listService.getCity($scope.uInfo.province);
+                $scope.uInfo.city = $scope.uInfo.city || $scope.liveplace_city[0]['value'];
+            });
+            // 我的学历
+            rcServices.queryAll('education', '').then(function(data) {
+                $scope.education = data;
+                listService.getSchool().then(function(data) {
+                    var schools = listService.convertFormat(data);
+                    for(var i = 0, j = 0; i < schools.length; i++) {
+                        for(j = 0; j < $scope.education.length; j++ ){
+                            if( schools[i]['value'] == $scope.education[j]['school']) {
+                                $scope.education[j]['school-string'] = schools[i]['label'];
+                            }
+                        }
+                    }
+                });
+                listService.getMarjor().then(function(data) {
+                    var majors = listService.convertFormat(data);
+                    for(var i = 0, j = 0; i < $scope.education.length; i++) {
+                        for(j = 0; j < majors.length; j++ ){
+                            if( majors[j]['value'] == $scope.education[i]['major']) {
+                                $scope.education[i]['major-string'] = majors[j]['label'];
+                            }
+                        }
+                    }
+                });
+                for(var i = 0, j = 0; i < $scope.education.length; i++) {
+                    listService.getSubMarjor($scope.education[i]['major']).then(function(data) {
+                        var subs = listService.convertFormat(data);
+                        for(j = 0; j < subs.length; j++) {
+                            if( subs[j]['value'] == $scope.education[i]['subMajor']) {
+                                $scope.education[i]['subMajor-string'] = subs[j]['label'];
+                            }
+                        }
+                    });
+                }
+            });
+            // 留学意向
+            rcServices.queryAll('intention', '').then(function(data) {
+                $scope.intention = data;
+                // 学校list & 专业大类list & 小类list
+                listService.getSchool().then(function(data) {
+                    $scope.intent_school = listService.convertFormat(data);
+                    $scope.intention.school = $scope.intention.school || $scope.intent_school[0]['value'];
+                });
+                listService.getMarjor().then(function(data) {
+                    $scope.intent_major = listService.convertFormat(data);
+                    $scope.intention.major = $scope.intention.major || $scope.intent_major[0]['value'];
+                    listService.getSubMarjor($scope.intention.major||$scope.intent_major[0]['value']).then(function(data) {
+                        $scope.intent_subMajor = listService.convertFormat(data);
+                        $scope.intention.subMajor = $scope.intention.subMajor || $scope.intent_subMajor[0]['value'];
+                    });
+                });
+            });
+        };
+        init();
+        // uInfo
+        $scope.detectInput = function(type, inputName) {
+            formService.init($('#' + inputName));
+            switch (type) {
+                // 我的身份
+                case 'username':
+                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
+                    break;
+                // 我的成绩
+                case 'score':
+                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_SCORE', $('#' + inputName));
+                    break;
+                // 渠道 - 推荐人姓名
+                case 'way0name':
+                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
+                    break;
+                // 渠道 - 推荐人邮箱
+                case 'way0mail':
+                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
+                    break;
+            }
+        };
+        $scope.submit = function() {
+            var form = $scope.frmAccount;
+            // 我的身份
+            $scope.detectInput('username', 'username');
+            // 成绩
+            // $scope.detectInput('score', 'sat');
+            // $scope.detectInput('score', 'toefl');
+            // $scope.detectInput('score', 'ielts');
+            // $scope.detectInput('score', 'gre');
+            // $scope.detectInput('score', 'gmat');
+            // Post
+            var postData = angular.copy($scope.uInfo);
+            rcServices.post({
+                'type': 'user',
+                'path': 'studentInfo',
+                'postData': postData,
+                'sFunc': function() {},
+                'eFunc': function() {}
+            });
+        };
+        // 我的学历
+        $scope.eduAction = function(action, item) {
+            switch (action) {
+                case 'add':
+                    ngDialog.open({
+                        template: 'eduPage',
+                        controller: 'SAccountEduCtrl',
+                        showClose: false,
+                        data: {actType: 'add'}
+                    });
+                    break;
+                case 'delete':
+                    rcServices.delete({
+                        'type': 'education',
+                        'id': item.id,
+                        'sFunc': function() {
+                            location.reload();
+                        },
+                        'eFunc': function() {}
+                    });
+                    break;
+                case 'edit':
+                    ngDialog.open({
+                        template: 'eduPage',
+                        controller: 'SAccountEduCtrl',
+                        showClose: false,
+                        data: {actType: 'edit', eduItem: item}
+                    });
+                    break;
+            }
+        };
+        // 留学意向
+        $scope.changeIMajor = function() {
+            listService.getSubMarjor($scope.intention.major).then(function(data) {
+                $scope.intent_subMajor = listService.convertFormat(data);
+                $scope.intention.subMajor = $scope.intent_subMajor[0]['value'];
+            });
+        };
+        // 我的联系方式
+        $scope.changeLProvince = function() {
+            listService.getCity($scope.uInfo.province).then(function(data) {
+                $scope.liveplace_city = listService.convertFormat(data);
+                $scope.uInfo.city = $scope.liveplace_city[0]['value'];
+            });
+        };
     }
 ]);
 app.controller('SOrderCtrl', ['$rootScope', '$scope', 'rcServices', 'ngDialog', 'formService',

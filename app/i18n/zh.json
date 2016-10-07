@@ -307,6 +307,7 @@
     "TS_ACCOUNT_MAJOR": "专业",
     "TS_ACCOUNT_MAJOR": "专业",
     "TS_ACCOUNT_TIME_OF_STUDY": "就读时间",
+    "TS_ACCOUNT_TIME_TO": "至",
     "TS_ACCOUNT_ACHIEVEMENT": "成绩",
     "TS_ACCOUNT_NO_WAITING_EXAMINATION_": "暂无，待考",
     "SAT": "SAT",
@@ -384,6 +385,7 @@
     "S_COMPARE_FEN": "分",
 
     "BT_ADD_SCHOOL": "添加大学",
+    "BT_EDIT_SCHOOL": "编辑大学",
     "BT_DELETE_SCHOOL": "删除该大学",
     "BT_DELETE": "删除",
     "BT_LOGIN": "登录",

@@ -1,0 +1,5 @@
+[
+	{ "createdAt": 1475598304556, "enName": "test", "id": 2, "updatedAt": 1475598304556 },
+	{ "createdAt": 1475598304556, "zhName": "清华大学", "enName": "THU", "id": 3, "updatedAt": 1475598304556 },
+	{ "createdAt": 1475598304556, "zhName": "北京大学", "enName": "PKU", "id": 4, "updatedAt": 1475598304556 }
+]

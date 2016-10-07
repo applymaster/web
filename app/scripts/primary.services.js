@@ -15,16 +15,16 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
     var baseUrl = "";
     service.init = function(_type, _path, _byId) {
         var url = this.getUrl(_type, _path, _byId);
-        return $resource(url, { id: '@id' }, {});
+        return $resource(url, { id: '@id' }, { update: { method: 'PUT' } });
     };
     service.getUrl = function(_type, _path, _byId) {
         if(_type !== '') {
-            _type = _type + '/';
+            _type = _path ? _type + '/' + _path : _type;
         }
         if (_byId)
-            var url = '/api/' + _type + _path + '/:id';
+            var url = '/api/' + _type + '/:id';
         else
-            var url = '/api/' + _type + _path;
+            var url = '/api/' + _type;
         return url;
     }
     return service;
@@ -65,7 +65,6 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
             var defer = $q.defer();
 
             var sFunc = function(data, headers) {
-                console.log('rcServices data:', data)
                 defer.resolve(data);
             };
             var eFunc = function(data, headers) {
@@ -88,7 +87,6 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
             var defer = $q.defer();
 
             var sFunc = function(data, headers) {
-                console.log('rcServices data:', data)
                 defer.resolve(data);
             };
             var eFunc = function(data, headers) {
@@ -114,10 +112,43 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
              * @sFunc: function, "sFunc"
              * @eFunc: function, "eFunc"
              */
+             console.log(data);
             var byId = data.id ? true : false,
-                _path = data.path.indexOf('/') === 0 ? data.path.substr(1) : data.path;
+                _path = data.path && data.path.indexOf('/') === 0 ? data.path.substr(1) : data.path;
             var tResource = resourceObj.init(getType(data.type), _path, byId);
             tResource.save(data.postData, data.sFunc, data.eFunc);
+        },
+        put: function(data) {
+            /* data is an {object}
+             * @type: 0, 1, 2
+             * @path: string, "path"
+             * @id: string, "id"
+             * @postData: object | array, "postData"
+             * @sFunc: function, "sFunc"
+             * @eFunc: function, "eFunc"
+             */
+            var byId = data.id ? true : false,
+                _path = data.path && data.path.indexOf('/') === 0 ? data.path.substr(1) : data.path;
+            var tResource = resourceObj.init(getType(data.type), _path, byId);
+            tResource.update(data.postData, data.sFunc, data.eFunc);
+        },
+        delete: function(data) {
+            /* data is an {object}
+             * @type: 0, 1, 2
+             * @path: string, "path"
+             * @id: string, "id"
+             * @postData: object | array, "postData"
+             * @sFunc: function, "sFunc"
+             * @eFunc: function, "eFunc"
+             */
+            var postData = data.postData || {},
+                byId = data.id ? true : false,
+                _path = data.path && data.path.indexOf('/') === 0 ? data.path.substr(1) : data.path;
+            var tResource = resourceObj.init(getType(data.type), _path, byId);
+            if(byId) {
+                postData.id = data.id;
+            }
+            tResource.delete(postData, data.sFunc, data.eFunc);
         },
         getUrl: function(_type, _path, _byId){
             return resourceObj.getUrl(getType(_type), _path, _byId);
@@ -129,19 +160,24 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
 priServices.factory('listService', ['rcServices', '$translate', function(rcServices, $translate){
     var service = {};
     // 获取省份or美国大洲列表
-    service.getProvince = function(countryId){
-        var postData = {'countryId': countryId};
-        return rcServices.queryAll('experience', 'province', postData);
+    service.getProvince = function(){
+        var res = [
+            { "createdAt": 1475598304556, "zhName": "福建", "enName": "", "id": 1, "updatedAt": 1475598304556 }
+        ];
+        return this.convertFormat(res);
     };
     // 获取城市列表
     service.getCity = function(provinceId){
-        var postData = {'provinceId': provinceId};
-        return rcServices.queryAll('experience', 'city', postData);
+        var res = [
+            { "createdAt": 1475598304556, "zhName": "厦门", "enName": "", "id": 1, "updatedAt": 1475598304556 },
+            { "createdAt": 1475598304556, "zhName": "漳州", "enName": "", "id": 2, "updatedAt": 1475598304556 },
+            { "createdAt": 1475598304556, "zhName": "泉州", "enName": "", "id": 3, "updatedAt": 1475598304556 }
+        ];
+        return this.convertFormat(res);
     };
     // 获取学校列表
-    service.getSchool = function(countryId){
-        var postData = {'countryId': countryId};
-        return rcServices.queryAll('experience', 'school', postData);
+    service.getSchool = function(){
+        return rcServices.queryAll('experience', 'school');
     };
     // 获取专业大类列表
     service.getMarjor = function(){
