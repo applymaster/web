@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{"TS_ACCOUNT_REALNAME"|translate}}</td>
                     <td>
-                        <input type="text" dn-form-input id="username" name="username" ng-model="uInfo.name" ng-change="detectInput('username', 'username')" required>
+                        <input type="text" mz-detect-input id="username" name="username" ng-model="uInfo.name" ng-change="detectInput('username', 'username')" required>
                     </td>
                 </tr>
                 <tr>
@@ -75,54 +75,58 @@
                 <tr>
                     <td>{{"SAT"|translate}}</td>
                     <td>
-                        <input type="number" dn-form-input id="sat" name="sat" ng-model="uInfo.sat" ng-change="detectInput('score', 'sat')"/>
+                        <input type="number" mz-detect-input id="sat" name="sat" ng-model="uInfo.sat" ng-change="detectInput('score', 'sat')"/>
                     </td>
                 </tr>
                 <tr>
                     <td>{{"TOEFL"|translate}}</td>
                     <td>
-                        <input type="number" dn-form-input id="toefl" name="toefl" ng-model="uInfo.toefl" ng-change="detectInput('score', 'toefl')"/>
+                        <input type="number" mz-detect-input id="toefl" name="toefl" ng-model="uInfo.toefl" ng-change="detectInput('score', 'toefl')"/>
                     </td>
                 </tr>
                 <tr>
                     <td>{{"IELTS"|translate}}</td>
                     <td>
-                        <input type="number" dn-form-input id="ielts" name="ielts" ng-model="uInfo.ielts" ng-change="detectInput('score', 'ielts')"/>
+                        <input type="number" mz-detect-input id="ielts" name="ielts" ng-model="uInfo.ielts" ng-change="detectInput('score', 'ielts')"/>
                     </td>
                 </tr>
                 <tr>
                     <td>{{"GRE"|translate}}</td>
                     <td>
-                        <input type="number" dn-form-input id="gre" name="gre" ng-model="uInfo.gre" ng-change="detectInput('score', 'gre')"/>
+                        <input type="number" mz-detect-input id="gre" name="gre" ng-model="uInfo.gre" ng-change="detectInput('score', 'gre')"/>
                     </td>
                 </tr>
                 <tr>
                     <td>{{"GMAT"|translate}}</td>
                     <td>
-                        <input type="number" dn-form-input id="gmat" name="gmat" ng-model="uInfo.gmat" ng-change="detectInput('score', 'gmat')"/>
+                        <input type="number" mz-detect-input id="gmat" name="gmat" ng-model="uInfo.gmat" ng-change="detectInput('score', 'gmat')"/>
                     </td>
                 </tr>
             </tbody>
             <!-- 留学意向 -->
             <tbody>
                 <tr>
-                    <td colspan="2" class="title">{{"TS_ACCOUNT_INTENTION_OF_STUDYING_ABROAD"|translate}}</td>
+                    <td class="title">{{"TS_ACCOUNT_INTENTION_OF_STUDYING_ABROAD"|translate}}</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-link-blue" ng-click="intentAction('add')">{{"BT_ADD"|translate}}</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-repeat="item in intention">
+                <tr>
+                    <td>{{"TS_ACCOUNT_INTENTION_OF_STUDYING_ABROAD"|translate}}</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-link-blue" ng-click="intentAction('edit', item)">{{"BT_EDIT"|translate}}</button>
+                        <button type="button" class="btn btn-link btn-link-blue" ng-click="intentAction('delete', item)">{{"BT_DELETE"|translate}}</button>
+                    </td>
                 </tr>
                 <tr>
                     <td>{{"TS_ACCOUNT_WANT_TO_APPLY"|translate}}</td>
-                    <td>
-                        <select ng-model="intention.school" ng-options="i.value as i.label for i in intent_school">
-                        </select>
-                    </td>
+                    <td>{{item.school}}</td>
                 </tr>
                 <tr>
                     <td>{{"TS_ACCOUNT_PROFESSIONAL_INTENTION"|translate}}</td>
-                    <td>
-                        <select ng-model="intention.major" ng-options="i.value as i.label for i in intent_major" ng-change="changeIMajor()">
-                        </select>
-                        <select ng-model="intention.subMajor" ng-options="i.value as i.label for i in intent_subMajor">
-                        </select>
-                    </td>
+                    <td>{{item.major}} {{item.subMajor}}</td>
                 </tr>
             </tbody>
             <!-- 我的联系方式 -->
@@ -150,8 +154,10 @@
                         <input type="radio" name="channel" id="channel0" value="0" ng-model="uInfo.channel" /> {{"TS_ACCOUNT_FRIENDS_RECOMMENDED"|translate}}
                     </td>
                     <td>
-                        <input type="text" dn-form-input id="way0name" name="way0name" ng-model="uInfo.referrerName" ng-change="detectInput('way0name', 'way0name')" required placeholder="{{'TS_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel != 0"/>
-                        <input type="text" dn-form-input id="way0mail" name="way0mail" ng-model="uInfo.referrerEmail" ng-change="detectInput('way0mail', 'way0mail')" required placeholder="{{'TS_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel != 0"/>
+                        <input type="text" mz-detect-input id="referrerName" name="referrerName" ng-model="uInfo.referrerName" ng-change="detectInput('referrerName', 'referrerName')" required placeholder="{{'TS_ACCOUNT_NAME_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel != 0"/>
+                    </td>
+                    <td>
+                        <input type="email" mz-detect-input id="referrerEmail" name="referrerEmail" ng-model="uInfo.referrerEmail" ng-change="detectInput('referrerEmail', 'referrerEmail')" required placeholder="{{'TS_ACCOUNT_EMAIL_OF_THE_RECOMMENDER'|translate}}" ng-disabled="uInfo.channel != 0"/>
                     </td>
                 </tr>
                 <tr>
@@ -184,7 +190,7 @@
         </table>
     </div>
 </form>
-<!-- 添加/编辑 -->
+<!-- 添加/编辑 我的学历 -->
 <script  type="text/ng-template" id="eduPage">
 <form name="frmAccount">
 <div class="saccount">
@@ -217,15 +223,46 @@
             <tr>
                 <td>{{"TS_ACCOUNT_TIME_OF_STUDY"|translate}}</td>
                 <td>
-                <input type="date" format="yyyy-MM" class="form-control datepicker" ng-model="eduItem.start" id="start{{$index}}" mz-name="start{{$index}}" ng-change="detectTime('start{{$index}}')" required>
+                <input type="date" format="yyyy-MM" class="form-control datepicker" ng-model="eduItem.start" id="start{{$index}}" name="start{{$index}}" ng-change="detectTime('start{{$index}}')" required>
                 {{"TS_ACCOUNT_TIME_TO"|translate}}
-                <input type="date" format="yyyy-MM" class="form-control datepicker" ng-model="eduItem.end" id="end{{$index}}" mz-name="end{{$index}}" ng-change="detectTime('end{{$index}}')" required ng-disabled="eduItem.graduated">
+                <input type="date" format="yyyy-MM" class="form-control datepicker" ng-model="eduItem.end" id="end{{$index}}" name="end{{$index}}" ng-change="detectTime('end{{$index}}')" required ng-disabled="eduItem.graduated">
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
                     <input type="checkbox" name="graduated" id="graduated0" ng-model="eduItem.graduated" /> {{"TS_ACCOUNT_GRADUATED_0"|translate}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-success" ng-click="saveEdu()">{{"BT_SAVE"|translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="closeThisDialog()">{{"BT_CANCEL"|translate}}</button>
+</form>
+</div>
+</script>
+
+<!-- 添加/编辑 留学意向 -->
+<script  type="text/ng-template" id="intentPage">
+<form name="frmAccount">
+<div class="saccount tiny">
+    <h3>{{"TS_ACCOUNT_INTENTION_OF_STUDYING_ABROAD"|translate}}</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td>{{"TS_ACCOUNT_WANT_TO_APPLY"|translate}}</td>
+                <td>
+                    <select ng-model="intentItem.school" ng-options="i.value as i.label for i in intent_school">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>{{"TS_ACCOUNT_PROFESSIONAL_INTENTION"|translate}}</td>
+                <td>
+                    <select ng-model="intentItem.major" ng-options="i.value as i.label for i in intent_major" ng-change="changeIMajor()">
+                    </select>
+                    <select ng-model="intentItem.subMajor" ng-options="i.value as i.label for i in intent_subMajor">
+                    </select>
                 </td>
             </tr>
         </tbody>

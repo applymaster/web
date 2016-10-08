@@ -112,7 +112,6 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
              * @sFunc: function, "sFunc"
              * @eFunc: function, "eFunc"
              */
-             console.log(data);
             var byId = data.id ? true : false,
                 _path = data.path && data.path.indexOf('/') === 0 ? data.path.substr(1) : data.path;
             var tResource = resourceObj.init(getType(data.type), _path, byId);

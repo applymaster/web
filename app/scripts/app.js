@@ -201,6 +201,7 @@ angular.module('webApp', [
         .state('sh', {
             url: '/sh',
             templateUrl: '/views/student/home.html',
+            controller: 'StudentCtrl'
         })
         .state('student', {
             abstract: true,

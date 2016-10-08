@@ -4,8 +4,9 @@
 'use strict';
 
 var app = angular.module('studentModule', []);
-app.controller('StudentCtrl', ['$rootScope', '$scope', 'rcServices', '$location',
-    function($rootScope, $scope, rcServices, $location) {
+app.controller('StudentCtrl', ['$rootScope', '$scope', 'rcServices', '$location', 'menuServices',
+    function($rootScope, $scope, rcServices, $location, menuServices) {
+        $scope.menus = menuServices.init1(2);
     }
 ]);
 app.controller('SAccountEduCtrl', ['$rootScope', '$scope', 'rcServices', 'listService', '$translate', '$cookieStore', 'formService',
@@ -98,6 +99,59 @@ app.controller('SAccountEduCtrl', ['$rootScope', '$scope', 'rcServices', 'listSe
         };
     }
 ]);
+app.controller('SAccountIntentCtrl', ['$rootScope', '$scope', 'rcServices', 'listService', '$translate', '$cookieStore', 'formService',
+    function($rootScope, $scope, rcServices, listService, $translate, $cookieStore, formService) {
+        // 学校list & 专业大类list & 小类list
+        listService.getSchool().then(function(data) {
+            $scope.intent_school = listService.convertFormat(data);
+            listService.getMarjor().then(function(data) {
+                $scope.intent_major = listService.convertFormat(data);
+                listService.getSubMarjor($scope.intent_major[0]['value']).then(function(data) {
+                    $scope.intent_subMajor = listService.convertFormat(data);
+                    if($scope.ngDialogData.actType === 'add') {
+                        $scope.intentItem = {
+                            'school': angular.copy($scope.intent_school[0]['value']),
+                            'major': angular.copy($scope.intent_major[0]['value']),
+                            'subMajor': angular.copy($scope.intent_subMajor[0]['value'])
+                        };
+                    } else {
+                        $scope.intentItem = angular.copy($scope.ngDialogData.intentItem);
+                    }
+                });
+            });
+        });
+        $scope.saveEdu = function() {
+            var postData = angular.copy($scope.intentItem);
+            postData.userId = $cookieStore.get('user').userId;
+            if($scope.ngDialogData.actType === 'add') {
+                rcServices.put({
+                    'type': 'intention',
+                    'postData': postData,
+                    'sFunc': function(resp) {
+                        location.reload();
+                    },
+                    'eFunc': function(resp) {
+                        console.log('eFunc', resp);
+                    }
+                });
+            } else {
+                var id = angular.copy(postData.id);
+                delete postData.id;
+                rcServices.post({
+                    'type': 'intention',
+                    'path': id.toString(),
+                    'postData': postData,
+                    'sFunc': function(resp) {
+                        location.reload();
+                    },
+                    'eFunc': function(resp) {
+                        console.log('eFunc', resp);
+                    }
+                });
+            }
+        };
+    }
+]);
 app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcServices', 'formService', 'listService', 'ngDialog',
     function($scope, $translate, $rootScope, rcServices, formService, listService, ngDialog) {
         // 初始化
@@ -148,19 +202,6 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             // 留学意向
             rcServices.queryAll('intention', '').then(function(data) {
                 $scope.intention = data;
-                // 学校list & 专业大类list & 小类list
-                listService.getSchool().then(function(data) {
-                    $scope.intent_school = listService.convertFormat(data);
-                    $scope.intention.school = $scope.intention.school || $scope.intent_school[0]['value'];
-                });
-                listService.getMarjor().then(function(data) {
-                    $scope.intent_major = listService.convertFormat(data);
-                    $scope.intention.major = $scope.intention.major || $scope.intent_major[0]['value'];
-                    listService.getSubMarjor($scope.intention.major||$scope.intent_major[0]['value']).then(function(data) {
-                        $scope.intent_subMajor = listService.convertFormat(data);
-                        $scope.intention.subMajor = $scope.intention.subMajor || $scope.intent_subMajor[0]['value'];
-                    });
-                });
             });
         };
         init();
@@ -177,12 +218,16 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_SCORE', $('#' + inputName));
                     break;
                 // 渠道 - 推荐人姓名
-                case 'way0name':
-                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
+                case 'referrerName':
+                    if ($scope.uInfo.channel == 0) {
+                        formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_REFER_NAME', $('#' + inputName));
+                    }
                     break;
                 // 渠道 - 推荐人邮箱
-                case 'way0mail':
-                    formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_NAME', $('#' + inputName));
+                case 'referrerEmail':
+                    if ($scope.uInfo.channel == 0) {
+                        formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_EMAIL', $('#' + inputName));
+                    }
                     break;
             }
         };
@@ -191,18 +236,20 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             // 我的身份
             $scope.detectInput('username', 'username');
             // 成绩
-            // $scope.detectInput('score', 'sat');
-            // $scope.detectInput('score', 'toefl');
-            // $scope.detectInput('score', 'ielts');
-            // $scope.detectInput('score', 'gre');
-            // $scope.detectInput('score', 'gmat');
+            $scope.detectInput('score', 'sat');
+            $scope.detectInput('score', 'toefl');
+            $scope.detectInput('score', 'ielts');
+            $scope.detectInput('score', 'gre');
+            $scope.detectInput('score', 'gmat');
             // Post
             var postData = angular.copy($scope.uInfo);
             rcServices.post({
                 'type': 'user',
                 'path': 'studentInfo',
                 'postData': postData,
-                'sFunc': function() {},
+                'sFunc': function() {
+                    location.reload();
+                },
                 'eFunc': function() {}
             });
         };
@@ -238,6 +285,36 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             }
         };
         // 留学意向
+        $scope.intentAction = function(action, item) {
+            switch (action) {
+                case 'add':
+                    ngDialog.open({
+                        template: 'intentPage',
+                        controller: 'SAccountIntentCtrl',
+                        showClose: false,
+                        data: {actType: 'add'}
+                    });
+                    break;
+                case 'delete':
+                    rcServices.delete({
+                        'type': 'intention',
+                        'id': item.id,
+                        'sFunc': function() {
+                            location.reload();
+                        },
+                        'eFunc': function() {}
+                    });
+                    break;
+                case 'edit':
+                    ngDialog.open({
+                        template: 'intentPage',
+                        controller: 'SAccountIntentCtrl',
+                        showClose: false,
+                        data: {actType: 'edit', intentItem: item}
+                    });
+                    break;
+            }
+        };
         $scope.changeIMajor = function() {
             listService.getSubMarjor($scope.intention.major).then(function(data) {
                 $scope.intent_subMajor = listService.convertFormat(data);
