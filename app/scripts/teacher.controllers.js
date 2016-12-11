@@ -88,7 +88,7 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                 listService.getSchool($scope.user.intention.country).then(function(data){
                     $scope.intent_school = listService.convertFormat(data);
                 });
-                listService.getSchool($scope.countries[0]['value']).then(function(data){
+                listService.getSchool($scope.countries[0].value).then(function(data){
                     $scope.orig_school = listService.convertFormat(data);
                 });
                 listService.getMarjor().then(function(data){
@@ -136,11 +136,11 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             switch (action) {
                 case 'add':
                     var newItem = {
-                        'degree': angular.copy($scope.degrees[0]['value']),
-                        'country': angular.copy($scope.countries[0]['value']),
-                        'school': angular.copy($scope.orig_school[0]['value']),
-                        'major': angular.copy($scope.orig_major[0]['value']),
-                        'profession': angular.copy($scope.orig_profession[0]['value']),
+                        'degree': angular.copy($scope.degrees[0].value),
+                        'country': angular.copy($scope.countries[0].value),
+                        'school': angular.copy($scope.orig_school[0].value),
+                        'major': angular.copy($scope.orig_major[0].value),
+                        'profession': angular.copy($scope.orig_profession[0].value),
                         'edu_school': angular.copy($scope.orig_school),
                         'edu_major': angular.copy($scope.orig_major),
                         'edu_profession': angular.copy($scope.orig_profession),
@@ -158,20 +158,20 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     var i;
                     item.isEdit = false;
                     for(i in $scope.orig_school) {
-                        if($scope.orig_school[i]['value'] == item.school) {
-                            item.scName = $scope.orig_school[i]['label'];
+                        if($scope.orig_school[i].value === item.school) {
+                            item.scName = $scope.orig_school[i].label;
                             break;
                         }
                     }
                     for(i in $scope.orig_major) {
-                        if($scope.orig_major[i]['value'] == item.school) {
-                            item.mjName = $scope.orig_major[i]['label'];
+                        if($scope.orig_major[i].value === item.school) {
+                            item.mjName = $scope.orig_major[i].label;
                             break;
                         }
                     }
                     for(i in $scope.orig_profession) {
-                        if($scope.orig_profession[i]['value'] == item.school) {
-                            item.proName = $scope.orig_profession[i]['label'];
+                        if($scope.orig_profession[i].value === item.school) {
+                            item.proName = $scope.orig_profession[i].label;
                             break;
                         }
                     }
@@ -181,14 +181,14 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         $scope.changeECountry = function(item) {
             listService.getSchool(item.country).then(function(data){
                 $scope.edu_school = listService.convertFormat(data);
-                item.school = $scope.edu_school[0]['value'];
+                item.school = $scope.edu_school[0].value;
             });
         };
         $scope.changeEMajor = function(item) {
             // post major_list 值, 更改对应的 changeEMajor 菜单选项
             listService.getSubMarjor(item.major).then(function(data){
                 $scope.edu_profession = listService.convertFormat(data);
-                item.profession = item.edu_profession[0]['value'];
+                item.profession = item.edu_profession[0].value;
             });
         };
         $scope.detectTime = function(inputName) {
@@ -200,27 +200,27 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         $scope.changeICountry = function() {
             listService.getSchool($scope.user.intention.country).then(function(data){
                 $scope.intent_school = listService.convertFormat(data);
-                $scope.user.intention.school = $scope.intent_school[0]['value'];
+                $scope.user.intention.school = $scope.intent_school[0].value;
             });
         };
         $scope.changeIMajor = function() {
             listService.getSubMarjor($scope.user.intention.major).then(function(data){
                 $scope.intent_profession = listService.convertFormat(data);
-                $scope.user.intention.profession = $scope.intent_profession[0]['value'];
+                $scope.user.intention.profession = $scope.intent_profession[0].value;
             });
         };
         // 我的联系方式
         $scope.changeLCountry = function() {
             listService.getProvince($scope.user.liveplace.country).then(function(data){
                 $scope.liveplace_province = listService.convertFormat(data);
-                $scope.user.liveplace.province = $scope.liveplace_province[0]['value'];
+                $scope.user.liveplace.province = $scope.liveplace_province[0].value;
                 $scope.changeLProvince();
             });
         };
         $scope.changeLProvince = function() {
             listService.getCity($scope.user.liveplace.province).then(function(data){
                 $scope.liveplace_city = listService.convertFormat(data);
-                $scope.user.liveplace.city = $scope.liveplace_city[0]['value'];
+                $scope.user.liveplace.city = $scope.liveplace_city[0].value;
                 $scope.user.liveplace.timezone = getTimezone($scope.user.liveplace);
             });
         };
@@ -230,7 +230,7 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                 case 'add':
                     var newItem = {
                         'isEdit': true,
-                        'type': $scope.selType[0]['value'],
+                        'type': $scope.selType[0].value,
                         'numid': ''
                     };
                     $scope.user.account.push(newItem);
@@ -245,7 +245,7 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
             return '-';
         };
         // Post
-        $scope.submit = function() {
+/*        $scope.submit = function() {
             formService.init($('#' + inputName));
             var form = $scope.frmAccount;
             formService.detectInput(form.username.$invalid, 'ERR_PLZ_ENTER_NAME', $('#username'));
@@ -274,7 +274,7 @@ app.controller('TAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                 'sFunc': function() {},
                 'eFunc': function() {}
             });
-        };
+        };*/
     }
 ]);
 
@@ -292,20 +292,20 @@ app.controller('CenterCtrl', ['$rootScope', '$scope', 'rcServices',
         rcServices.query(1, $rootScope.$state.current.url).then(function(data) {
             $scope.single = [];
             for (var i = 0, count = 0; i < data.length; i++) {
-                if (data[i]['type'] == 0) {
+                if (data[i].type === 0) {
                     $scope.all = data[i];
                 } else {
                     $scope.single.push(data[i]);
-                    if (data[i]['avaliable']) {
+                    if (data[i].available) {
                         count++;
                     }
                 }
             }
-            $scope.select = count == 11;
+            $scope.select = count === 11;
         });
         $scope.selectAll = function() {
             for (var i = 0; i < $scope.single.length; i++) {
-                $scope.single[i]['avaliable'] = $scope.select;
+                $scope.single[i].available = $scope.select;
             }
         };
         $scope.submit = function() {
@@ -334,7 +334,7 @@ app.controller('SecurityCtrl', ['$rootScope', '$scope', 'rcServices', 'formServi
             formService.init($('#' + inputName));
             var errmsg = ['T_SECURITY_ERROR_OLDPWD', 'T_SECURITY_ERROR_PASSWORD', 'T_SECURITY_ERROR_CONFIRM'][idx];
             formService.detectInput($scope.frmSecurity[inputName].$invalid, errmsg, $('#' + inputName));
-            if (idx != 0 && $scope.frmSecurity.confirm.$dirty && $scope.teacher.password != $scope.teacher.confirm) {
+            if (idx !== 0 && $scope.frmSecurity.confirm.$dirty && $scope.teacher.password !== $scope.teacher.confirm) {
                 formService.detectInput(true, 'T_SECURITY_ERROR_CONFIRM', $('#confirm'));
                 $scope.frmSecurity.$setValidity('sameWithPwd', false);
             } else {
@@ -348,7 +348,7 @@ app.controller('SecurityCtrl', ['$rootScope', '$scope', 'rcServices', 'formServi
                 'postData': $scope.teacher,
                 'sFunc': function() {},
                 'eFunc': function() {}
-            })
+            });
         };
     }
 ]);
@@ -369,7 +369,7 @@ app.controller('OrderCtrl', ['$rootScope', '$scope', 'rcServices', 'ngDialog', '
                             $scope.entry.id = angular.copy($scope.ngDialogData.id);
                             $scope.detectInput = function(inputName) {
                                 formService.init($('#' + inputName));
-                                console.log('inputName:', $scope.frmOrder[inputName].$invalid, 'ERR_MSEEAGE')
+                                console.log('inputName:', $scope.frmOrder[inputName].$invalid, 'ERR_MSEEAGE');
                                 switch (inputName) {
                                     case 'price':
                                         formService.detectInput($scope.frmOrder[inputName].$invalid, 'TS_ORDER_ERROR_PRICE', $('#' + inputName));

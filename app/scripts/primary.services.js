@@ -21,12 +21,14 @@ priServices.factory('resourceObj', ['$resource', function($resource) {
         if(_type !== '') {
             _type = _path ? _type + '/' + _path : _type;
         }
-        if (_byId)
-            var url = '/api/' + _type + '/:id';
-        else
-            var url = '/api/' + _type;
+        var url;
+        if (_byId) {
+            url = '/api/' + _type + '/:id';
+        } else {
+            url = '/api/' + _type;
+        }
         return url;
-    }
+    };
     return service;
 }]);
 
@@ -48,12 +50,13 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
             var byId = id ? true : false,
                 _path = path.indexOf('/') === 0 ? path.substr(1) : path;
             var tResource = resourceObj.init(getType(type), _path, byId);
-            if (byId)
+            if (byId) {
                 tResource.get({
                     'id': id
                 }, sFunc, eFunc);
-            else
+            } else {
                 tResource.get(sFunc, eFunc);
+            }
             return defer.promise;
         },
         /*
@@ -76,10 +79,11 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
                 _path = path.indexOf('/') === 0 ? path.substr(1) : path;
             var tResource = resourceObj.init(getType(type), _path, byId);
 
-            if (byId)
+            if (byId) {
                 tResource.query({ 'id': id, 'offset': _offset, 'size': _size }, sFunc, eFunc);
-            else
+            } else {
                 tResource.query({ 'offset': _offset, 'size': _size }, sFunc, eFunc);
+            }
 
             return defer.promise;
         },
@@ -96,10 +100,11 @@ priServices.factory('rcServices', ['$q', 'resourceObj', function($q, resourceObj
                 _path = path.indexOf('/') === 0 ? path.substr(1) : path;
 
             var tResource = resourceObj.init(getType(type), _path, byId);
-            if (postData)
+            if (postData) {
                 tResource.query(postData, sFunc, eFunc);
-            else
+            } else {
                 tResource.query(sFunc, eFunc);
+            }
 
             return defer.promise;
         },
@@ -190,13 +195,13 @@ priServices.factory('listService', ['rcServices', '$translate', function(rcServi
     // 根据语言转换sellist
     service.convertFormat =function(data){
         var res = [];
-        data.forEach(function(item, i){
+        data.forEach(function (item, i) {
             var _obj = {
                 'value': item.id,
-                'label': $translate.use() == 'zh' ? item.zhName : item.enName
-            }
+                'label': $translate.use() === 'zh' ? item.zhName : item.enName
+            };
             res.push(_obj);
-        })
+        });
         return res;
     };
     return service;
@@ -404,8 +409,9 @@ priServices.factory('menuServices', ['$rootScope', function($rootScope) {
                 for (j = 0; j < fa.children.length; j++) {
                     fai = fa.children[j].link;
                     fai = fai.indexOf('(') > 0 ? fai.substr(0, fai.indexOf('(')) : fai;
-                    if (link === fai)
+                    if (link === fai) {
                         return fa.children;
+                    }
                 }
             } else if (fa.link === link) {
                 return fa;
@@ -418,10 +424,11 @@ priServices.factory('menuServices', ['$rootScope', function($rootScope) {
         var i, res;
         for (i = 0; i < menus.length; i++) {
             if (menus[i].id === id) {
-                if (menus[i].link)
+                if (menus[i].link) {
                     res = menus[i].link;
-                else
+                } else {
                     res = menus[i].children[0].link;
+                }
             } else if (menus[i].children) {
                 return _findLink(id, type, menus[i].children);
             }
@@ -454,30 +461,32 @@ priServices.factory('formService', ['$translate', function($translate) {
     obj.init = function(element) {
         this.errMsg = '';
         this.isError = false;
-        if(getType(element) === 1)
+        if(getType(element) === 1) {
             $(element).next('.error-message').find('.text-danger').empty();
-        else
+        } else {
             $(element).parents('.form-group').find('.text-danger').empty();
-    }
+        }
+    };
     obj.detectInput = function(isError, errMsg, element) {
         if (isError) {
             this.isError = true;
             var message = $translate.instant(errMsg);
-            if(getType(element) === 1)
+            if (getType(element) === 1) {
                 $(element).next('.error-message').find('.text-danger').html(message);
-            else
+            } else {
                 $(element).parents('.form-group').find('.text-danger').html(message);
+            }
             $(element).focus();
         }
     };
     var getType = function(element) {
         /* 类型1: 不使用 form-group */
         /* 类型2: 使用 form-group */
-        if(angular.isDefined($(element).attr('mz-detect-input'))) {
+        if (angular.isDefined($(element).attr('mz-detect-input'))) {
             return 1;
         } else {
             return 2;
         }
     };
     return obj;
-}])
+}]);

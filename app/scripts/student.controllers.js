@@ -30,16 +30,16 @@ app.controller('SAccountEduCtrl', ['$rootScope', '$scope', 'rcServices', 'listSe
             $scope.edu_school = listService.convertFormat(data);
             listService.getMarjor().then(function(data) {
                 $scope.edu_major = listService.convertFormat(data);
-                listService.getSubMarjor($scope.edu_major[0]['value']).then(function(data) {
+                listService.getSubMarjor($scope.edu_major[0].value).then(function(data) {
                     $scope.edu_subMajor = listService.convertFormat(data);
                     if($scope.ngDialogData.actType === 'add') {
                         $scope.eduItem = {
-                            'degree': angular.copy($scope.degrees[0]['value']),
-                            'school': angular.copy($scope.edu_school[0]['value']),
-                            'major': angular.copy($scope.edu_major[0]['value']),
-                            'subMajor': angular.copy($scope.edu_subMajor[0]['value']),
+                            'degree': angular.copy($scope.degrees[0].value),
+                            'school': angular.copy($scope.edu_school[0].value),
+                            'major': angular.copy($scope.edu_major[0].value),
+                            'subMajor': angular.copy($scope.edu_subMajor[0].value),
                             'start': new Date(),
-                            'end': new Date,
+                            'end': new Date(),
                             'graduated': false
                         };
                     } else {
@@ -57,7 +57,7 @@ app.controller('SAccountEduCtrl', ['$rootScope', '$scope', 'rcServices', 'listSe
             // post major_list 值, 更改对应的 changeEMajor 菜单选项
             listService.getSubMarjor(item.major).then(function(data) {
                 $scope.edu_subMajor = listService.convertFormat(data);
-                item.subMajor = item.edu_subMajor[0]['value'];
+                item.subMajor = item.edu_subMajor[0].value;
             });
         };
         $scope.detectTime = function(inputName) {
@@ -106,13 +106,13 @@ app.controller('SAccountIntentCtrl', ['$rootScope', '$scope', 'rcServices', 'lis
             $scope.intent_school = listService.convertFormat(data);
             listService.getMarjor().then(function(data) {
                 $scope.intent_major = listService.convertFormat(data);
-                listService.getSubMarjor($scope.intent_major[0]['value']).then(function(data) {
+                listService.getSubMarjor($scope.intent_major[0].value).then(function(data) {
                     $scope.intent_subMajor = listService.convertFormat(data);
                     if($scope.ngDialogData.actType === 'add') {
                         $scope.intentItem = {
-                            'school': angular.copy($scope.intent_school[0]['value']),
-                            'major': angular.copy($scope.intent_major[0]['value']),
-                            'subMajor': angular.copy($scope.intent_subMajor[0]['value'])
+                            'school': angular.copy($scope.intent_school[0].value),
+                            'major': angular.copy($scope.intent_major[0].value),
+                            'subMajor': angular.copy($scope.intent_subMajor[0].value)
                         };
                     } else {
                         $scope.intentItem = angular.copy($scope.ngDialogData.intentItem);
@@ -161,9 +161,9 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                 $scope.uInfo = data;
                 // 我的联系方式 － province list & 城市list & 时区
                 $scope.liveplace_province = listService.getProvince();
-                $scope.uInfo.province = $scope.uInfo.province || $scope.liveplace_province[0]['value'];
+                $scope.uInfo.province = $scope.uInfo.province || $scope.liveplace_province[0].value;
                 $scope.liveplace_city = listService.getCity($scope.uInfo.province);
-                $scope.uInfo.city = $scope.uInfo.city || $scope.liveplace_city[0]['value'];
+                $scope.uInfo.city = $scope.uInfo.city || $scope.liveplace_city[0].value;
             });
             // 我的学历
             rcServices.queryAll('education', '').then(function(data) {
@@ -172,8 +172,8 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     var schools = listService.convertFormat(data);
                     for(var i = 0, j = 0; i < schools.length; i++) {
                         for(j = 0; j < $scope.education.length; j++ ){
-                            if( schools[i]['value'] == $scope.education[j]['school']) {
-                                $scope.education[j]['school-string'] = schools[i]['label'];
+                            if( schools[i].value === $scope.education[j].school) {
+                                $scope.education[j]['school-string'] = schools[i].label;
                             }
                         }
                     }
@@ -182,21 +182,22 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     var majors = listService.convertFormat(data);
                     for(var i = 0, j = 0; i < $scope.education.length; i++) {
                         for(j = 0; j < majors.length; j++ ){
-                            if( majors[j]['value'] == $scope.education[i]['major']) {
-                                $scope.education[i]['major-string'] = majors[j]['label'];
+                            if( majors[j].value === $scope.education[i].major) {
+                                $scope.education[i]['major-string'] = majors[j].label;
                             }
                         }
                     }
                 });
-                for(var i = 0, j = 0; i < $scope.education.length; i++) {
-                    listService.getSubMarjor($scope.education[i]['major']).then(function(data) {
-                        var subs = listService.convertFormat(data);
-                        for(j = 0; j < subs.length; j++) {
-                            if( subs[j]['value'] == $scope.education[i]['subMajor']) {
-                                $scope.education[i]['subMajor-string'] = subs[j]['label'];
-                            }
+                function parseSubMajor(subData, i) {
+                    var subs = listService.convertFormat(subData);
+                    for(j = 0; j < subs.length; j++) {
+                        if( subs[j].value === $scope.education[i].subMajor) {
+                            $scope.education[i]['subMajor-string'] = subs[j].label;
                         }
-                    });
+                    }
+                }
+                for(var i = 0, j = 0; i < $scope.education.length; i++) {
+                    listService.getSubMarjor($scope.education[i].major).then(parseSubMajor(data, i));
                 }
             });
             // 留学意向
@@ -219,13 +220,13 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
                     break;
                 // 渠道 - 推荐人姓名
                 case 'referrerName':
-                    if ($scope.uInfo.channel == 0) {
+                    if ($scope.uInfo.channel === 0) {
                         formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_REFER_NAME', $('#' + inputName));
                     }
                     break;
                 // 渠道 - 推荐人邮箱
                 case 'referrerEmail':
-                    if ($scope.uInfo.channel == 0) {
+                    if ($scope.uInfo.channel === 0) {
                         formService.detectInput($scope.frmAccount[inputName].$invalid, 'ERR_ACCOUNT_EMAIL', $('#' + inputName));
                     }
                     break;
@@ -318,14 +319,14 @@ app.controller('SAccountCtrl', ['$scope', '$translate', '$rootScope', 'rcService
         $scope.changeIMajor = function() {
             listService.getSubMarjor($scope.intention.major).then(function(data) {
                 $scope.intent_subMajor = listService.convertFormat(data);
-                $scope.intention.subMajor = $scope.intent_subMajor[0]['value'];
+                $scope.intention.subMajor = $scope.intent_subMajor[0].value;
             });
         };
         // 我的联系方式
         $scope.changeLProvince = function() {
             listService.getCity($scope.uInfo.province).then(function(data) {
                 $scope.liveplace_city = listService.convertFormat(data);
-                $scope.uInfo.city = $scope.liveplace_city[0]['value'];
+                $scope.uInfo.city = $scope.liveplace_city[0].value;
             });
         };
     }
@@ -399,17 +400,17 @@ app.controller('SearchCtrl', ['$scope', '$rootScope', 'listService', '$translate
         }];
         listService.getMarjor().then(function(data) {
             $scope.majors = listService.convertFormat(data);
-            listService.getSubMarjor($scope.majors[0]['value']).then(function(data) {
+            listService.getSubMarjor($scope.majors[0].value).then(function(data) {
                 $scope.professions = listService.convertFormat(data);
                 $scope.search = {
                     'query': {
                         'service': 'fullset',
                         'degree': 'bachelor',
-                        'major': $scope.majors[0]['value'],
-                        'profession': $scope.professions[0]['value'],
+                        'major': $scope.majors[0].value,
+                        'profession': $scope.professions[0].value,
                         'gender': 'male',
                         'education': 'master0',
-                        'liveplace': $scope.countries[0]['value'],
+                        'liveplace': $scope.countries[0].value,
                         'sort': '1',
                     },
                     'offset': 0,
@@ -425,7 +426,7 @@ app.controller('SearchCtrl', ['$scope', '$rootScope', 'listService', '$translate
         $scope.changeMajor = function() {
             listService.getSubMarjor($scope.search.query.major).then(function(data) {
                 $scope.professions = listService.convertFormat(data);
-                $scope.search.query.profession = $scope.professions[0]['value'];
+                $scope.search.query.profession = $scope.professions[0].value;
             });
         };
         // submit action
@@ -442,13 +443,13 @@ app.controller('SearchCtrl', ['$scope', '$rootScope', 'listService', '$translate
             });
         };
         $scope.addToComparison = function() {
-            srchConsultant.saveFavorate({
+/*            srchConsultant.saveFavorate({
                 postData: {
                     tid: this.teacher.tid
                 },
                 sFunc: function(data) {},
                 eFunc: function(response) {}
-            });
+            });*/
         };
     }
 ]);
@@ -472,6 +473,6 @@ app.controller('SCompareCtrl', ['$rootScope', '$scope', 'rcServices', '$translat
                 },
                 'eFunc': function() {}
             });
-        }
+        };
     }
 ]);

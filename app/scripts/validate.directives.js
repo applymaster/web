@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var app = angular.module('webApp');
 
 /* Detect Type 1: showing error message under form control */
@@ -17,8 +17,12 @@ app.directive('dnFormInput', ['formService', function(formService) {
             $(element).parent().after(msgObj);
 
             scope.$watch(attrs.ngModel, function(newValue, oldValue) {
-                if (ctrl.$pristine) return;
-                if (angular.isUndefined(attrs.ngChange)) return;
+                if (ctrl.$pristine) {
+                    return;
+                }
+                if (angular.isUndefined(attrs.ngChange)) {
+                    return;
+                }
                 if (formService.isError) {
                     // class
                     $(element).parents('tr').removeClass('has-success').addClass('has-error');
@@ -34,7 +38,7 @@ app.directive('dnFormInput', ['formService', function(formService) {
                     // icon
                     $(element).next('.form-control-feedback').addClass('glyphicon-ok').removeClass('glyphicon-remove');
                 }
-            })
+            });
         }
     };
 }]);

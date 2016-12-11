@@ -3,7 +3,7 @@
  */
 'use strict';
 var tFilters = angular.module('teacherModule', ['ngDialog']);
-tFilters.filter('tFilter', function($rootScope) {
+tFilters.filter('tFilter', ['$translate', function($translate) {
     var fomate = function(input, expression, value) {
         var str;
         if (angular.isUndefined(input)) {
@@ -18,6 +18,6 @@ tFilters.filter('tFilter', function($rootScope) {
             break;
         }
         return str;
-    }
+    };
     return fomate;
-});
+}]);

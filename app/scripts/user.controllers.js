@@ -61,7 +61,9 @@ app.controller('RegisterCtrl', ['$rootScope', '$scope', '$cookies', 'rcServices'
         $scope.verifyEmail = function(inputName) {
             formService.init($('#' + inputName));
             formService.detectInput($scope.frmRegister[inputName].$invalid, 'LOGIN_EMAIL_ERROR', $('#' + inputName));
-            if(formService.isError) return false;
+            if(formService.isError) {
+                return false;
+            }
             rcServices.post({
                 'type': 0,
                 'path': 'verifyEmail',

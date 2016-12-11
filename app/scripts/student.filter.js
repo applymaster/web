@@ -21,6 +21,6 @@ sFilters.filter('sFilter', ['$rootScope', '$translate', function($rootScope, $tr
             break;
         }
         return str;
-    }
+    };
     return fomate;
 }]);
