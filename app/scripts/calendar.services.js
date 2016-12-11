@@ -1,5 +1,7 @@
 'use strict';
 
+/*jslint bitwise: true*/
+/*jshint multistr: true*/
 var calendar = angular.module('primaryModule');
 
 calendar.factory('calService', function($filter, $translate) {
@@ -18,7 +20,8 @@ calendar.factory('calService', function($filter, $translate) {
         0x0a950, 0x0b4a0, 0x0baa4, 0x0ad50, 0x055d9, 0x04ba0, 0x0a5b0, 0x15176, 0x052b0, 0x0a930,
         0x07954, 0x06aa0, 0x0ad50, 0x05b52, 0x04b60, 0x0a6e6, 0x0a4e0, 0x0d260, 0x0ea65, 0x0d530,
         0x05aa0, 0x076a3, 0x096d0, 0x04bd7, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45,
-        0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0);
+        0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0
+    );
     var Gan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
     var Zhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
     var mEng = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -64,13 +67,13 @@ calendar.factory('calService', function($filter, $translate) {
             baseDate = new Date(1900, 0, 31),
             offset = (objDate - baseDate) / 86400000;
 
-        this.dayCyl = offset + 40
-        this.monCyl = 14
+        this.dayCyl = offset + 40;
+        this.monCyl = 14;
 
         for (i = 1900; i < 2050 && offset > 0; i++) {
-            temp = lYearDays(i)
-            offset -= temp
-            this.monCyl += 12
+            temp = lYearDays(i);
+            offset -= temp;
+            this.monCyl += 12;
         }
         if (offset < 0) {
             offset += temp;
@@ -78,11 +81,11 @@ calendar.factory('calService', function($filter, $translate) {
             this.monCyl -= 12;
         }
 
-        this.year = i
-        this.yearCyl = i - 1864
+        this.year = i;
+        this.yearCyl = i - 1864;
 
-        leap = leapMonth(i) //闰哪个月
-        this.isLeap = false
+        leap = leapMonth(i); //闰哪个月
+        this.isLeap = false;
 
         for (i = 1; i < 13 && offset > 0; i++) {
             //闰月
@@ -99,13 +102,13 @@ calendar.factory('calService', function($filter, $translate) {
                 this.isLeap = false;
             }
 
-            offset -= temp
+            offset -= temp;
             if (this.isLeap === false) {
                 this.monCyl++;
             }
-        };
+        }
 
-        if (offset === 0 && leap > 0 && i === leap + 1)
+        if (offset === 0 && leap > 0 && i === leap + 1) {
             if (this.isLeap) {
                 this.isLeap = false;
             } else {
@@ -113,6 +116,7 @@ calendar.factory('calService', function($filter, $translate) {
                 --i;
                 --this.monCyl;
             }
+        }
 
         if (offset < 0) {
             offset += temp;
@@ -120,8 +124,8 @@ calendar.factory('calService', function($filter, $translate) {
             --this.monCyl;
         }
 
-        this.month = i
-        this.day = offset + 1
+        this.month = i;
+        this.day = offset + 1;
     }
 
     //-- 农历
@@ -153,7 +157,7 @@ calendar.factory('calService', function($filter, $translate) {
                 break;
         }
         return (s);
-    };
+    }
 
     // 获取农历 月/日
     function getSolarDay(year, month, day) {
@@ -168,7 +172,7 @@ calendar.factory('calService', function($filter, $translate) {
         var tyear = Gan[(year - 3) % 10 - 1]; // 天干
         var dyear = Zhi[(year - 3) % 12 - 1]; // 地支
         return tyear + ' ' + dyear;
-    };
+    }
 
     // 获取C值
     function getC(year) {
@@ -189,18 +193,16 @@ calendar.factory('calService', function($filter, $translate) {
                 C = 3.87;
         }
         return C;
-    };
+    }
 
     // 获取立春日
     function getSpringDay(year) {
         var Y = year % 100,
             D = 0.2422,
-            C = getC(year),
-            L = (Y - 1) / 4,
-            springDay = 0;
-        springDay = Math.floor(Y * D + C) - Math.floor((Y - 1) / 4);
+            C = getC(year);
+        var springDay = Math.floor(Y * D + C) - Math.floor((Y - 1) / 4);
         return springDay;
-    };
+    }
 
     // 获取生肖
     function getZodiac(year, month, day) {
@@ -229,7 +231,7 @@ calendar.factory('calService', function($filter, $translate) {
                 break;
         }
         return myZodiac;
-    };
+    }
 
     //-->
 
@@ -256,7 +258,7 @@ calendar.factory('calService', function($filter, $translate) {
             case 2:
                 return isy ? 28 : 29;
         }
-    };
+    }
 
     //获取该月一号是周几
     function getStartWeek() {
@@ -264,7 +266,7 @@ calendar.factory('calService', function($filter, $translate) {
         var week = now.getDay() + 1; //今天周几
         var startweek = week + 7 - tempnum;
         return startweek > 7 ? startweek % 7 : startweek;
-    };
+    }
 
     var service = {};
     // 月视图 calendarService.showMonth
@@ -276,8 +278,8 @@ calendar.factory('calService', function($filter, $translate) {
             i, SYMD;
         /* 星期 */
         html += "<tr>";
-        for(i = 1; i < 8; i++) {
-            html += "<th>"+$translate.instant('T_CALENDAR_'+i);+"</th>"
+        for (i = 1; i < 8; i++) {
+            html += "<th>" + $translate.instant('T_CALENDAR_' + i) + "</th>";
         }
         html += "</tr>";
         html += "<tr style='height: 28px'></tr>";
@@ -294,7 +296,7 @@ calendar.factory('calService', function($filter, $translate) {
             if (index % 7 === 0) {
                 html += "</tr><tr>";
             }
-            SYMD = SY+'-'+SM+'-'+i;
+            SYMD = SY + '-' + SM + '-' + i;
             html += '\
                 <td id="' + SYMD + '">\
                     <div class="day">' + i + '\
@@ -305,7 +307,7 @@ calendar.factory('calService', function($filter, $translate) {
         }
 
         /* 占位 */
-        for (var i = 0; i < 7; i++) {
+        for (i = 0; i < 7; i++) {
             if (index % 7 === 0) {
                 break;
             }

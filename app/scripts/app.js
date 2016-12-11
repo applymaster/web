@@ -307,6 +307,6 @@ angular.module('webApp', [
                 // console.log('[httpInterceptor]requestError:', config);
                 return $q.reject(config);
             }
-        }
+        };
         return httpInterceptor;
     }]);

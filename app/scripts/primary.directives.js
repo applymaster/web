@@ -1,3 +1,5 @@
+/*jshint sub: true*/
+/*jshint multistr: true*/
 'use strict';
 var app = angular.module('primaryModule');
 
@@ -42,7 +44,7 @@ app.directive('tooltip', [function($translate) {
                 title: attrs['toolTitleFunc'] ? scope[attrs.toolTitleFunc]() : attrs.title
             });
         }
-    }
+    };
 }]);
 
 // 日历
@@ -64,9 +66,9 @@ app.directive('calendarTitle', ['calService', function(calService) {
             scope.cal = {
                 date: 1,
                 lunar: '廿六'
-            }
+            };
         }
-    }
+    };
 }]);
 app.directive('calendarTable', ['calService', 'ngDialog', function(calService, ngDialog) {
     return {
@@ -87,7 +89,7 @@ app.directive('calendarTable', ['calService', 'ngDialog', function(calService, n
                 });
             });
         }
-    }
+    };
 }]);
 
 // 点击button时, 恢复原始数据
@@ -103,17 +105,17 @@ app.directive('btnCancel', [function() {
                             arrReset = strReset.indexOf(',') > -1 ? strReset.split(',') : [strReset];
                         for (i = 0; i < arrReset.length; i++) {
                             item = arrReset[i];
-                            if (arrReset.length == 1) {
+                            if (arrReset.length === 1) {
                                 scope[item] = angular.copy(scope.origData);
                             } else {
                                 scope[item] = angular.copy(scope.origData[i]);
                             }
                         }
-                    })
+                    });
                 }
-            })
+            });
         }
-    }
+    };
 }]);
 /**
  * The ng-thumb directive
@@ -136,24 +138,21 @@ app.directive('ngThumb', ['$window', function($window) {
         restrict: 'A',
         template: '<canvas/>',
         link: function(scope, element, attributes) {
-            if (!helper.support) return;
+            if (!helper.support) {
+                return;
+            }
 
             var params = scope.$eval(attributes.ngThumb);
 
-            if (!helper.isFile(params.file)) return;
-            if (!helper.isImage(params.file)) return;
+            if (!helper.isFile(params.file)) {
+                return;
+            }
+            if (!helper.isImage(params.file)) {
+                return;
+            }
 
             var canvas = element.find('canvas');
             var reader = new FileReader();
-
-            reader.onload = onLoadFile;
-            reader.readAsDataURL(params.file);
-
-            function onLoadFile(event) {
-                var img = new Image();
-                img.onload = onLoadImage;
-                img.src = event.target.result;
-            }
 
             function onLoadImage() {
                 var width = params.width || this.width / this.height * params.height;
@@ -161,6 +160,16 @@ app.directive('ngThumb', ['$window', function($window) {
                 canvas.attr({ width: width, height: height });
                 canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
             }
+
+            function onLoadFile(event) {
+                var img = new Image();
+                img.onload = onLoadImage;
+                img.src = event.target.result;
+            }
+            
+            reader.onload = onLoadFile;
+            reader.readAsDataURL(params.file);
+
         }
     };
 }]);
