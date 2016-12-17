@@ -7,3 +7,4 @@ bower_components
 /.editorconfig
 /.idea
 *.patch
+.DS_Store
