@@ -153,12 +153,14 @@ app.directive('ngThumb', ['$window', function($window) {
 
             var canvas = element.find('canvas');
             var reader = new FileReader();
+            
+            var that = this;
 
             function onLoadImage() {
-                var width = params.width || this.width / this.height * params.height;
-                var height = params.height || this.height / this.width * params.width;
+                var width = params.width || that.width / that.height * params.height;
+                var height = params.height || that.height / that.width * params.width;
                 canvas.attr({ width: width, height: height });
-                canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+                canvas[0].getContext('2d').drawImage(that, 0, 0, width, height);
             }
 
             function onLoadFile(event) {
