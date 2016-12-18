@@ -293,7 +293,7 @@ angular.module('webApp', [
                     config.headers.Authentication = user.Authentication;
                     config.headers['User-Id'] = user.userId;
                 }
-                var baseUrl = "http://amali.shenqingdashi.com";
+                var baseUrl = "http://amali.shenqingdashi.com:8080";
                 if(config.method === "POST" || config.method === "PUT" || config.method === "DELETE") {
                     // var baseUrl = ""; config.url = config.url + '.json';
                     config.url = baseUrl + config.url;
