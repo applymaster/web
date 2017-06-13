@@ -3,7 +3,7 @@
  */
 'use strict';
 var getType = function(type) {
-    return ['user', 'teacher', 'student', 'admin'][type] ? ['user', 'teacher', 'student', 'admin'][type] : type;
+    return ['user', 'consultant', 'student', 'admin'][type] ? ['user', 'teacher', 'student', 'admin'][type] : type;
 };
 
 var priServices = angular.module('primaryModule', ['ngResource']);

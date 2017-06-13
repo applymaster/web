@@ -289,7 +289,7 @@ app.controller('DiplomaCtrl', ['$rootScope', '$scope', 'rcServices',
 app.controller('CenterCtrl', ['$rootScope', '$scope', 'rcServices',
     function($rootScope, $scope, rcServices) {
         $scope.disStatus = false;
-        rcServices.query(1, $rootScope.$state.current.url).then(function(data) {
+        rcServices.query('service', 'cId=5', 0, 10).then(function(data) {
             $scope.single = [];
             for (var i = 0, count = 0; i < data.length; i++) {
                 if (data[i].type === 0) {
